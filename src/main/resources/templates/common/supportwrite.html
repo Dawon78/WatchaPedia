@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>왓챠피디아 문의하기</title>
+    <style>
+        /* 기본 태그 스타일은 그대로 유지하거나, 필요에 따라 초기화할 수 있습니다. */
+        body {
+    margin: 0;
+    padding-top : 90px;
+    background: #ffffff;
+    font-family: Arial, sans-serif;
+        }
+
+ /* 컨테이너 설정 */
+.faq-container {
+    max-width: 800px;  /* 원하는 본문 너비 */
+    width: 100%;
+    margin: 0px auto 60px; /* 상단 120px(네비바 높이 고려), 좌우 auto(중앙정렬), 하단 60px */
+    padding: 0 20px;   /* 양옆 여백 */
+    box-sizing: border-box;
+}
+
+/* 기본 컨테이너 */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* 도토리 + 아이콘 버튼 */
+.dropdown-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 텍스트와 아이콘 사이 간격 */
+  padding: 5px;
+}
+
+.brand-name {
+  color: #ff3366; /* 이미지의 붉은 계열 색상 */
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* 햄버거 아이콘 모양 만들기 */
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.menu-icon span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: #888;
+}
+/* 드롭다운 메뉴 스타일 부분에 추가하세요 */
+.dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -15px; /* 버튼과 메뉴 사이의 간격만큼 위로 확장 */
+  left: 0;
+  width: 100%;
+  height: 15px; /* 투명한 연결 통로 생성 */
+  background: transparent;
+}
+/* 드롭다운 메뉴 (기본 상태: 숨김) */
+.dropdown-menu {
+  display: none; 
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  min-width: 140px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  list-style: none;
+  padding: 10px 0;
+  margin-top: 5px;
+  z-index: 10;
+}
+
+/* 메뉴 리스트 아이템 */
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f5f5f5;
+}
+
+/* 마우스를 올렸을 때 메뉴 보이기 (클릭 방식으로 바꾸려면 JS 필요) */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* 기본 폰트 설정 (support 내부 요소에만 적용) */
+.support {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    color: #333;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.support .container {
+    max-width: 800px;
+    width: 100%;
+}
+
+/* 상단 경로 */
+.support .breadcrumb {
+    font-size: 14px;
+    color: #a0a0a0;
+    margin-bottom: 40px;
+}
+
+.support .breadcrumb .brand {
+    color: #ff0050;
+}
+
+/* 헤더 섹션 */
+.support header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.support header .notice {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.support header .hours {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* 폼 스타일 */
+.support .form-group {
+    margin-bottom: 25px;
+}
+
+.support label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.support textarea, 
+.support input[type="email"] {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 12px;
+    font-size: 14px;
+    outline: none;
+}
+
+.support textarea {
+    height: 200px;
+    resize: none;
+}
+
+.support textarea::placeholder {
+    color: #b0b0b0;
+    font-size: 13px;
+}
+
+/* 파일 업로드 박스 */
+.support .file-upload-box {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 30px;
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.support .file-upload-box .highlight {
+    color: #ff0050;
+    font-weight: bold;
+}
+
+/* 제출 버튼 */
+.support .submit-btn {
+    background-color: #ff0050;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    width: 160px; /* 이미지 비율에 맞춰 소폭 조정 */
+    height: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+}
+
+.support .submit-btn:hover {
+    background-color: #e60048;
+}
+
+</style>
+</head>
+
+<body>
+<nav th:fragment="watchaNavbar"
+	style="width: 100%; height: 62px; background: #fff;  display: flex; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; z-index: 1000; font-family: 'Apple SD Gothic Neo', 'NanumBarunGothic', sans-serif;">
+
+	<div
+		style="width: 100%; max-width: 1300px; display: flex; align-items: center; padding: 0 20px;">
+
+		<div style="margin-right: 30px; flex-shrink: 0;">
+			<a th:href="@{/main}" style="text-decoration: none;"> <span
+				style="color: #ff0558; font-size: 24px; font-weight: 900; letter-spacing: -1.5px;">WATCHA</span>
+				<span
+				style="color: #292a32; font-size: 24px; font-weight: 900; letter-spacing: -1.5px;">PEDIA</span>
+			</a>
+		</div>
+
+
+<div style="display: flex; gap: 10px; align-items: center; font-size: 14px; flex-shrink: 0; margin-left: 800px;">
+	
+	<div class="dropdown">
+  <button class="dropdown-btn">
+    <div class="menu-icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a th:href="@{/support}">문의 내역</a></li>
+    <li><a th:href="@{/supportwrite}">문의 등록</a></li>
+  </ul>
+</div>
+		</div>
+
+
+	</div>
+</nav>
+
+<div class="faq-container">
+<div class="support">
+    <div class="container">
+        <nav class="breadcrumb">
+            <span class="brand">왓챠피디아 고객센터</span> &gt; <span>문의 등록</span>
+        </nav>
+
+        <header>
+            <h1>문의 등록</h1>
+            <p class="notice">문의하신 내용은 고객센터에서 확인 후 1~3 영업일 이내에 답변드릴게요.</p>
+            <p class="hours">* 운영 시간: 평일 10:00 ~ 18:00(주말, 공휴일 제외)</p>
+        </header>
+
+<form th:action="@{/supportwrite}" method="post" enctype="multipart/form-data" class="inquiryForm">
+    <div class="form-group">
+        <label for="description">설명</label>
+        <textarea id="description" name="inquiryContent" required placeholder="문의 내용을 자세하게 작성해 주세요."></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="email">답변 등록 시 알림을 받을 이메일 주소</label>
+        <input type="email" id="email" name="inquiryEmail" required>
+    </div>
+
+    <div class="form-group">
+        <label>첨부 파일 (선택 사항)</label>
+        <input type="file" name="uploadFiles" multiple class="file-input">
+        <div class="file-upload-box" onclick="document.querySelector('.file-input').click()">
+            <span class="highlight">파일 추가</span> 또는 파일을 여기로 드래그
+        </div>
+    </div>
+
+    <button type="submit" class="submit-btn">제출</button>
+</form>
+    </div>
+</div>
+    </div>
+    <footer th:fragment="watchaFooter"
+        style="background-color: #ff2f6e; color: #ffffff; padding: 25px 0; font-size: 13px; line-height: 20px; margin-top: 50px;">
+
+    <div style="max-width: 1300px; margin: 0 auto; padding: 0 20px;">
+        
+
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="text-align: left;">
+                <ul style="list-style: none; padding: 0; display: flex; gap: 15px; margin-bottom: 5px; color: #ffffff; font-weight: 500;">
+                    <li>서비스 이용약관</li>
+                    <li style="font-weight: bold; border-left: 1px solid #ffffff; padding-left: 15px;">개인정보 처리방침</li>
+                    <li style="border-left: 1px solid #ffffff; padding-left: 15px;">회사 안내</li>
+                </ul>
+                <p style="margin: 2px 0;">고객센터 | cs@watchapedia.com, 02-515-9985</p>
+                <p style="margin: 2px 0;">광고 문의 | ad-sales@watcha.com / 최신 광고 소개서</p>
+                <p style="margin: 2px 0;">제휴 및 대외 협력 | https://watcha.team/contact</p>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid #ffffff; padding-top: 15px; margin-top: 15px;">
+            <div style="text-align: left;">
+                <p style="margin: 1px 0;">주식회사 왓챠 | 대표 박태훈 | 서울특별시 서초구 강남대로 343 신덕빌딩 3층</p>
+                <p style="margin: 1px 0;">사업자 등록 번호 211-88-66013</p>
+                <p style="margin: 10px 0 0 0; font-weight: 800; letter-spacing: -0.5px; font-size: 14px;">
+                    WATCHA PEDIA 
+                    <span style="font-weight: normal; margin-left: 10px; color: #ffffff; font-size: 12px;">
+                        © 2026 by WATCHA, Inc. All rights reserved.
+                    </span>
+                </p>
+            </div>
+            
+        </div>
+
+    </div>
+</footer>
+
+
+</body>
+</html>
