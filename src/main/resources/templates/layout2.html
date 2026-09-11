@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:fragment="layout2(content)">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>WatchaPedia</title>
+
+</head>
+
+<body>
+
+    <!-- navbar -->
+    <div th:replace="fragments/navbar2 :: watchaNavbar2"></div>
+
+    <!-- 페이지 내용 영역 -->
+    <main>
+        <div th:replace="${content}"></div>
+    </main>
+    
+    <div th:replace="fragments/notice :: notice"></div>
+
+    <!-- footer -->
+    <div th:replace="fragments/footer :: watchaFooter"></div>
+    
+    <!-- login modal -->
+    <div th:replace="fragments/login-modal :: loginModal"></div>
+    
+    <div th:replace="fragments/join-modal :: watchaJoinModal"></div>
+    
+
+    <!-- js -->
+    <script src="/login/modal.js"></script>
+
+</body>
+</html>

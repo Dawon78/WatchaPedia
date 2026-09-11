@@ -1,0 +1,55 @@
+<footer th:fragment="watchaFooter"
+        style="background-color: #1c1d1f; color: #a5a5a7; padding: 25px 0; font-size: 13px; line-height: 20px; margin-top: 5px;">
+
+    <div style="max-width: 1300px; margin: 0 auto; padding: 0 20px;">
+        
+<div style="text-align: center; border-bottom: 1px solid #353535; padding-bottom: 20px; margin-bottom: 20px;">
+    <p style="font-size: 18px; font-weight: bold; color: #d1d1d2; margin: 0;">
+        지금까지 
+        <span style="color: #ff0558;">
+            ★ 
+            <th:block th:text="${totalCount != null ? #numbers.formatInteger(totalCount, 0, 'COMMA') : '0'}">
+                753,375,809
+            </th:block> 개의 평가가
+        </span> 쌓였어요.
+    </p>
+</div>
+
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="text-align: left;">
+                <ul style="list-style: none; padding: 0; display: flex; gap: 15px; margin-bottom: 5px; color: #d1d1d2; font-weight: 500;">
+                    <li>서비스 이용약관</li>
+                    <li style="font-weight: bold; border-left: 1px solid #353535; padding-left: 15px;">개인정보 처리방침</li>
+                    <li style="border-left: 1px solid #353535; padding-left: 15px;">회사 안내</li>
+                </ul>
+                <p style="margin: 2px 0;">고객센터 | cs@watchapedia.com, 02-515-9985</p>
+                <p style="margin: 2px 0;">광고 문의 | ad-sales@watcha.com / 최신 광고 소개서</p>
+                <p style="margin: 2px 0;">제휴 및 대외 협력 | https://watcha.team/contact</p>
+            </div>
+            
+            <button style="background: #252628; color: #d1d1d2; border: 1px solid #353535; padding: 8px 16px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 12px; font-size: 12px;">
+                한국어 <span style="font-size: 10px; color: #8e8e93;">▼</span>
+            </button>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid #353535; padding-top: 15px; margin-top: 15px;">
+            <div style="text-align: left;">
+                <p style="margin: 1px 0;">주식회사 왓챠 | 대표 박태훈 | 서울특별시 서초구 강남대로 343 신덕빌딩 3층</p>
+                <p style="margin: 1px 0;">사업자 등록 번호 211-88-66013</p>
+                <p style="margin: 10px 0 0 0; font-weight: 800; letter-spacing: -0.5px; font-size: 14px;">
+                    WATCHA PEDIA 
+                    <span style="font-weight: normal; margin-left: 10px; color: #848485; font-size: 12px;">
+                        © 2026 by WATCHA, Inc. All rights reserved.
+                    </span>
+                </p>
+            </div>
+            
+            <div style="display: flex; gap: 12px;">
+                <div style="width: 28px; height: 28px; background: #353535; border-radius: 50%; color: #fff; text-align: center; line-height: 28px; font-size: 12px; font-weight: bold; cursor: pointer;">f</div>
+                <div style="width: 28px; height: 28px; background: #353535; border-radius: 50%; color: #fff; text-align: center; line-height: 28px; font-size: 12px; font-weight: bold; cursor: pointer;">X</div>
+                <div style="width: 28px; height: 28px; background: #353535; border-radius: 50%; color: #fff; text-align: center; line-height: 28px; font-size: 12px; font-weight: bold; cursor: pointer;">B</div>
+            </div>
+        </div>
+
+    </div>
+</footer>

@@ -1,0 +1,47 @@
+<div th:fragment="notice">
+<style>
+/* 클래스명 및 스타일 수정 */
+.footer-notice-wrapper {
+    width: 100%;
+    background-color: #ffffff !important;
+    /* 상하 여백을 기존 60px/20px에서 40px/10px로 줄였습니다. */
+    padding: 40px 0 10px 0; 
+    margin-top: 30px; /* 위 요소와의 간격도 살짝 줄임 */
+}
+
+.notice-container {
+    max-width: 1300px;
+    margin: 0 auto; 
+    padding: 0 20px;
+}
+
+.notice-box {
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    /* 박스 내부 상하 여백을 25px에서 18px로 줄여 슬림하게 만듦 */
+    padding: 18px 0;
+    text-align: center;
+}
+
+.notice-text {
+    /* 글씨색을 더 짙게 (#a5a5a7 -> #767676) 조정 */
+    color: #767676;
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 500; /* 가독성을 위해 두께도 살짝 올림 */
+}
+</style>
+
+    <div class="footer-notice-wrapper">
+        <div class="notice-container">
+            <div class="notice-box">
+                <p class="notice-text">
+                    본 사이트의 모든 콘텐츠는 왓챠피디아의 자산이며,<br> 
+                    사전 동의 없이 복제, 전재, 재배포, 인용, 크롤링,
+                    AI학습, 데이터 수집 등에 사용하는 것을 금지합니다.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

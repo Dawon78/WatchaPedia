@@ -1,0 +1,148 @@
+<nav th:fragment="watchaNavbar2" id="mainNavbar" class="navbar-transparent">
+    <style>
+        /* 기본 고정 스타일 */
+        #mainNavbar {
+            width: 100%;
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            font-family: 'Apple SD Gothic Neo', 'NanumBarunGothic', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        /* 💡 초기 투명 상태 스타일 */
+        .navbar-transparent {
+            background-color: transparent !important;
+            border-bottom: 1px solid transparent !important;
+        }
+
+        /* 투명일 때: PEDIA 텍스트, 모든 링크, 버튼 글자색을 하얀색으로 변경 */
+        .navbar-transparent .nav-pedia-text,
+        .navbar-transparent a, 
+        .navbar-transparent button { 
+            color: #fff !important; 
+        }
+        
+        /* 투명일 때 회원가입 버튼 테두리도 밝게 변경 */
+        .navbar-transparent #signUpBtn {
+            border-color: rgba(255, 255, 255, 0.5) !important;
+        }
+
+        /* 💡 스크롤 시 흰색 상태 스타일 */
+        .navbar-white {
+            background-color: #ffffff !important;
+            border-bottom: 1px solid #e3e3e3 !important;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+        }
+
+        /* 흰색 배경일 때: PEDIA 텍스트와 글자색을 원래의 어두운 색으로 복구 */
+        .navbar-white .nav-pedia-text,
+        .navbar-white a, 
+        .navbar-white button { 
+            color: #292a32 !important; 
+        }
+        
+        /* 흰색 배경일 때 메뉴 항목(홈, 영화 등) 기본색 유지 */
+        .navbar-white ul li a {
+            color: #666 !important;
+        }
+        /* 현재 활성화된 메뉴(예: 책)는 강조색 유지 */
+        .navbar-white ul li a[style*="font-weight: bold"] {
+            color: #292a32 !important;
+        }
+    </style>
+
+    <div style="width: 100%; max-width: 1300px; display: flex; align-items: center; padding: 0 20px;">
+
+        <div style="margin-right: 30px; flex-shrink: 0;">
+            <a th:href="@{/main}" style="text-decoration: none;"> 
+                <span style="color: #ff0558; font-size: 24px; font-weight: 900; letter-spacing: -1.5px;">WATCHA</span>
+                <span class="nav-pedia-text" style="font-size: 24px; font-weight: 900; letter-spacing: -1.5px; transition: color 0.3s;">PEDIA</span>
+            </a>
+        </div>
+
+         <ul id="nav-menu-list" style="list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; flex-shrink: 0; align-items: center; color: #666; font-size: 15px; font-weight: 500;">
+    <li><a th:href="@{/main}" style="text-decoration: none; color: inherit;">홈</a></li>
+    <li><a th:href="@{/movie}" style="text-decoration: none; color: inherit;">영화</a></li>
+    <li><a th:href="@{/series}" style="text-decoration: none; color: inherit;">시리즈</a></li>
+    <li><a th:href="@{/book}" style="text-decoration: none; color: inherit;">책</a></li>
+    <li><a th:href="@{/webtoon}" style="text-decoration: none; color: inherit;">웹툰</a></li>
+</ul>
+        <div style="flex: 1; display: flex; justify-content: flex-end; align-items: center; margin-right: 70px;">
+            <div style="position: relative; width: 250px;">
+                <input type="text" placeholder="콘텐츠, 인물, 컬렉션, 유저, 매거진 검색"
+                    style="width: 100%; height: 38px; background: #f5f5f7; border: none; border-radius: 5px; padding: 0 15px 0 45px; font-size: 14px; outline: none;">
+                <div style="position: absolute; left: 15px; top: 10px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="#8e8e93" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+   <div style="display: flex; gap: 15px; align-items: center; font-size: 14px; flex-shrink: 0;">
+   
+    <th:block sec:authorize="isAnonymous()">
+        <button id="loginBtn" onclick="location.href='/login'"
+            style="background: none; border: none; padding: 5px 14px; color: #292a32; cursor: pointer; font-weight: bold; white-space: nowrap;">
+            로그인</button>
+        <button id="signUpBtn" onclick="location.href='/signup'"
+            style="background: none; border: 1px solid #d1d1d2; padding: 5px 14px; border-radius: 4px; color: #292a32; cursor: pointer; font-weight: bold; white-space: nowrap;">
+            회원가입</button>
+    </th:block>
+
+    <th:block sec:authorize="isAuthenticated()">
+        <a th:href="@{/calendar}" style="text-decoration: none; color: #666; font-size: 15px; font-weight: 500;">
+            캘린더
+        </a>
+
+        <a th:href="@{/notifications}" style="text-decoration: none; color: #666; font-size: 15px; font-weight: 500; position: relative; display: flex; align-items: center;">
+            소식
+            <span style="width: 5px; height: 5px; background: #ffbc00; border-radius: 50%; position: absolute; top: -2px; right: -7px;"></span>
+        </a>
+<th:block sec:authorize="hasRole('ADMIN')">
+    <a th:href="@{/admin}"
+       style="text-decoration:none; color:#ff0558; font-weight:bold;">
+       관리자
+    </a>
+</th:block>
+
+<a th:href="@{/member/mypage}" sec:authorize="isAuthenticated()" 
+   style="text-decoration: none; display: flex; align-items: center; margin-left: 5px;">
+    <div style="width: 28px; height: 28px; border-radius: 50%; overflow: hidden; border: 1px solid #e3e3e3; cursor: pointer;">
+        <img th:src="${(#authentication.principal.member.memberPhoto != null and #authentication.principal.member.memberPhoto != '') ? #authentication.principal.member.memberPhoto : '/images/default-profile.png'}" 
+             onerror="this.src='/images/default-profile.jpg'"
+             alt="Profile" 
+             style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+</a>
+    </th:block>
+</div>
+   
+   </div>
+
+    <script th:inline="javascript">
+        (function() {
+            const navbar = document.getElementById('mainNavbar');
+            
+            window.addEventListener('scroll', () => {
+                // 스크롤이 어느 정도 내려가면 배경을 흰색으로 변경
+                if (window.scrollY > 100) { 
+                    navbar.classList.add('navbar-white');
+                    navbar.classList.remove('navbar-transparent');
+                } else {
+                    navbar.classList.add('navbar-transparent');
+                    navbar.classList.remove('navbar-white');
+                }
+            });
+        })();
+    </script>
+</nav>

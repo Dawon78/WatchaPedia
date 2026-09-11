@@ -1,0 +1,193 @@
+<html lang="ko" 
+      xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+   <nav th:fragment="watchaNavbar"
+      style="width: 100%; height: 62px; background: #fff; border-bottom: 1px solid #e3e3e3; display: flex; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; z-index: 1000; font-family: 'Apple SD Gothic Neo', 'NanumBarunGothic', sans-serif;">
+   <style>
+      .search-section {
+          padding: 15px;
+      }
+      
+      .search-title {
+          font-size: 13px;
+          font-weight: 600;
+          margin-bottom: 10px;
+          display: flex;
+          justify-content: space-between;
+      }
+      
+      .search-title.recent {
+          color: #ff0558;
+      }
+      
+      .search-title.popular {
+          color: #ff0558;
+      }
+      
+      .search-clear {
+          font-size: 12px;
+          color: #999;
+          cursor: pointer;
+      }
+      
+      .search-item {
+          padding: 6px 0;
+          font-size: 14px;
+          cursor: pointer;
+      }
+      
+      .search-item:hover {
+          background: #f5f5f7;
+      }
+      
+      .search-divider {
+          height: 1px;
+          background: #eee;
+      }
+      </style>
+      
+      <div
+         style="width: 100%; max-width: 1300px; display: flex; align-items: center; padding: 0 20px;">
+   
+         <div style="margin-right: 30px; flex-shrink: 0;">
+            <a th:href="@{/main}" style="text-decoration: none;"> <span
+               style="color: #ff0558; font-size: 24px; font-weight: 900; letter-spacing: -1.5px;">WATCHA</span>
+               <span
+               style="color: #292a32; font-size: 24px; font-weight: 900; letter-spacing: -1.5px;">PEDIA</span>
+            </a>
+         </div>
+   
+         <ul id="nav-menu-list" style="list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; flex-shrink: 0; align-items: center; color: #666; font-size: 15px; font-weight: 500;">
+    <li><a th:href="@{/main}" style="text-decoration: none; color: inherit;">홈</a></li>
+    <li><a th:href="@{/movie}" style="text-decoration: none; color: inherit;">영화</a></li>
+    <li><a th:href="@{/series}" style="text-decoration: none; color: inherit;">시리즈</a></li>
+    <li><a th:href="@{/book}" style="text-decoration: none; color: inherit;">책</a></li>
+    <li><a th:href="@{/webtoon}" style="text-decoration: none; color: inherit;">웹툰</a></li>
+</ul>
+  <div style="flex: 1; display: flex; justify-content: flex-end; align-items: center; margin-right: 70px;">
+
+        <form th:action="@{/search}" method="get"
+            style="position: relative; width: 250px; overflow: visible;">
+      
+          <input type="text"
+                 id="searchInput"
+                 name="keyword"
+                 autocomplete="off"
+                 placeholder="콘텐츠, 인물, 컬렉션, 유저, 매거진 검색"
+                 style="width: 100%; height: 38px; background: #f5f5f7; border: none; border-radius: 5px; padding: 0 15px 0 45px; font-size: 14px; outline: none;"
+                 required>
+      
+          <button type="submit"
+                  style="position: absolute; left: 15px; top: 10px; background: none; border: none; cursor: pointer;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                   stroke="#8e8e93" stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+          </button>
+         <div id="searchDropdown"
+              style="display:none;
+                     position:absolute;
+                     top:45px;
+                     right:0;
+                     width:250px;
+                     background:#fff;
+                     border:1px solid #ccc;
+                     z-index:9999;">
+         </div>
+      
+      </form>
+      
+      </div>
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+          </button>
+         <div id="searchDropdown"
+              style="display:none;
+                     position:absolute;
+                     top:45px;
+                     right:0;
+                     width:250px;
+                     background:#fff;
+                     border:1px solid #ccc;
+                     z-index:9999;">
+         </div>
+      
+      </form>
+      
+      </div>
+   
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+      
+          </button>
+      
+        </form>
+      
+      </div>
+   
+<div style="display: flex; gap: 15px; align-items: center; font-size: 14px; flex-shrink: 0;">
+
+    <th:block sec:authorize="isAnonymous()">
+        <button id="loginBtn" onclick="location.href='/login'"
+            style="background: none; border: none; padding: 5px 14px; color: #292a32; cursor: pointer; font-weight: bold; white-space: nowrap;">
+            로그인</button>
+        <button id="signUpBtn" onclick="location.href='/signup'"
+            style="background: none; border: 1px solid #d1d1d2; padding: 5px 14px; border-radius: 4px; color: #292a32; cursor: pointer; font-weight: bold; white-space: nowrap;">
+            회원가입</button>
+    </th:block>
+
+    <th:block sec:authorize="isAuthenticated()">
+        <a th:href="@{/calendar}" style="text-decoration: none; color: #666; font-size: 15px; font-weight: 500;">
+            캘린더
+        </a>
+
+        <a th:href="@{/news}" style="text-decoration: none; color: #666; font-size: 15px; font-weight: 500; position: relative; display: flex; align-items: center;">
+            소식
+            <span style="width: 5px; height: 5px; background: #ffbc00; border-radius: 50%; position: absolute; top: -2px; right: -7px;"></span>
+        </a>
+<th:block sec:authorize="hasRole('ADMIN')">
+    <a th:href="@{/admin}"
+       style="text-decoration:none; color:#ff0558; font-weight:bold;">
+       관리자
+    </a>
+</th:block>
+
+<a th:href="@{/member/mypage}" sec:authorize="isAuthenticated()" 
+   style="text-decoration: none; display: flex; align-items: center; margin-left: 5px;">
+    <div style="width: 28px; height: 28px; border-radius: 50%; overflow: hidden; border: 1px solid #e3e3e3; cursor: pointer;">
+        <img th:src="${(#authentication.principal.member.memberPhoto != null and #authentication.principal.member.memberPhoto != '') ? #authentication.principal.member.memberPhoto : '/images/default-profile.png'}" 
+             onerror="this.src='/images/default-profile.jpg'"
+             alt="Profile" 
+             style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+</a>
+    </th:block>
+</div>
+   
+   </div>
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll("#nav-menu-list a");
+
+        navLinks.forEach(link => {
+            const linkPath = link.getAttribute("href");
+            
+            // 현재 경로와 링크 경로가 일치하거나, 경로가 포함되어 있으면 강조
+            // 예: /book/detail 인 경우 /book 메뉴 강조
+            if (currentPath === linkPath || (linkPath !== '/main' && currentPath.startsWith(linkPath))) {
+                link.style.color = "#292a32";
+                link.style.fontWeight = "bold";
+            }
+        });
+    });
+    
+</script>
+<!-- 검색어 -->
+<script th:src="@{/search/search.js}"></script>
+
+   </nav>

@@ -1,0 +1,58 @@
+plugins {
+   id 'java'
+   id 'org.springframework.boot' version '3.5.12-SNAPSHOT'
+   id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'org.doit'
+version = '0.0.1-SNAPSHOT'
+description = 'Demo project for Spring Boot'
+
+java {
+   toolchain {
+      languageVersion = JavaLanguageVersion.of(17)
+   }
+}
+
+repositories {
+   mavenCentral()
+   maven { url = 'https://repo.spring.io/snapshot' }
+}
+
+dependencies {
+   implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+   implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+   implementation 'org.springframework.boot:spring-boot-starter-web'
+   implementation 'org.springframework.boot:spring-boot-starter-web-services'
+   developmentOnly 'org.springframework.boot:spring-boot-devtools'
+   runtimeOnly 'com.mysql:mysql-connector-j'
+   testImplementation 'org.springframework.boot:spring-boot-starter-test'
+   testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+   
+   compileOnly 'org.projectlombok:lombok:1.18.42'
+   annotationProcessor 'org.projectlombok:lombok:1.18.42'
+   
+      /*  http://querydsl.com/
+        Query DSL
+        - querydsl-jpa: QClass 생성
+        - querydsl-apt: Query DSL 관련 코드 생성
+
+     */
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
+    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+    // 1. 스프링 시큐리티 핵심 라이브러리
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // 2. 타임리프에서 시큐리티 문법(sec:authorize 등)을 사용하기 위한 라이브러리
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+	
+	
+    
+    // 기존에 사용하시던 JPA, MySQL, Lombok 등은 그대로 두시면 됩니다.
+    }
+
+tasks.named('test') {
+   useJUnitPlatform()
+}
