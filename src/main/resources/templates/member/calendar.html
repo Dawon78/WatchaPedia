@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout(~{::section})">
+<section>
+    <link rel="stylesheet" th:href="@{/member/calendar.css}" />
+    <main class="cal-container">
+        <div class="cal-header">
+            <div class="cal-nav-group">
+                <a th:href="@{/calendar(year=${currentMonth == 1 ? currentYear - 1 : currentYear}, month=${currentMonth == 1 ? 12 : currentMonth - 1})}" class="cal-nav-btn">◀</a>
+                <h1 class="cal-current-date" th:text="${#strings.substring(currentYear, 2)} + '년 ' + ${currentMonth} + '월'">26년 2월</h1>
+                <a th:href="@{/calendar(year=${currentMonth == 12 ? currentYear + 1 : currentYear}, month=${currentMonth == 12 ? 1 : currentMonth + 1})}" class="cal-nav-btn">▶</a>
+            </div>
+            <span class="cal-this-month">이번 달</span>
+        </div>
+
+        <div class="cal-reward-banner">
+            <div class="reward-info">
+                <div class="reward-circle">1/3</div>
+                <div class="reward-text">
+                    <p>작품 <span class="pink-text">2개</span> 평가하고</p>
+                    <p>월말 결산 신청하기</p>
+                </div>
+            </div>
+            <span class="reward-arrow">›</span>
+        </div>
+
+        <div class="cal-filter-row">
+            <button class="filter-btn active">전체</button>
+            <button class="filter-btn">영화</button>
+            <button class="filter-btn">시리즈</button>
+            <button class="filter-btn">책</button>
+        </div>
+
+        <div class="cal-grid">
+            <div class="cal-day-label" th:each="day : ${#strings.arraySplit('일,월,화,수,목,금,토', ',')}" th:text="${day}"></div>
+            
+            <div class="cal-date-cell" th:if="${startDayOfWeek > 0}" th:each="num : ${#numbers.sequence(1, startDayOfWeek)}"></div>
+            
+            <div class="cal-date-cell active" th:each="num : ${#numbers.sequence(1, lastDay)}">
+                <span class="date-num" th:text="${num}">1</span>
+                <img th:if="${num == 26}" th:src="@{/images/double-click.png}" class="cal-added-poster">
+                <div th:unless="${num == 26}" class="cal-skeleton-poster"></div>
+            </div>
+        </div>
+
+        <a th:href="@{/calendar/search}" class="cal-footer-btn" style="text-decoration: none;">작품 추가하기</a>
+    </main>
+    <script th:src="@{/member/calendar.js}"></script>
+    </section>
+</html>

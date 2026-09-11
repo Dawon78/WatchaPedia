@@ -1,0 +1,52 @@
+@charset "UTF-8";
+.cal-container { max-width: 640px; margin: 0 auto; background: #fff; padding: 20px; min-height: 100vh; }
+
+/* 💡 헤더: nav-group 왼쪽, this-month 오른쪽 */
+.cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; }
+.cal-nav-group { display: flex; align-items: center; gap: 8px; }
+.cal-nav-btn { text-decoration: none; color: #ccc; font-size: 14px; padding: 5px; }
+.cal-current-date { font-size: 20px; font-weight: bold; border-bottom: 2px solid #000; margin: 0; }
+.cal-this-month { font-size: 14px; color: #ccc; font-weight: 500; }
+
+/* 💡 월말 결산 배너 */
+.cal-reward-banner { background: #fafafa; border: 1px solid #f0f0f0; border-radius: 12px; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; cursor: pointer; }
+.reward-info { display: flex; align-items: center; gap: 15px; }
+.reward-circle { width: 44px; height: 44px; border-radius: 50%; border: 3px solid #ffeaf1; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #ff2f6e; font-weight: bold; }
+.reward-text p { font-size: 15px; font-weight: bold; margin: 0; line-height: 1.4; }
+.pink-text { color: #ff2f6e; }
+.reward-arrow { color: #ccc; font-size: 18px; }
+
+/* 💡 카테고리 필터 */
+.cal-filter-row { display: flex; gap: 8px; margin-bottom: 30px; }
+.filter-btn { padding: 8px 16px; border-radius: 20px; border: 1px solid #eee; background: #fff; font-size: 14px; color: #a5a5a7; cursor: pointer; }
+.filter-btn.active { background: #000; color: #fff; border-color: #000; }
+
+/* 그리드 및 스켈레톤 */
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); border-top: 1px solid #f2f2f2; }
+.cal-day-label { font-size: 13px; color: #a5a5a7; padding: 15px 0; text-align: center; }
+.cal-date-cell { position: relative; height: 110px; border-bottom: 1px solid #f9f9f9; overflow: hidden; }
+.date-num { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); z-index: 5; font-size: 15px; color: #fff; }
+.cal-date-cell.active .date-num { color: #292a32; }
+
+/* 포스터 및 스켈레톤 배경 */
+.cal-added-poster { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; filter: brightness(0.9); }
+.cal-skeleton-poster { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #fff; z-index: 1; }
+
+.cal-footer-btn { 
+    /* 💡 고정 위치 해제 및 중앙 정렬 설정 */
+    display: block;
+    margin: 40px auto 60px auto; /* 위쪽 여백 40px, 아래쪽 여백 60px로 여유 있게 배치 */
+    
+    /* 너비 및 스타일 설정 */
+    width: 90%; 
+    max-width: 580px; 
+    background: #000; 
+    color: #fff; 
+    padding: 18px; 
+    border-radius: 8px; 
+    font-weight: bold; 
+    border: none; 
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+}

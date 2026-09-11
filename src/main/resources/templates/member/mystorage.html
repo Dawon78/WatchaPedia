@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::section})">
+      
+<section>
+    <link rel="stylesheet" th:href="@{/member/mystorage.css}">
+
+    <div class="storage-container">
+        <div class="storage-title" th:switch="${param.type != null ? param.type[0] : 'ALL'}">
+            <span th:case="'MOVIE'">영화</span>
+            <span th:case="'SERIES'">시리즈</span>
+            <span th:case="'BOOK'">책</span>
+            <span th:case="'WEBTOON'">웹툰</span>
+            <span th:case="*">보관함</span>
+        </div>
+
+        <div class="storage-rating-header">
+            <div class="storage-section-title">
+                평가 <span th:text="${allRatings != null ? allRatings.size() : 0}">0</span>
+            </div>
+            <a th:href="@{/reviewdetail(type=${param.type})}" style="text-decoration: none; color: inherit;">
+                <div class="storage-more-btn">더보기</div>
+            </a>
+        </div>
+
+<div class="storage-movie-list" th:if="${allRatings != null and !allRatings.isEmpty()}" 
+     style="display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px;">
+    
+<div class="storage-movie-card" 
+     th:each="rating, iterStat : ${allRatings}" 
+     th:if="${iterStat.index < 7}" 
+     style="flex: 0 0 auto; width: 140px;">
+     
+    <a th:href="@{/work/{id}(id=${rating.work.workId})}" style="text-decoration: none; color: inherit;">
+        <div class="poster-wrapper" style="width: 140px; height: 200px; border-radius: 4px; overflow: hidden; background: #f0f0f0;">
+            <img th:src="@{'/images/' + ${rating.work.workThumbnail}}"
+                 th:alt="${rating.work.workTitle}" 
+                 style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="storage-movie-title" 
+             th:text="${rating.work.workTitle}" 
+             style="margin-top: 8px; font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            작품 제목
+        </div>
+        <div class="storage-movie-rating" style="font-size: 12px; color: #ffaa00; margin-top: 4px;">
+            ★ <span th:text="${rating.ratingScore}">3.0</span>
+        </div>
+    </a>
+</div>
+</div>
+        
+        <div class="empty-text" th:if="${allRatings == null or allRatings.isEmpty()}" 
+             style="padding: 50px 0; text-align: center; color: #a5a5a7; font-size: 14px;">
+            <div style="font-size: 30px; margin-bottom: 10px;">;-(</div>
+            아직 평가한 작품이 없습니다.
+        </div>
+
+<div class="storage-list-section">
+    <a th:href="@{/memberwatch(type=${param.type})}" style="text-decoration: none; color: inherit;">
+        <div class="storage-list-item">
+            <span>보고싶어요</span>
+            <span class="storage-count" th:text="${wantCount}">0</span>
+        </div>
+    </a>
+    
+    <a th:href="@{/memberwatching(type=${param.type})}" style="text-decoration: none; color: inherit;">
+        <div class="storage-list-item">
+            <span>보는 중</span>
+            <span class="storage-count" th:text="${watchingCount}">0</span>
+        </div>
+    </a>
+</div>
+    </div>
+</section>
+</html>

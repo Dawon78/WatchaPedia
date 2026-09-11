@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout(~{::section})">
+<section>
+    <link rel="stylesheet" th:href="@{/member/calendarSearch.css}" />
+    <main class="search-container">
+        <div class="search-head">
+            <h2 class="search-title">작품 검색</h2>
+        </div>
+
+        <div class="search-body">
+            <div class="search-input-box">
+                <input type="text" placeholder="콘텐츠, 인물, 컬렉션, 유저, 매거진 검색" class="search-input" autofocus>
+            </div>
+
+            <div class="search-results">
+                <div class="search-item" th:each="num : ${#numbers.sequence(1, 5)}">
+                    <img th:src="@{/images/hustle.png}" src="/images/hustle.png" class="search-item-img">
+                    <div class="search-item-info">
+                        <p class="item-name">히슬</p>
+                        <p class="item-meta">영화 · 2022</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</section>
+</html>

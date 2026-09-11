@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    margin: 0;
+}
+
+.storage-container {
+    width: 1100px;
+    margin: 50px auto;
+}
+
+.storage-title {
+    font-size: 28px;
+    margin-bottom: 40px;
+}
+
+/* ===== 평가 영역 ===== */
+.storage-rating-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.storage-section-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.storage-section-title span {
+    color: #ff2f6e;
+    margin-left: 5px;
+}
+
+.storage-more-btn {
+    font-size: 14px;
+    color: #888;
+    cursor: pointer;
+}
+
+.storage-more-btn:hover {
+    text-decoration: underline;
+}
+
+/* ===== 영화 카드 ===== */
+.storage-movie-card {
+    width: 160px;
+    
+}				
+
+.storage-movie-card img {
+    width: 160px;
+    height: 230px;
+    border-radius: 6px;
+}
+
+.storage-movie-title {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.storage-movie-rating {
+    color: #ff9f00;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* ===== 보고싶어요 / 보는중 ===== */
+.storage-list-section {
+    margin-top: 60px;
+    border-top: 1px solid #ddd;
+}
+
+.storage-list-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.storage-list-item:hover {
+    background: #f0f0f0;
+}
+
+.storage-count {
+    color: #999;
+}

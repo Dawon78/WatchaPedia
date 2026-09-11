@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="layout :: layout(~{::section})">
+
+<section>
+	<link rel="stylesheet" th:href="@{/login/myPage.css}" />
+	<link rel="stylesheet" th:href="@{/member/myPagecalendar.css}" />
+	<main class="mypage-container">
+		<div class="profile-header">
+
+			<!-- 우측 상단 아이콘 -->
+			<div class="top-utils">
+				<span class="icon-btn" onclick="toggleUniqueFriendModal(true)"
+					style="cursor: pointer;">👤+</span> 
+				<span class="icon-btn" onclick="toggleProfileSettings(true)"
+					style="cursor: pointer;">⚙️</span>
+			</div>
+
+			<!-- 프로필 영역 -->
+			<div class="profile-info">
+				            <div class="profile-circle">
+                    <img th:src="${(member?.memberPhoto != null and member.memberPhoto != '') ? member.memberPhoto : '/images/default-profile.png'}"
+                  onerror="this.src='/images/default-profile.jpg'" alt="프로필">
+            </div>
+
+				<div class="profile-text-group">
+					<h2 class="nickname"
+						th:text="${member?.memberName != null ? member.memberName : 'grg'}">grg</h2>
+					<p class="email"
+						th:text="${member?.memberId != null ? member.memberId : 'placeyeah@nsu.ac.kr'}">email</p>
+					<div class="follow-counts">
+    <a th:href="@{/follower}" style="text-decoration: none; color: inherit;">
+        팔로워 <span th:text="${followerCount}">0</span>
+    </a> 
+    · 
+    <a th:href="@{/following}" style="text-decoration: none; color: inherit;">
+        팔로잉 <span th:text="${followingCount}">0</span>
+    </a>
+    <hr class="profile-hr">
+</div>
+				</div>
+			</div>
+
+			<!-- 버튼 영역 -->
+			<div class="action-buttons">
+				<button class="btn-gray" onclick="toggleUniqueEditModal(true)">프로필
+					수정</button>
+				<button class="btn-gray" onclick="executeUniqueCopyLink()">프로필
+					공유</button>
+			</div>
+
+		</div>
+
+		<div class="stats-row">
+<div class="stat-box">
+    <a th:href="@{/review}" style="text-decoration: none; color: inherit;">
+        <div class="count" th:text="${totalRatingCount ?: 0}">0</div>
+        <div class="label">평가</div>
+    </a>
+</div>
+<div class="stat-box">
+    <a th:href="@{/member/comments}" style="text-decoration: none; color: inherit;">
+        <div class="count" th:text="${totalCommentCount}">0</div>
+        <div class="label">코멘트</div>
+    </a>
+</div>
+<div class="stat-box">
+            <a th:href="@{/collection/list(memberId=${member.memberId})}"
+               style="text-decoration: none; color: inherit;">
+               <div class="count" th:text="${collectionCount ?: 0}">0</div>
+               <div class="label">컬렉션</div>
+            </a>
+         </div>
+		</div>
+
+<section class="mypage-section">
+    <h3 class="section-title">보관함</h3>
+    <div class="storage-row">
+        <div class="storage-unit">
+            <a th:href="@{/storage(type='MOVIE')}" style="text-decoration: none; color: inherit;">
+                <div class="icon-bg">🎞️</div>
+                <span>영화</span>
+            </a>
+        </div>
+        
+        <div class="storage-unit">
+            <a th:href="@{/storage(type='SERIES')}" style="text-decoration: none; color: inherit;">
+                <div class="icon-bg">📺</div>
+                <span>시리즈</span>
+            </a>
+        </div>
+        
+        <div class="storage-unit">
+            <a th:href="@{/storage(type='BOOK')}" style="text-decoration: none; color: inherit;">
+                <div class="icon-bg">📖</div>
+                <span>책</span>
+            </a>
+        </div>
+        
+        <div class="storage-unit">
+            <a th:href="@{/storage(type='WEBTOON')}" style="text-decoration: none; color: inherit;">
+                <div class="icon-bg">📂</div>
+                <span>웹툰</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+		<section class="mypage-section subscription">
+			<div class="sub-header">
+				<div>
+					<h3 class="section-title inline">구독 중인 서비스</h3>
+					<p class="sub-desc">구독 중인 서비스 작품을 추천할게요.</p>
+				</div>
+				<button class="btn-register">등록하기</button>
+			</div>
+		</section>
+
+<section class="mypage-section" id="mypage-calendar-root" style="padding: 20px; background: #fff;">
+    <div class="calendar-header" style="display: flex; align-items: center; margin-bottom: 15px; gap: 10px;">
+        <button type="button" 
+                th:onclick="changeMonth([[${currentMonth == 1 ? currentYear - 1 : currentYear}]], [[${currentMonth == 1 ? 12 : currentMonth - 1}]])" 
+                style="background:none; border:none; cursor:pointer; color: #ccc; font-size: 14px;">◀</button>
+        
+        <h3 style="font-size: 18px; font-weight: bold; margin: 0;">
+            <span id="cal-month-title" th:text="${currentMonth} + '월 캘린더'">3월 캘린더</span>
+        </h3>
+        
+        <button type="button" 
+                th:onclick="changeMonth([[${currentMonth == 12 ? currentYear + 1 : currentYear}]], [[${currentMonth == 12 ? 1 : currentMonth + 1}]])" 
+                style="background:none; border:none; cursor:pointer; color: #ccc; font-size: 14px;">▶</button>
+    </div>
+
+    <div id="calendar-content-area">
+        <div class="mypage-cal-section">
+            <div class="mypage-cal-grid">
+                <div class="mypage-day-label" th:each="day : ${#strings.arraySplit('일,월,화,수,목,금,토', ',')}" th:text="${day}"></div>
+                
+                <div class="mypage-date-cell" th:if="${startDayOfWeek > 0}" th:each="num : ${#numbers.sequence(1, startDayOfWeek)}"></div>
+                
+                <div class="mypage-date-cell" 
+                     th:each="num : ${#numbers.sequence(1, lastDay)}"
+                     th:classappend="${currentYear == #temporals.year(#temporals.createNow()) 
+                                      and currentMonth == #temporals.month(#temporals.createNow()) 
+                                      and num == #temporals.day(#temporals.createNow())} ? 'is-today'">
+                    
+                    <span class="mypage-date-num" th:text="${num}">1</span>
+                    
+                    <div th:unless="${num == 26}" class="mypage-skeleton"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <a th:href="@{/calendar}" style="display: flex; justify-content: center; align-items: center; text-decoration: none; color: #666; font-size: 14px; padding: 15px 0; border-top: 1px solid #f2f2f2; margin-top: 10px;">
+        캘린더 전체 보기 <span style="margin-left: 5px; font-size: 12px;">&gt;</span>
+    </a>
+</section>
+
+	</main>
+
+	<div th:replace="~{member/myPage/editShareProfile :: editShareFragment}"></div>
+	<div th:replace="~{member/myPage/findFriends :: findFriendsFragment}"></div>
+	<div th:replace="~{member/myPage/profileSetting :: profileSettingFragment}"></div>
+	<script>
+	function changeMonth(year, month) {
+	    // 1. URL 호출 (전체 페이지를 가져오지만 필요한 부분만 쓸 것임)
+	    fetch(`/member/mypage?year=${year}&month=${month}`)
+	        .then(response => response.text())
+	        .then(html => {
+	            const parser = new DOMParser();
+	            const doc = parser.parseFromString(html, 'text/html');
+	            
+	            // 2. 제목 업데이트
+	            const newTitle = doc.querySelector('#cal-month-title').innerText;
+	            document.querySelector('#cal-month-title').innerText = newTitle;
+	            
+	            // 3. 캘린더 그리드 내용만 교체 (스크롤 유지의 핵심)
+	            const newContent = doc.querySelector('#calendar-content-area').innerHTML;
+	            document.querySelector('#calendar-content-area').innerHTML = newContent;
+	            
+	            // 4. [중요] 버튼의 onclick 파라미터 업데이트
+	            // 화면에 있는 버튼들을 찾아서 새로 받아온 HTML의 버튼 속성으로 덮어씌웁니다.
+	            const newButtons = doc.querySelectorAll('.calendar-header button');
+	            const currentButtons = document.querySelectorAll('.calendar-header button');
+	            
+	            if(newButtons.length >= 2) {
+	                currentButtons[0].setAttribute('onclick', newButtons[0].getAttribute('onclick'));
+	                currentButtons[1].setAttribute('onclick', newButtons[1].getAttribute('onclick'));
+	            }
+	        })
+	        .catch(error => console.error('달력 전환 실패:', error));
+	}
+	
+	// 외부 JS 로드 실패 시에도 클릭 에러가 나지 않도록 임시 정의
+    window.toggleUniqueFriendModal = window.toggleUniqueFriendModal || function(show) {
+        const modal = document.getElementById('uModFriendLayer');
+        if (modal) modal.style.display = show ? 'flex' : 'none';
+    };
+	</script>
+	<script th:src="@{/login/findFriends.js}"></script>
+	<script th:src="@{/login/profileSetting.js}"></script>
+	<script th:src="@{/login/myPageCopyModal.js}"></script>
+</section>
+</html>
