@@ -1,0 +1,181 @@
+
+/* ===== 기본 레이아웃 ===== */
+body {
+    margin: 0;
+    font-family: 'Pretendard', sans-serif;
+    background-color: rgb(255, 255, 255);
+}
+
+.webtoon-container {
+    width: 1300px;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+/* ===== 광고 배너 ===== */
+.webtoon-banner {
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(90deg, #ff2f6e, #ff6f91);
+    border-radius: 15px;
+    margin: 40px 0 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* ===== 섹션 제목 ===== */
+.webtoon-section-title {
+    font-size: 19px;
+    font-weight: bold;
+    margin: 40px 0 20px 0;
+}
+
+/* ===== 웹툰 그리드 수정 ===== */
+.webtoon-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+    /* overflow: hidden; 삭제 -> hover 효과가 잘리지 않게 함 */
+    margin-bottom: 30px;
+}
+
+/* 5개만 보여주기 위한 처리 (기존 유지) */
+.webtoon-grid > .webtoon-card:nth-child(n+6) {
+    display: none;
+}
+
+/* ===== 웹툰 카드 수정 ===== */
+.webtoon-card {
+    background: none; /* 배경색 제거 (이미지가 꽉 차므로) */
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+    text-decoration: none; /* a 태그 언더라인 방지 */
+    color: inherit;
+}
+
+.webtoon-card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.webtoon-card:hover {
+    transform: translateY(-8px); /* 위로 부드럽게 올라감 */
+}
+
+/* 썸네일 비율 조정 */
+.webtoon-thumbnail {
+    width: 100%;
+    aspect-ratio: 1 / 1;   /* ⭐ 2 / 3 를 1 / 1 로 수정하세요 */
+    overflow: hidden;
+    border-radius: 12px;   /* 둥근 모서리 유지 */
+    background-color: #f0f0f0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.webtoon-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: scale 0.3s ease;
+}
+
+.webtoon-card:hover .webtoon-thumbnail img {
+    scale: 1.05; /* 마우스 올리면 이미지 미세하게 확대 */
+}
+
+/* 정보 영역 정렬 */
+.webtoon-info {
+    padding: 12px 4px; /* 좌우 여백을 줄여 이미지와 라인 맞춤 */
+}
+
+.webtoon-title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 4px;
+    /* 제목이 길어질 경우 대비 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.webtoon-meta {
+    font-size: 13px;
+    color: #ff2f6e; /* 장르를 왓챠 핑크로 강조하거나 회색(#888) 유지 */
+    font-weight: 500;
+}
+
+/* ===== 전체 영역 (1300 고정) ===== */
+.webtoon-collection-section {
+    width: 1300px;
+    margin: 60px auto;
+}
+
+/* 제목 */
+.webtoon-section-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* ===== 컬렉션 가로 정렬 ===== */
+.webtoon-collection-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+}
+
+/* ===== 개별 컬렉션 카드 ===== */
+.webtoon-collection-card {
+    flex: 1;                 /* 카드 개수만큼 자동 비율 분할 */
+    cursor: pointer;
+}
+
+.webtoon-collection-thumbs {
+    padding: 8px;                 /* ✅ 이미지 2px 안쪽 */
+    border-radius: 14px;          /* 바깥 둥근 테두리 */
+    background: #eee;             /* 테두리처럼 보이게 */
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+
+    aspect-ratio: 4 / 5;
+}
+
+/* 이미지 */
+.webtoon-collection-thumbs img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+	border-radius: 10px; 
+}
+
+/* 타이틀 */
+.webtoon-collection-title {
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.footer-notice {
+    width: 1300px;
+    margin: 80px auto 40px;
+    padding: 28px 20px;
+
+    background: #f3f3f3;
+    border-radius: 12px;
+
+    text-align: center;
+}
+
+.footer-notice p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.8;
+}

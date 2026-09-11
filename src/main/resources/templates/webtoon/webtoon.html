@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::section})">
+
+<section>
+	  <link rel="stylesheet" th:href="@{/webtoon/webtoon.css}">
+<!-- ===== 메인 컨텐츠 ===== -->
+<div class="webtoon-container">
+
+    <!-- 배너 -->
+    <div class="webtoon-banner">
+        지금 가장 핫한 웹툰을 만나보세요 🔥
+    </div>
+
+<!-- 최신 등록 -->
+<div class="webtoon-section-title">최신 등록 웹툰</div>
+<div class="webtoon-grid">
+    <div class="webtoon-card" th:each="w : ${latestList}">
+        <a th:href="@{/work/{id}(id=${w.workId})}">
+            <div class="webtoon-thumbnail">
+                <img th:src="@{'/images/' + ${w.workThumbnail}}"
+                     th:alt="${w.workTitle}">
+            </div>
+            <div class="webtoon-info">
+                <div class="webtoon-title" th:text="${w.workTitle}"></div>
+                <div class="webtoon-meta" th:text="${w.genre}"></div>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+<!-- HOT 웹툰 -->
+<div class="webtoon-section-title">🔥 HOT 웹툰</div>
+<div class="webtoon-grid">
+    <div class="webtoon-card" th:each="w : ${hotList}">
+        <a th:href="@{/work/{id}(id=${w.workId})}">
+            <div class="webtoon-thumbnail">
+                <img th:src="@{'/images/' + ${w.workThumbnail}}">
+            </div>
+            <div class="webtoon-info">
+                <div class="webtoon-title" th:text="${w.workTitle}"></div>
+                <div class="webtoon-meta" th:text="${w.genre}"></div>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+<!-- 랭킹순 -->
+<div class="webtoon-section-title">🏆 랭킹순 웹툰</div>
+<div class="webtoon-grid">
+    <div class="webtoon-card" th:each="w : ${rankList}">
+        <a th:href="@{/work/{id}(id=${w.workId})}">
+            <div class="webtoon-thumbnail">
+                <img th:src="@{'/images/' + ${w.workThumbnail}}">
+            </div>
+            <div class="webtoon-info">
+                <div class="webtoon-title" th:text="${w.workTitle}"></div>
+                <div class="webtoon-meta" th:text="${w.genre}"></div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="webtoon-section-title">💙 인기 BL 웹툰</div>
+<div class="webtoon-grid">
+    <div class="webtoon-card" th:each="w : ${blList}">
+        <a th:href="@{/work/{id}(id=${w.workId})}">
+            <div class="webtoon-thumbnail">
+                <img th:src="@{'/images/' + ${w.workThumbnail}}" th:alt="${w.workTitle}">
+            </div>
+            <div class="webtoon-info">
+                <div class="webtoon-title" th:text="${w.workTitle}"></div>
+                <div class="webtoon-meta" th:text="${w.genre}"></div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="webtoon-section-title">💖 설레는 로맨스 웹툰</div>
+<div class="webtoon-grid">
+    <div class="webtoon-card" th:each="w : ${romanceList}">
+        <a th:href="@{/work/{id}(id=${w.workId})}">
+            <div class="webtoon-thumbnail">
+                <img th:src="@{'/images/' + ${w.workThumbnail}}" th:alt="${w.workTitle}">
+            </div>
+            <div class="webtoon-info">
+                <div class="webtoon-title" th:text="${w.workTitle}"></div>
+                <div class="webtoon-meta" th:text="${w.genre}"></div>
+            </div>
+        </a>
+    </div>
+</div>
+
+	
+	
+</div>
+</section>
+</html>
