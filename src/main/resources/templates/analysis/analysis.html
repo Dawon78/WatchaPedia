@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="layout :: layout(~{::section})">
+
+<section data-theme="light">
+	<link rel="stylesheet" th:href="@{/analysis/analysis.css}">
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.2.2/wordcloud2.min.js"></script>
+	<script th:src="@{/analysis/analysis.js}"></script>
+
+	<main
+		class="_mainSection_vjv2a_9 _paddingTop_vjv2a_13 _paddingBottom_vjv2a_17">
+		<div class="_self_1f250_2">
+			<div class="_background_1dj3i_1"></div>
+
+			<div class="_grid_6ty13_1">
+
+				<!-- ===== 헤더 ===== -->
+				<div
+					class="_block_1py4t_1 _smAll_1py4t_38 _mdAll_1py4t_73 _headerBlock_1f250_26">
+					<div class="_background_1f250_37"></div>
+
+					<header class="_header_1f250_26"
+						th:style="|background-image: url(@{/analysis/images/analysis-bg.png});|">
+						<div>
+							<div class="_row_buaph_1 Row">
+
+								<div class="_logoContainer_1f250_44">
+									<img alt=""
+										class="_image_opm6f_1 _withSrc_opm6f_5 _logo_1f250_44"
+										th:src="@{/analysis/images/analysis-logo.svg}" />
+								</div>
+
+								<h1 class="_title_1f250_50">
+									<span class="_word_1f250_58">취향분석</span>
+
+									<div class="_profile_1f250_67">
+										<div
+											class="_rounded_rqdtv_1 _wrapper_6cgwz_1 _userProfilePhoto_1f250_295">
+											<div
+												class="_profilePhoto_6cgwz_27 _withSrc_6cgwz_34 ProfilePhotoImage"
+												th:style="|background-image: url(@{/analysis/images/profile.jpg});|">
+											</div>
+										</div>
+										<div class="_userName_1f250_6"
+										     th:text="${member != null ? member.memberName : '사용자'}">
+										</div>
+									</div>
+								</h1>
+
+							</div>
+						</div>
+					</header>
+				</div>
+
+
+				<!-- ===== 평가수 ===== -->
+				<div
+					class="_block_1py4t_1 _smAll_1py4t_38 _mdAll_1py4t_73 _roundedCornerBlock_1f250_21">
+					<section class="_analysisSection_1f250_258">
+						<div class="_row_buaph_1 Row Row">
+							<header class="_header_1jdvf_5">
+								<h2 class="_title_1jdvf_12 _display2Bold_1dosp_8">평가수</h2>
+							</header>
+						</div>
+
+						<div>
+							<div class="_row_buaph_1 Row">
+								<div class="_categorySumContainer_1f250_178">
+									<ul class="_statSumUl_1f250_127">
+										<li class="_statSumList_1f250_131" style="width: 25%;">
+											<div class="_statSumTitle_1f250_139">1</div>
+											<div class="_statSumSubTitle_1f250_147">영화</div>
+										</li>
+										<li class="_statSumList_1f250_131" style="width: 25%;">
+											<div class="_statSumTitle_1f250_139">0</div>
+											<div class="_statSumSubTitle_1f250_147">시리즈</div>
+										</li>
+										<li class="_statSumList_1f250_131" style="width: 25%;">
+											<div class="_statSumTitle_1f250_139">0</div>
+											<div class="_statSumSubTitle_1f250_147">책</div>
+										</li>
+										<li class="_statSumList_1f250_131" style="width: 25%;">
+											<div class="_statSumTitle_1f250_139">0</div>
+											<div class="_statSumSubTitle_1f250_147">웹툰</div>
+										</li>
+									</ul>
+								</div>
+
+								<hr class="Divider _hr_108xr_1 _regular_108xr_17 _divider_1f250_96">
+							</div>
+						</div>
+					</section>
+
+					<!-- 원본은 같은 block 안에 별점 섹션이 이어서 들어가기도 함 (네 원본 DOM처럼) -->
+					<section class="_ratingStatSection_1f250_285">
+						<div class="_row_buaph_1 Row Row">
+							<header class="_header_1jdvf_5">
+								<h2 class="_title_1jdvf_12 _display2Bold_1dosp_8">별점 분포</h2>
+							</header>
+						</div>
+
+						<div>
+							<div class="_row_buaph_1 Row">
+								<h3 class="_subTitle_1f250_100" style="margin: 8px 0px 24px;">평가가
+									너무 적어요 ㅠ_ㅠ</h3>
+
+								<div class="_ratingStatStyle_1f250_291 _self_1roby_65">
+
+									<!-- 🔥 barsContainer는 단 하나만 -->
+									<div class="_barsContainer_1roby_71">
+
+										<!-- 0.5 -->
+										<div class="_barArea_1roby_13">
+											<div class="_bar_1roby_6 _animation_1roby_79"
+												th:style="|--rating-height: ${ratingPercent0}%;|">
+												<div>0.5</div>
+											</div>
+										</div>
+
+										<!-- 1.0 -->
+										<div class="_barArea_1roby_13">
+											<div class="_bar_1roby_6 _animation_1roby_79"
+												th:style="|--rating-height: ${ratingPercent1}%;|">
+												<div>1</div>
+											</div>
+										</div>
+
+										<!-- 1.5 -->
+										<div class="_barArea_1roby_13">
+											<div class="_bar_1roby_6 _animation_1roby_79"
+												th:style="|--rating-height: ${ratingPercent2}%;|">
+												<div>1.5</div>
+											</div>
+										</div>
+
+										<!-- 2.0 -->
+										<div class="_barArea_1roby_13">
+											<div class="_bar_1roby_6 _animation_1roby_79"
+												th:style="|--rating-height: ${ratingPercent3}%;|">
+												<div>2</div>
+											</div>
+										</div>
+
+										<!-- 2.5 -->
+										<div class="_barArea_1roby_13">
+											<div class="_bar_1roby_6 _animation_1roby_79"
+												th:style="|--rating-height: ${ratingPercent4}%;|">
+												<div>2.5</div>
+											</div>
+										</div>
+
+										<!-- 3.0 -->
+										<div class="_barArea_1roby_13">
+											<div class="_bar_1roby_6 _animation_1roby_79"
+												th:style="|--rating-height: ${ratingPercent5}%;|">
+												<div>3</div>
+											</div>
+										</div>
+
+										<!-- 3.5 -->
+										<div class="_barArea_1roby_13">
+											<div class="_bar_1roby_6 _animation_1roby_79"
+												th:style="|--rating-height: ${ratingPercent6}%;|">
+												<div>3.5</div>
+											</div>
+										</div>
+
+										<!-- 4.0 -->
+										<div class="_barArea_1roby_13">
+											<div class="_bar_1roby_6 _animation_1roby_79"
+												th:style="|--rating-height: ${ratingPercent7}%;|">
+												<div>4</div>
+											</div>
+										</div>
+
+										<!-- 4.5 -->
+										<div class="_barArea_1roby_13">
+											<div class="_bar_1roby_6 _animation_1roby_79"
+												th:style="|--rating-height: ${ratingPercent8}%;|">
+												<div>4.5</div>
+											</div>
+										</div>
+
+										<!-- 5.0 (최다 별점 강조) -->
+										<div class="_barArea_1roby_13">
+											<div
+												class="_bar_1roby_6 _mostVoted_1roby_32 _animation_1roby_79"
+												th:style="|--rating-height: ${ratingPercent9}%;|">
+												<div>5</div>
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+
+								<!-- 별점 요약 영역 -->
+								<div class="_ratingStatSumContainer_1f250_123">
+									<ul class="_statSumUl_1f250_127">
+										<li class="_statSumList_1f250_131" style="width: 33.3333%;">
+											<div class="_statSumTitle_1f250_139" th:text="${avgRating}">5.0</div>
+											<div class="_statSumSubTitle_1f250_147">별점 평균</div>
+										</li>
+										<li class="_statSumList_1f250_131" style="width: 33.3333%;">
+											<div class="_statSumTitle_1f250_139" th:text="${ratingCount}">1</div>
+											<div class="_statSumSubTitle_1f250_147">별점 개수</div>
+										</li>
+										<li class="_statSumList_1f250_131" style="width: 33.3333%;">
+											<div class="_statSumTitle_1f250_139" th:text="${mostVoted}">5.0</div>
+											<div class="_statSumSubTitle_1f250_147">많이 준 별점</div>
+										</li>
+									</ul>
+								</div>
+
+							</div>
+						</div>
+					</section>
+				</div>
+
+
+				<!-- ===== 선호태그/국가/장르/감상시간 (원본처럼 block 단위로 계속) ===== -->
+				<div
+					class="_block_1py4t_1 _smAll_1py4t_38 _mdAll_1py4t_73 _roundedCornerBlock_1f250_21">
+					<!-- 영화 선호태그 -->
+					<section class="_analysisSection_1f250_258">
+						<div class="_row_buaph_1 Row Row">
+							<header class="_header_1jdvf_5">
+								<h2 class="_title_1jdvf_12 _display2Bold_1dosp_8">영화 선호태그</h2>
+							</header>
+						</div>
+
+						<div>
+							<div class="_row_buaph_1 Row">
+								<div class="_tagCloudContainer_1f250_182">
+									<div style="display:flex; justify-content:center;">
+								        <div id="wordCloud" style="width:280px; height:172px; position:relative;"></div>
+								     </div>
+								</div>
+
+								<hr class="Divider _hr_108xr_1 _regular_108xr_17 _divider_1f250_96">
+								
+							</div>
+						</div>
+					</section>
+
+					<!-- 영화 선호국가 -->
+					<section class="_analysisSection_1f250_258">
+						<div class="_row_buaph_1 Row Row">
+							<header class="_header_1jdvf_5">
+								<h2 class="_title_1jdvf_12 _display2Bold_1dosp_8">영화 선호국가</h2>
+							</header>
+						</div>
+
+						<div>
+							<div class="_row_buaph_1 Row">
+								<div class="_genreStatSumContainer_1f250_119">
+									<ul class="_statSumUl_1f250_127">
+										<li class="_statSumList_1f250_131" style="width: 100%;">
+											<div class="_statSumTitle_1f250_139">일본</div>
+											<div class="_statSumSubTitle_1f250_147">94점 • 1편</div>
+										</li>
+									</ul>
+								</div>
+
+								<ul></ul>
+
+								<hr
+									class="Divider _hr_108xr_1 _regular_108xr_17 _divider_1f250_96">
+							</div>
+						</div>
+					</section>
+
+					<!-- 영화 선호장르 -->
+					<section class="_analysisSection_1f250_258">
+						<div class="_row_buaph_1 Row Row">
+							<header class="_header_1jdvf_5">
+								<h2 class="_title_1jdvf_12 _display2Bold_1dosp_8">영화 선호장르</h2>
+							</header>
+						</div>
+
+						<div>
+							<div class="_row_buaph_1 Row">
+								<h3 class="_subTitle_1f250_100" style="margin: 8px 0px 0px;">애니메이션
+									좋아하는 사람 치고 나쁜 사람 없어요</h3>
+
+								<div class="_genreStatSumContainer_1f250_119">
+									<ul class="_statSumUl_1f250_127">
+									  <li class="_statSumList_1f250_131"
+									      th:each="genre : ${topGenres}"
+									      th:style="'width:' + ${100 / topGenres.size()} + '%;'">
+									
+									    <div class="_statSumTitle_1f250_139"
+									         th:text="${genre.name}">
+									      장르명
+									    </div>
+									
+									    <div class="_statSumSubTitle_1f250_147">
+									      <span th:text="${genre.score}">90</span>점 •
+									      <span th:text="${genre.count}">1</span>편
+									    </div>
+									
+									  </li>
+									</ul>
+								</div>
+
+								<hr
+									class="Divider _hr_108xr_1 _regular_108xr_17 _divider_1f250_96">
+							</div>
+						</div>
+					</section>
+
+					<!-- 감상 시간 -->
+					<section class="_watchingTimeSection_1f250_286">
+						<div class="_row_buaph_1 Row Row">
+							<header class="_header_1jdvf_5">
+								<h2 class="_title_1jdvf_12 _display2Bold_1dosp_8">영화 감상 시간</h2>
+							</header>
+						</div>
+
+						<div>
+							<div class="_row_buaph_1 Row">
+								<h3 class="_watchingTime_1f250_109">1 시간</h3>
+								<h3 class="_subTitle_1f250_100" style="margin: 4px 0px 0px;">에이
+									설마 이것만 본 건 아닐 거예요.</h3>
+							</div>
+						</div>
+					</section>
+				</div>
+
+				
+			</div>
+		</div>
+
+	</main>
+
+</section>
+</html>

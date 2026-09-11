@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::section})">
+      
+ <section data-theme="light">
+	  <link rel="stylesheet" th:href="@{/magazine/magazine.css}">
+	  
+	  <main class="_mainSection_vjv2a_9 _paddingTop_vjv2a_13 _paddingBottom_vjv2a_17">
+	  	<section class="_section_1dfi5_1">
+
+		  <!-- 상단 헤더 -->
+		  <header class="_header_1dfi5_6">
+		    <h1 class="_title_1dfi5_13 _h3_o65ro_67">매거진</h1>
+		
+		    <ul class="_ul_1eeva_1">
+		      <li>
+		        <button class="_button_faef4_1 _chip_faef4_7 _medium_o65ro_6 _body3_o65ro_153 _chipSelected_faef4_23"
+		                data-filter ="전체"
+		                type="button">
+		          전체
+		        </button>
+		      </li>
+		      <li>
+		        <button class="_button_faef4_1 _chip_faef4_7 _medium_o65ro_6 _body3_o65ro_153"
+		                data-filter ="아티클"
+		                type="button">
+		          아티클
+		        </button>
+		      </li>
+		      <li>
+		        <button class="_button_faef4_1 _chip_faef4_7 _medium_o65ro_6 _body3_o65ro_153"
+		                data-filter ="왓피인터뷰"
+		                type="button">
+		          왓피인터뷰
+		        </button>
+		      </li>
+		      <li>
+		        <button class="_button_faef4_1 _chip_faef4_7 _medium_o65ro_6 _body3_o65ro_153"
+		        		data-filter ="큐레이션"
+		                type="button">
+		          큐레이션
+		        </button>
+		      </li>
+		      <li>
+		        <button class="_button_faef4_1 _chip_faef4_7 _medium_o65ro_6 _body3_o65ro_153"
+		        		data-filter ="콘텐츠소식"
+		                type="button">
+		          콘텐츠소식
+		        </button>
+		      </li>
+		      <li>
+		        <button class="_button_faef4_1 _chip_faef4_7 _medium_o65ro_6 _body3_o65ro_153"
+		        		data-filter ="#왓챠디깅클럽"
+		                type="button">
+		          #왓챠디깅클럽
+		        </button>
+		      </li>
+		      <li>
+		        <button class="_button_faef4_1 _chip_faef4_7 _medium_o65ro_6 _body3_o65ro_153"
+		        		data-filter ="오픈에디터"
+		                type="button">
+		          오픈에디터
+		        </button>
+		      </li>
+		    </ul>
+		  </header>
+		
+		
+		  <!-- 카드 리스트 영역 -->
+		  <ul class="_ul_1dfi5_21">
+		
+		      <!-- 아티클 -->
+			  <li th:each="mag : ${articleList}"
+			      class="_li_1dfi5_17 _component_82rb0_1"
+			      data-category="아티클">
+			    <a href="#">
+			      <article class="_card_1xcia_1">
+			        <div class="_imageContainer_1xcia_5">
+			          <img class="_image_1xcia_5"
+					     th:src="@{/magazine/images/{file}(file=${mag.magazineThumbnail})}">
+			          <div class="_imageBorder_1xcia_12"></div>
+			        </div>
+			        <header class="_header_1xcia_40">
+			          <p class="_headerText_1xcia_54 _medium_o65ro_6 _body4_o65ro_164"
+						   th:text="${mag.magazineCategoryName}">
+					  </p>
+			        </header>
+			        <p class="_title_1xcia_61 _h4_o65ro_82"
+			           th:text="${mag.magazineTitle}"></p>
+			        <p class="_description_1xcia_71 _medium_o65ro_6 _body3_o65ro_153"
+			           th:text="${mag.magazineSummary}"></p>
+			      </article>
+			    </a>
+			  </li>
+			
+			  <!-- 왓피인터뷰 -->
+			  <li th:each="mag : ${watpediViewList}"
+			      class="_li_1dfi5_17 _component_82rb0_1"
+			      data-category="왓피인터뷰">
+			    <a href="#">
+			      <article class="_card_1xcia_1">
+			        <div class="_imageContainer_1xcia_5">
+			          <img class="_image_1xcia_5"
+					     th:src="@{/magazine/images/{file}(file=${mag.magazineThumbnail})}">
+			          <div class="_imageBorder_1xcia_12"></div>
+			        </div>
+			        <header class="_header_1xcia_40">
+			          <p class="_headerText_1xcia_54 _medium_o65ro_6 _body4_o65ro_164">
+			            왓피인터뷰
+			          </p>
+			        </header>
+			        <p class="_title_1xcia_61 _h4_o65ro_82"
+			           th:text="${mag.magazineTitle}"></p>
+			        <p class="_description_1xcia_71 _medium_o65ro_6 _body3_o65ro_153"
+			           th:text="${mag.magazineSummary}"></p>
+			      </article>
+			    </a>
+			  </li>
+			
+			  <!-- 큐레이션 -->
+			  <li th:each="mag : ${curationList}"
+			      class="_li_1dfi5_17 _component_82rb0_1"
+			      data-category="큐레이션">
+			    <a href="#">
+			      <article class="_card_1xcia_1">
+			        <div class="_imageContainer_1xcia_5">
+			          <img class="_image_1xcia_5"
+					     th:src="@{/magazine/images/{file}(file=${mag.magazineThumbnail})}">
+			          <div class="_imageBorder_1xcia_12"></div>
+			        </div>
+			        <header class="_header_1xcia_40">
+			          <p class="_headerText_1xcia_54 _medium_o65ro_6 _body4_o65ro_164">
+			            큐레이션
+			          </p>
+			          
+			        </header>
+			        <p class="_title_1xcia_61 _h4_o65ro_82"
+			           th:text="${mag.magazineTitle}"></p>
+			        <p class="_description_1xcia_71 _medium_o65ro_6 _body3_o65ro_153"
+			           th:text="${mag.magazineSummary}"></p>
+			      </article>
+			    </a>
+			  </li>
+
+		    
+		     <!-- 콘텐츠소식 -->
+		     <li th:each="mag : ${contentNewsList}"
+			      class="_li_1dfi5_17 _component_82rb0_1"
+			      data-category="콘텐츠소식">
+			    <a href="#">
+			      <article class="_card_1xcia_1">
+			        <div class="_imageContainer_1xcia_5">
+			          <img class="_image_1xcia_5"
+					     th:src="@{/magazine/images/{file}(file=${mag.magazineThumbnail})}">
+			          <div class="_imageBorder_1xcia_12"></div>
+			        </div>
+			        <header class="_header_1xcia_40">
+			          <p class="_headerText_1xcia_54 _medium_o65ro_6 _body4_o65ro_164">
+			            콘텐츠소식
+			          </p>
+			        </header>
+			        <p class="_title_1xcia_61 _h4_o65ro_82"
+			           th:text="${mag.magazineTitle}"></p>
+			        <p class="_description_1xcia_71 _medium_o65ro_6 _body3_o65ro_153"
+			           th:text="${mag.magazineSummary}"></p>
+			      </article>
+			    </a>
+			</li>
+			
+		     <!-- #왓챠디깅클럽 -->
+		     <li th:each="mag : ${diggingClubList}"
+			      class="_li_1dfi5_17 _component_82rb0_1"
+			      data-category="#왓챠디깅클럽">
+			    <a href="#">
+			      <article class="_card_1xcia_1">
+			        <div class="_imageContainer_1xcia_5">
+			          <img class="_image_1xcia_5"
+					     th:src="@{/magazine/images/{file}(file=${mag.magazineThumbnail})}">
+			          <div class="_imageBorder_1xcia_12"></div>
+			        </div>
+			        <header class="_header_1xcia_40">
+			          <p class="_headerText_1xcia_54 _medium_o65ro_6 _body4_o65ro_164">
+			            #왓챠디깅클럽
+			          </p>
+			        </header>
+			        <p class="_title_1xcia_61 _h4_o65ro_82"
+			           th:text="${mag.magazineTitle}"></p>
+			        <p class="_description_1xcia_71 _medium_o65ro_6 _body3_o65ro_153"
+			           th:text="${mag.magazineSummary}"></p>
+			      </article>
+			    </a>
+			</li>
+			
+			 <!-- 오픈에디터 -->
+		     <li th:each="mag : ${openEditorList}"
+			      class="_li_1dfi5_17 _component_82rb0_1"
+			      data-category="오픈에디터">
+			    <a href="#">
+			      <article class="_card_1xcia_1">
+			        <div class="_imageContainer_1xcia_5">
+			          <img class="_image_1xcia_5"
+					     th:src="@{/magazine/images/{file}(file=${mag.magazineThumbnail})}">
+			          <div class="_imageBorder_1xcia_12"></div>
+			        </div>
+			        <header class="_header_1xcia_40">
+			          <p class="_headerText_1xcia_54 _medium_o65ro_6 _body4_o65ro_164">
+			            오픈에디터
+			          </p>
+			        </header>
+			        <p class="_title_1xcia_61 _h4_o65ro_82"
+			           th:text="${mag.magazineTitle}"></p>
+			        <p class="_description_1xcia_71 _medium_o65ro_6 _body3_o65ro_153"
+			           th:text="${mag.magazineSummary}"></p>
+			      </article>
+			    </a>
+			</li>
+		
+		  </ul>
+		
+		</section>
+	  
+	  
+	  </main>
+	 
+	<script th:src="@{/magazine/magazine.js}"></script>
+	</section>
+</html>

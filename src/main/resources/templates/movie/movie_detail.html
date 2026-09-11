@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout2 :: layout2(~{::section})">
+<section>
+<link rel="stylesheet" type="text/css" th:href="@{/movie/movie_detail.css}">
+
+<div class="main">
+
+    <div class="hero">
+        <div class="hero-image">
+            <!-- 영화 썸네일 -->
+  <div class="hero-image" th:switch="${movie.workId}">
+    <img th:case="1" src="https://an2-img.amz.wtchn.net/image/v2/oz-5lJZrObRDeWau8Q70cA.webp?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1Ua3lNSGd4TURnd2NUZ3dJbDBzSW5BaU9pSXZkakl2YzNSdmNtVXZhVzFoWjJVdk1UZ3hOVEk1TlRVd01qRTBPREUxSW4wLkJJSEg3VHZ3WmRzQzFkQ3ZlSVRsN2VFb21aQzI3VkdCeGdSSmdFTHlCX0E=" alt="영화 이미지">
+    <img th:case="2" src="https://an2-img.amz.wtchn.net/image/v2/m2lKSoyAF_ryQNPHPEbxjw.webp?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1Ua3lNSGd4TURnd2NUZ3dJbDBzSW5BaU9pSXZkakl2YzNSdmNtVXZhVzFoWjJVdk1USXdNVFl5TXprNU16QTJOelk1TmpNaWZRLlFIWmRMNXpOS0xndUtzczZCN3VLeHRUTW9BUjlYVW1FY0twLUx0cS1Da0E=" alt="영화 이미지">
+    <img th:case="3" src="https://an2-img.amz.wtchn.net/image/v2/NbXPRHe9XgFG9AlcQw5bxQ.webp?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1Ua3lNSGd4TURnd2NUZ3dJbDBzSW5BaU9pSXZkakl2YzNSdmNtVXZhVzFoWjJVdk56STJNRE0xTURReE1URXlNRGM1SW4wLi00Unhad2NoY1dvREdJVlZleVZNUThaOG4yRUZxZEpJZ2tyYTVGWDJHODQ=" alt="영화 이미지">
+    <img th:case="4" src="https://an2-img.amz.wtchn.net/image/v2/rfTBOpFIciXSX8616rptlA.webp?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1Ua3lNSGd4TURnd2NUZ3dJbDBzSW5BaU9pSXZkakl2YzNSdmNtVXZhVzFoWjJVdk1qY3hPVEUxTVRReU1USXpPRGN3SW4wLnhOa1Y5Nm5WTkdkQjhnbmcyQWtmODkzUzV2Sm9taXBpR2FFZjU1LXRKd0U=" alt="영화 이미지">
+    <img th:case="5" src="https://an2-img.amz.wtchn.net/image/v2/gtYheM0A8LuimeBnDSVbNA.webp?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1Ua3lNSGd4TURnd2NUZ3dJbDBzSW5BaU9pSXZkakl2YzNSdmNtVXZhVzFoWjJVdk1UZzVNVFV5TWprMU5qQTVOakU0SW4wLllpQ0xaa0p1WlIxYldkVG9pR25pN2V4OTNwLXA5MGtSM1hUMV9wRmRabVE=" alt="영화 이미지">
+</div>
+        </div>
+
+        <section class="hero-info">
+            <div class="hero-info-inner">
+                <!-- 영화 제목 -->
+                <h1 class="hero-title" th:text="${movie.title}"></h1>
+
+                <!-- hero-description 은 workTitle 사용 -->
+                <div class="hero-description" th:text="${movie.title}"></div>
+
+                <!-- 국가, 장르(없다면 WORKTYPE), 국가 반복 가능 -->
+                <div class="hero-meta"
+     th:text="${movie.publishDate.year} + ' · ' + ${genre} + ' · ' + ${movieDetail.country}">
+   
+</div>
+
+                <!-- 상영시간 + 연령 -->
+              <div class="hero-details" 
+     th:text="${movieDetail.runningTime} + '분 · ' + (${movieDetail.ageRating} != null ? ${movieDetail.ageRating} : '청불')">
+</div>
+
+                <!-- 예매순위 + 예매율 + 총관객 -->
+	<div class="hero-ranking"
+     th:text="
+       '예매 순위 ' + ${movie.Rank} + '위' +
+       (${movieDetail.bookingRate} != null ? '(' + ${movieDetail.bookingRate} + '%)' : '') +
+       (${movieDetail.totalAudience} != null
+         ? ' · 누적 관객 ' + 
+           (${movieDetail.totalAudience} >= 10000 
+             ? ${#numbers.formatDecimal(movieDetail.totalAudience / 10000, 1, 0)} + '만명'
+             : ${movieDetail.totalAudience} + '명')
+         : '')">
+</div>
+            </div>
+        </section>
+    </div>
+    </div>
+ <!-- 상세 정보들 -->
+    <div class="content">
+       <div class="content_info">
+       <!-- 상세 왼쪽 -->
+       	<div class="content_info_left">
+       <img th:src="@{'/images/' + ${movie.Thumbnail}}" alt="영화 이미지">
+       	<div class="content_info_left2">
+       	
+       	<div class="rating">별점 그래프</div>
+       	<span class="rating2" >평균
+       	  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 12 12">
+            <path fill="currentColor" d="M5.65 1.8a.38.38 0 0 1 .67 0l1.36 2.76q.03.06.1.07l3.04.45c.31.04.43.42.21.63l-2.2 2.15a.1.1 0 0 0-.04.11L9.31 11c.05.31-.27.54-.54.4L6.05 9.97a.1.1 0 0 0-.12 0L3.2 11.4a.38.38 0 0 1-.55-.4l.52-3.03q.01-.07-.03-.1L0.95 5.7a.38.38 0 0 1 .2-.63l3.05-.45q.06 0 .09-.07z"/>
+        </svg> 3.3 <span class="rating-count">(4.1만명)</span> </span>
+       	</div>
+       	</div>
+       	
+       
+        <!-- 오른쪽 큰 박스-->
+    <div class="content_info_right">
+
+        <!-- 🔵 1. 상단 : 별점/버튼 -->
+		<div class="right-top">
+
+    <!-- 왼쪽 : 평가하기 -->
+    <div class="rating-summary">
+        <div class="rating-wrap">
+            <div class="stars-bg">★★★★★</div>
+            <div class="stars-fill">★★★★★</div>
+            <div class="rating-text1">평가하기</div>
+        </div>
+    </div>
+
+    <!-- ⭐ 가운데 : 점수 + 텍스트 묶음 -->
+    <div class="rating-info">
+    <div class="rating-info-left">
+        <div class="rating-number">3.3</div>
+        <div class="rating-text2">평균 별점 (4.1만명)</div>
+        </div>
+    </div>
+
+    <!-- 오른쪽 : 버튼 -->
+ <div class="rating-buttons">
+
+    <!-- 보고싶어요 -->
+    <button class="btn">
+        <svg viewBox="0 0 24 24">
+            <path d="M12 4v16M4 12h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        보고싶어요
+    </button>
+
+    <!-- 코멘트 -->
+    <button class="btn">
+        <svg viewBox="0 0 24 24">
+            <path d="M4 4h16v11H7l-3 3V4z" fill="currentColor"/>
+        </svg>
+        코멘트
+    </button>
+
+    <!-- 보는 중 -->
+    <button class="btn">
+        <svg viewBox="0 0 24 24">
+            <path d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 11a4 4 0 100-8 4 4 0 000 8z" fill="currentColor"/>
+        </svg>
+        보는 중
+    </button>
+
+    <!-- 더보기 -->
+    <button class="btn">
+        <svg viewBox="0 0 24 24">
+            <circle cx="5" cy="12" r="2" fill="currentColor"/>
+            <circle cx="12" cy="12" r="2" fill="currentColor"/>
+            <circle cx="19" cy="12" r="2" fill="currentColor"/>
+        </svg>
+        더보기
+    </button>
+
+</div>
+
+</div>
+
+        <!-- 🔵 2. 배너 -->
+        <div class="right-banner">
+        	<img src="https://an2-img.amz.wtchn.net/image/v2/4_7LYNxBgYhErgEg4020dw.png?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKd0lqb2lMM1l5TDNOMGIzSmxMM0J5YjIxdmRHbHZiaTh4TkRBeE5qVXhNamMxTmpZeE1UZzRJbjAuMWlIRkgwVXN5aV9mTFNzU0E2cmtuQ1BGMGRIVkhfT1hYWDk2bWE5SHpDbw==">
+            
+        </div>
+
+        <!-- 🔵 3. 줄거리 -->
+	<div class="right-desc">
+    <p th:text="${movie.description}"></p>
+	</div>
+
+    </div>
+       
+    </div>
+    
+<!-- 출연 제작 -->
+<section id="content-credits" class="credits">
+
+    <header class="credits-header">
+        <h2 class="credits-title">출연/제작</h2>
+    </header>
+
+    <div class="credits-slider">
+        <ul class="credits-list">
+            <!-- PersonWork 반복 -->
+<li class="credit-item" th:each="pw : ${castList}">
+    <a href="#" class="credit-card">
+        <img th:src="@{'/images/' + ${pw.person.profileUrl}}" th:alt="${pw.person.name}">
+        <div class="credit-info">
+            <span class="credit-name" th:text="${pw.person.name}"></span>
+         <!-- characterName이 있으면 roleType + ' | ' + characterName, 없으면 roleType만 -->
+<span class="credit-role" 
+      th:text="${pw.characterName != null} ? ${pw.roleType} + ' | ' + ${pw.characterName} : ${pw.roleType}">
+</span>
+        </div>
+    </a>
+</li>
+        </ul>
+    </div>
+</section>
+    <!-- 코멘트 -->
+    <section class="coment">
+    	<header class="coment-header" th:switch="${movie.workId}">
+    		<h2 class="coment-title">코멘트</h2>
+    		<span class="coment-rate" th:case="1">8000+</span>
+    		<span class="coment-rate" th:case="2">1000+</span>
+    		<span class="coment-rate" th:case="3">2000+</span>
+    		<span class="coment-rate" th:case="4">100+</span>
+    		<span class="coment-rate" th:case="5">200+</span>
+    	</header>
+        <ul class="coment-section">
+        <!-- 코멘트박스 -->
+        	<li class="coment-card">
+        		<article class="coment-container">
+	<a class="coment-container-a" href="/ko-KR/users/6ADvG2LB8AqzZ">
+		<header class="coment-container-header">
+			<img class="coment-user"
+				src="https://an2-img.amz.wtchn.net/image/v2/XSb9y--R5gOdYGIZBbQhfQ.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk16QXdlRE13TUNKZExDSndJam9pTDNZeUwzTjBiM0psTDNWelpYSXZOa0ZFZGtjeVRFSTRRWEY2V2k5d2NtOW1hV3hsTHpFME1EVXpPVFF4TlRrM05qVXlPRGtpZlEuLTJFVUVrWU5zbGo0UDkxa09kZTRqbDhOMngtYzRYUTBsU2pPaHpqQTRrbw==">
+			<div class="coment-userInfo">
+				<p class="coment-username">장소예</p>
+			</div>
+			<div class="_action_1cqxl_56 _rating_1cqxl_68 _body2Medium_1dosp_141">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="15"
+					fill="none" viewBox="0 0 14 15">
+					<path fill="currentColor" fill-rule="evenodd"
+						d="M6.62 1.4 4.86 5.04l-.07.05-3.93.58c-.35.06-.49.5-.24.75l2.85 2.83.02.08-.67 4c-.06.36.31.63.62.46l3.52-1.88h.08l3.52 1.88c.31.17.68-.1.62-.46l-.67-4q0-.05.02-.08l2.84-2.83c.26-.25.12-.7-.23-.75L9.2 5.1l-.07-.05L7.38 1.4a.42.42 0 0 0-.76 0"
+						clip-rule="evenodd"></path></svg>
+				<p>4.0</p>
+			</div>
+		</header></a>
+	<hr class="coment-hr">
+	<a class="coment-content" href="/ko-KR/comments/W4zQrOnOBpEw1">
+	<p class="coment-content2">3.0 영화지만 박지훈이 1.0을 함 
+	어지간한 동년배가 나와서 주접 쌌으면 측은지심도 안 들었을 텐데 비쩍 마른 채로 푹 팬 눈가에 그렁그렁~눈물 달고 허공 응시하니까 나까지 눈물이 막 나옴.....</p></a>
+	<hr class="coment-hr">
+	
+	<ul class="coment-content-3">
+		<li class="coment-like">
+		<button class="coment-btn" type="button">좋아요<span>1345</span>
+		</button>
+		</li>
+        <li class="coment-like">
+        <button class="coment-btn" type="button">댓글<span>2</span>
+		</button></li>
+	</ul>
+	<div class="comment-bottom">
+		<ul class="coment-icon">
+			<li>
+			<button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M10.2 2.03c.28-.64.92-1.03 1.6-1.03a3.25 3.25 0 0 1 3.27 3.22V7.3h3.16c2.28 0 4.08 2 3.72 4.27l-.99 6.3A3.75 3.75 0 0 1 17.24 21H4.84A2.8 2.8 0 0 1 2 18.2v-6.3c0-1.57 1.3-2.8 2.85-2.8h2.12zM8.6 19h8.63c.89 0 1.62-.63 1.75-1.44l.99-6.3c.16-1-.64-1.96-1.75-1.96H15a1.9 1.9 0 0 1-1.93-1.9V4.22c0-.6-.47-1.14-1.12-1.21L8.77 9.98q-.07.16-.16.28zm-2-7.9V19H4.85a.8.8 0 0 1-.85-.8v-6.3c0-.42.35-.8.85-.8z"
+							clip-rule="evenodd"></path></svg>
+			</button>
+			</li>
+			<li><button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M7.76 2h8.48q1.2-.01 2.01.04c.56.05 1.07.15 1.56.39.75.37 1.36.97 1.75 1.7.25.49.35 1 .4 1.55q.05.8.04 1.96v5.35q.01 1.17-.04 1.96a4 4 0 0 1-.4 1.54c-.39.74-1 1.34-1.75 1.72-.49.24-1 .33-1.56.38q-.8.05-2 .04H9.67c-.66 0-.86 0-1.03.04q-.27.05-.52.17c-.16.08-.31.2-.83.6l-2.41 1.88q-.29.24-.54.4c-.16.1-.46.28-.85.28-.45 0-.88-.2-1.16-.55-.26-.3-.3-.66-.32-.85q-.03-.3-.02-.66V7.64q-.01-1.17.04-1.96c.05-.55.15-1.06.4-1.54.39-.74 1-1.34 1.75-1.71.49-.24 1-.34 1.56-.39Q6.55 2 7.76 2M5.91 4.04c-.44.03-.67.1-.83.18q-.58.29-.87.84c-.07.15-.14.36-.17.78C4 6.28 4 6.84 4 7.68v11.8l2.07-1.61.07-.06c.42-.33.74-.58 1.1-.76q.48-.24 1.01-.34c.4-.08.8-.08 1.35-.08h6.6c.86 0 1.44 0 1.9-.04.43-.03.66-.1.82-.18q.58-.28.87-.84c.07-.15.14-.36.17-.78.04-.44.04-1 .04-1.84V7.68c0-.83 0-1.4-.04-1.84-.03-.42-.1-.63-.17-.78q-.3-.56-.87-.84a2 2 0 0 0-.83-.18C17.64 4 17.06 4 16.2 4H7.8c-.86 0-1.44 0-1.9.04"
+							clip-rule="evenodd"></path></svg>
+				</button>
+				</li>
+			<li class="_dropDownList_1ovnc_42">
+			<button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M18 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0m2 0a3 3 0 0 1-4.77 2.43l-7.28 4.04a3 3 0 0 1-.05 1.32l7.02 4.05A2.99 2.99 0 0 1 20 19a3 3 0 1 1-5.98-.37l-7.27-4.2Q6 14.99 5 15a3 3 0 1 1 1.96-5.27l7.14-3.96A3 3 0 1 1 20 5M6 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0m11 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
+							clip-rule="evenodd"></path></svg>
+			</button></li>
+		</ul>
+		
+		<ul class="coment-bottomright">
+			<li class="_dropDownList_1ovnc_42">
+			<button class="_coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M13.62 12a1.62 1.62 0 1 1-3.24 0 1.62 1.62 0 0 1 3.24 0m-5.6 0a1.62 1.62 0 1 1-3.24 0 1.62 1.62 0 0 1 3.24 0m9.58 1.62a1.62 1.62 0 1 0 0-3.24 1.62 1.62 0 0 0 0 3.24"
+							clip-rule="evenodd"></path></svg>
+				</button>
+				</li>
+		</ul>
+	</div>
+	</article>
+</li>
+            <li class="coment-card">
+        		<article class="coment-container">
+	<a class="coment-container-a" href="/ko-KR/users/6ADvG2LB8AqzZ">
+		<header class="coment-container-header">
+			<img class="coment-user"
+				src="https://an2-img.amz.wtchn.net/image/v2/vnZ2tAlkWOYmNoJHnPzjXA.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk16QXdlRE13TUNKZExDSndJam9pTDNZeUwzTjBiM0psTDNWelpYSXZSR2QzZUVGQ1FsRk5jWEpOYWk5d2NtOW1hV3hsTHpFMk16azNNRGszT0RjeU1qTTBPVEkwTURZaWZRLkZmYzdSZWZzRzdFM0ZEWm5DVGl5WTN6MVpvaEthTUlVLTZWSDJOVkxzY1k=">
+			<div class="coment-userInfo">
+				<p class="coment-username">마난마</p>
+			</div>
+			<div class="_action_1cqxl_56 _rating_1cqxl_68 _body2Medium_1dosp_141">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="15"
+					fill="none" viewBox="0 0 14 15">
+					<path fill="currentColor" fill-rule="evenodd"
+						d="M6.62 1.4 4.86 5.04l-.07.05-3.93.58c-.35.06-.49.5-.24.75l2.85 2.83.02.08-.67 4c-.06.36.31.63.62.46l3.52-1.88h.08l3.52 1.88c.31.17.68-.1.62-.46l-.67-4q0-.05.02-.08l2.84-2.83c.26-.25.12-.7-.23-.75L9.2 5.1l-.07-.05L7.38 1.4a.42.42 0 0 0-.76 0"
+						clip-rule="evenodd"></path></svg>
+				<p>3.0</p>
+			</div>
+		</header></a>
+	<hr class="coment-hr">
+	<a class="coment-content" href="/ko-KR/comments/W4zQrOnOBpEw1">
+	<p class="coment-content2">내가 장항준 감독이면 유해진 박지훈 두 분 생일때마다 매년 동네잔치 열어주고 싶겠다.</p></a>
+	<hr class="coment-hr">
+	
+	<ul class="coment-content-3">
+		<li class="coment-like">
+		<button class="coment-btn" type="button">좋아요<span>1145</span>
+		</button>
+		</li>
+        <li class="coment-like">
+        <button class="coment-btn" type="button">댓글<span>5</span>
+		</button></li>
+	</ul>
+	<div class="comment-bottom">
+		<ul class="coment-icon">
+			<li>
+			<button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M10.2 2.03c.28-.64.92-1.03 1.6-1.03a3.25 3.25 0 0 1 3.27 3.22V7.3h3.16c2.28 0 4.08 2 3.72 4.27l-.99 6.3A3.75 3.75 0 0 1 17.24 21H4.84A2.8 2.8 0 0 1 2 18.2v-6.3c0-1.57 1.3-2.8 2.85-2.8h2.12zM8.6 19h8.63c.89 0 1.62-.63 1.75-1.44l.99-6.3c.16-1-.64-1.96-1.75-1.96H15a1.9 1.9 0 0 1-1.93-1.9V4.22c0-.6-.47-1.14-1.12-1.21L8.77 9.98q-.07.16-.16.28zm-2-7.9V19H4.85a.8.8 0 0 1-.85-.8v-6.3c0-.42.35-.8.85-.8z"
+							clip-rule="evenodd"></path></svg>
+			</button>
+			</li>
+			<li><button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M7.76 2h8.48q1.2-.01 2.01.04c.56.05 1.07.15 1.56.39.75.37 1.36.97 1.75 1.7.25.49.35 1 .4 1.55q.05.8.04 1.96v5.35q.01 1.17-.04 1.96a4 4 0 0 1-.4 1.54c-.39.74-1 1.34-1.75 1.72-.49.24-1 .33-1.56.38q-.8.05-2 .04H9.67c-.66 0-.86 0-1.03.04q-.27.05-.52.17c-.16.08-.31.2-.83.6l-2.41 1.88q-.29.24-.54.4c-.16.1-.46.28-.85.28-.45 0-.88-.2-1.16-.55-.26-.3-.3-.66-.32-.85q-.03-.3-.02-.66V7.64q-.01-1.17.04-1.96c.05-.55.15-1.06.4-1.54.39-.74 1-1.34 1.75-1.71.49-.24 1-.34 1.56-.39Q6.55 2 7.76 2M5.91 4.04c-.44.03-.67.1-.83.18q-.58.29-.87.84c-.07.15-.14.36-.17.78C4 6.28 4 6.84 4 7.68v11.8l2.07-1.61.07-.06c.42-.33.74-.58 1.1-.76q.48-.24 1.01-.34c.4-.08.8-.08 1.35-.08h6.6c.86 0 1.44 0 1.9-.04.43-.03.66-.1.82-.18q.58-.28.87-.84c.07-.15.14-.36.17-.78.04-.44.04-1 .04-1.84V7.68c0-.83 0-1.4-.04-1.84-.03-.42-.1-.63-.17-.78q-.3-.56-.87-.84a2 2 0 0 0-.83-.18C17.64 4 17.06 4 16.2 4H7.8c-.86 0-1.44 0-1.9.04"
+							clip-rule="evenodd"></path></svg>
+				</button>
+				</li>
+			<li class="_dropDownList_1ovnc_42">
+			<button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M18 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0m2 0a3 3 0 0 1-4.77 2.43l-7.28 4.04a3 3 0 0 1-.05 1.32l7.02 4.05A2.99 2.99 0 0 1 20 19a3 3 0 1 1-5.98-.37l-7.27-4.2Q6 14.99 5 15a3 3 0 1 1 1.96-5.27l7.14-3.96A3 3 0 1 1 20 5M6 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0m11 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
+							clip-rule="evenodd"></path></svg>
+			</button></li>
+		</ul>
+		
+		<ul class="coment-bottomright">
+			<li class="_dropDownList_1ovnc_42">
+			<button class="_coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M13.62 12a1.62 1.62 0 1 1-3.24 0 1.62 1.62 0 0 1 3.24 0m-5.6 0a1.62 1.62 0 1 1-3.24 0 1.62 1.62 0 0 1 3.24 0m9.58 1.62a1.62 1.62 0 1 0 0-3.24 1.62 1.62 0 0 0 0 3.24"
+							clip-rule="evenodd"></path></svg>
+				</button>
+				</li>
+		</ul>
+	</div>
+	</article>
+</li>
+  <li class="coment-card">
+        		<article class="coment-container">
+	<a class="coment-container-a" href="/ko-KR/users/6ADvG2LB8AqzZ">
+		<header class="coment-container-header">
+			<img class="coment-user"
+				src="https://an2-img.amz.wtchn.net/image/v2/gUAqv7fhKqc1g3g28f0b6A.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk16QXdlRE13TUNKZExDSndJam9pTDNZeUwzTjBiM0psTDNWelpYSXZUMnRsZUVwUVdVOVljblprWWk5d2NtOW1hV3hsTHpJME1EQTVPRGd3T0RrNE1qYzFNemdpZlEuczFmYnJXbFFmb1g5enpCaWt5T0ZnYzVEZ2N1a3VVWEU0MklaU203LTV1UQ==">
+			<div class="coment-userInfo">
+				<p class="coment-username">재원</p>
+			</div>
+			<div class="_action_1cqxl_56 _rating_1cqxl_68 _body2Medium_1dosp_141">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="15"
+					fill="none" viewBox="0 0 14 15">
+					<path fill="currentColor" fill-rule="evenodd"
+						d="M6.62 1.4 4.86 5.04l-.07.05-3.93.58c-.35.06-.49.5-.24.75l2.85 2.83.02.08-.67 4c-.06.36.31.63.62.46l3.52-1.88h.08l3.52 1.88c.31.17.68-.1.62-.46l-.67-4q0-.05.02-.08l2.84-2.83c.26-.25.12-.7-.23-.75L9.2 5.1l-.07-.05L7.38 1.4a.42.42 0 0 0-.76 0"
+						clip-rule="evenodd"></path></svg>
+				<p>2.5</p>
+			</div>
+		</header></a>
+	<hr class="coment-hr">
+	<a class="coment-content" href="/ko-KR/comments/W4zQrOnOBpEw1">
+	<p class="coment-content2">비극의 역사와 배우의 열연 뒤 가려진 어정쩡한 연출이 못내 아쉽게 다가온다.</p></a>
+	<hr class="coment-hr">
+	
+	<ul class="coment-content-3">
+		<li class="coment-like">
+		<button class="coment-btn" type="button">좋아요<span>988</span>
+		</button>
+		</li>
+        <li class="coment-like">
+        <button class="coment-btn" type="button">댓글<span>22</span>
+		</button></li>
+	</ul>
+	<div class="comment-bottom">
+		<ul class="coment-icon">
+			<li>
+			<button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M10.2 2.03c.28-.64.92-1.03 1.6-1.03a3.25 3.25 0 0 1 3.27 3.22V7.3h3.16c2.28 0 4.08 2 3.72 4.27l-.99 6.3A3.75 3.75 0 0 1 17.24 21H4.84A2.8 2.8 0 0 1 2 18.2v-6.3c0-1.57 1.3-2.8 2.85-2.8h2.12zM8.6 19h8.63c.89 0 1.62-.63 1.75-1.44l.99-6.3c.16-1-.64-1.96-1.75-1.96H15a1.9 1.9 0 0 1-1.93-1.9V4.22c0-.6-.47-1.14-1.12-1.21L8.77 9.98q-.07.16-.16.28zm-2-7.9V19H4.85a.8.8 0 0 1-.85-.8v-6.3c0-.42.35-.8.85-.8z"
+							clip-rule="evenodd"></path></svg>
+			</button>
+			</li>
+			<li><button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M7.76 2h8.48q1.2-.01 2.01.04c.56.05 1.07.15 1.56.39.75.37 1.36.97 1.75 1.7.25.49.35 1 .4 1.55q.05.8.04 1.96v5.35q.01 1.17-.04 1.96a4 4 0 0 1-.4 1.54c-.39.74-1 1.34-1.75 1.72-.49.24-1 .33-1.56.38q-.8.05-2 .04H9.67c-.66 0-.86 0-1.03.04q-.27.05-.52.17c-.16.08-.31.2-.83.6l-2.41 1.88q-.29.24-.54.4c-.16.1-.46.28-.85.28-.45 0-.88-.2-1.16-.55-.26-.3-.3-.66-.32-.85q-.03-.3-.02-.66V7.64q-.01-1.17.04-1.96c.05-.55.15-1.06.4-1.54.39-.74 1-1.34 1.75-1.71.49-.24 1-.34 1.56-.39Q6.55 2 7.76 2M5.91 4.04c-.44.03-.67.1-.83.18q-.58.29-.87.84c-.07.15-.14.36-.17.78C4 6.28 4 6.84 4 7.68v11.8l2.07-1.61.07-.06c.42-.33.74-.58 1.1-.76q.48-.24 1.01-.34c.4-.08.8-.08 1.35-.08h6.6c.86 0 1.44 0 1.9-.04.43-.03.66-.1.82-.18q.58-.28.87-.84c.07-.15.14-.36.17-.78.04-.44.04-1 .04-1.84V7.68c0-.83 0-1.4-.04-1.84-.03-.42-.1-.63-.17-.78q-.3-.56-.87-.84a2 2 0 0 0-.83-.18C17.64 4 17.06 4 16.2 4H7.8c-.86 0-1.44 0-1.9.04"
+							clip-rule="evenodd"></path></svg>
+				</button>
+				</li>
+			<li class="_dropDownList_1ovnc_42">
+			<button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M18 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0m2 0a3 3 0 0 1-4.77 2.43l-7.28 4.04a3 3 0 0 1-.05 1.32l7.02 4.05A2.99 2.99 0 0 1 20 19a3 3 0 1 1-5.98-.37l-7.27-4.2Q6 14.99 5 15a3 3 0 1 1 1.96-5.27l7.14-3.96A3 3 0 1 1 20 5M6 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0m11 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
+							clip-rule="evenodd"></path></svg>
+			</button></li>
+		</ul>
+		
+		<ul class="coment-bottomright">
+			<li class="_dropDownList_1ovnc_42">
+			<button class="_coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M13.62 12a1.62 1.62 0 1 1-3.24 0 1.62 1.62 0 0 1 3.24 0m-5.6 0a1.62 1.62 0 1 1-3.24 0 1.62 1.62 0 0 1 3.24 0m9.58 1.62a1.62 1.62 0 1 0 0-3.24 1.62 1.62 0 0 0 0 3.24"
+							clip-rule="evenodd"></path></svg>
+				</button>
+				</li>
+		</ul>
+	</div>
+	</article>
+</li>
+<li class="coment-card">
+        		<article class="coment-container">
+	<a class="coment-container-a" href="/ko-KR/users/6ADvG2LB8AqzZ">
+		<header class="coment-container-header">
+			<img class="coment-user"
+				src="https://an2-img.amz.wtchn.net/image/v2/gYIGjbMGjBkWyf14oNp7UA.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk16QXdlRE13TUNKZExDSndJam9pTDNZeUwzTjBiM0psTDNWelpYSXZSR2QzZUVGbFVWbE9lSEpOYWk5d2NtOW1hV3hsTHpFMk1qazVOekE0TnpBeU5UWXpOemN6TkRRaWZRLkNPaFZuVFVad1FkZy04YnFFemlhdWRtN0t3ZS1RTVpDNVFzY2QtTERhZUU=">
+			<div class="coment-userInfo">
+				<p class="coment-username">yykk</p>
+			</div>
+			<div class="_action_1cqxl_56 _rating_1cqxl_68 _body2Medium_1dosp_141">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="15"
+					fill="none" viewBox="0 0 14 15">
+					<path fill="currentColor" fill-rule="evenodd"
+						d="M6.62 1.4 4.86 5.04l-.07.05-3.93.58c-.35.06-.49.5-.24.75l2.85 2.83.02.08-.67 4c-.06.36.31.63.62.46l3.52-1.88h.08l3.52 1.88c.31.17.68-.1.62-.46l-.67-4q0-.05.02-.08l2.84-2.83c.26-.25.12-.7-.23-.75L9.2 5.1l-.07-.05L7.38 1.4a.42.42 0 0 0-.76 0"
+						clip-rule="evenodd"></path></svg>
+				<p>4.5</p>
+			</div>
+		</header></a>
+	<hr class="coment-hr">
+	<a class="coment-content" href="/ko-KR/comments/W4zQrOnOBpEw1">
+	<p class="coment-content2">끝내 마음 깊은 곳의 현을 제대로 울린다.</p></a>
+	<hr class="coment-hr">
+	
+	<ul class="coment-content-3">
+		<li class="coment-like">
+		<button class="coment-btn" type="button">좋아요<span>777</span>
+		</button>
+		</li>
+        <li class="coment-like">
+        <button class="coment-btn" type="button">댓글<span>12</span>
+		</button></li>
+	</ul>
+	<div class="comment-bottom">
+		<ul class="coment-icon">
+			<li>
+			<button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M10.2 2.03c.28-.64.92-1.03 1.6-1.03a3.25 3.25 0 0 1 3.27 3.22V7.3h3.16c2.28 0 4.08 2 3.72 4.27l-.99 6.3A3.75 3.75 0 0 1 17.24 21H4.84A2.8 2.8 0 0 1 2 18.2v-6.3c0-1.57 1.3-2.8 2.85-2.8h2.12zM8.6 19h8.63c.89 0 1.62-.63 1.75-1.44l.99-6.3c.16-1-.64-1.96-1.75-1.96H15a1.9 1.9 0 0 1-1.93-1.9V4.22c0-.6-.47-1.14-1.12-1.21L8.77 9.98q-.07.16-.16.28zm-2-7.9V19H4.85a.8.8 0 0 1-.85-.8v-6.3c0-.42.35-.8.85-.8z"
+							clip-rule="evenodd"></path></svg>
+			</button>
+			</li>
+			<li><button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M7.76 2h8.48q1.2-.01 2.01.04c.56.05 1.07.15 1.56.39.75.37 1.36.97 1.75 1.7.25.49.35 1 .4 1.55q.05.8.04 1.96v5.35q.01 1.17-.04 1.96a4 4 0 0 1-.4 1.54c-.39.74-1 1.34-1.75 1.72-.49.24-1 .33-1.56.38q-.8.05-2 .04H9.67c-.66 0-.86 0-1.03.04q-.27.05-.52.17c-.16.08-.31.2-.83.6l-2.41 1.88q-.29.24-.54.4c-.16.1-.46.28-.85.28-.45 0-.88-.2-1.16-.55-.26-.3-.3-.66-.32-.85q-.03-.3-.02-.66V7.64q-.01-1.17.04-1.96c.05-.55.15-1.06.4-1.54.39-.74 1-1.34 1.75-1.71.49-.24 1-.34 1.56-.39Q6.55 2 7.76 2M5.91 4.04c-.44.03-.67.1-.83.18q-.58.29-.87.84c-.07.15-.14.36-.17.78C4 6.28 4 6.84 4 7.68v11.8l2.07-1.61.07-.06c.42-.33.74-.58 1.1-.76q.48-.24 1.01-.34c.4-.08.8-.08 1.35-.08h6.6c.86 0 1.44 0 1.9-.04.43-.03.66-.1.82-.18q.58-.28.87-.84c.07-.15.14-.36.17-.78.04-.44.04-1 .04-1.84V7.68c0-.83 0-1.4-.04-1.84-.03-.42-.1-.63-.17-.78q-.3-.56-.87-.84a2 2 0 0 0-.83-.18C17.64 4 17.06 4 16.2 4H7.8c-.86 0-1.44 0-1.9.04"
+							clip-rule="evenodd"></path></svg>
+				</button>
+				</li>
+			<li class="_dropDownList_1ovnc_42">
+			<button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M18 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0m2 0a3 3 0 0 1-4.77 2.43l-7.28 4.04a3 3 0 0 1-.05 1.32l7.02 4.05A2.99 2.99 0 0 1 20 19a3 3 0 1 1-5.98-.37l-7.27-4.2Q6 14.99 5 15a3 3 0 1 1 1.96-5.27l7.14-3.96A3 3 0 1 1 20 5M6 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0m11 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
+							clip-rule="evenodd"></path></svg>
+			</button></li>
+		</ul>
+		
+		<ul class="coment-bottomright">
+			<li class="_dropDownList_1ovnc_42">
+			<button class="_coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M13.62 12a1.62 1.62 0 1 1-3.24 0 1.62 1.62 0 0 1 3.24 0m-5.6 0a1.62 1.62 0 1 1-3.24 0 1.62 1.62 0 0 1 3.24 0m9.58 1.62a1.62 1.62 0 1 0 0-3.24 1.62 1.62 0 0 0 0 3.24"
+							clip-rule="evenodd"></path></svg>
+				</button>
+				</li>
+		</ul>
+	</div>
+	</article>
+</li>
+<li class="coment-card">
+        		<article class="coment-container">
+	<a class="coment-container-a" href="/ko-KR/users/6ADvG2LB8AqzZ">
+		<header class="coment-container-header">
+			<img class="coment-user"
+				src="https://an2-img.amz.wtchn.net/image/v2/l-ukxM57HQ8_Ck5qXKyRBg.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk16QXdlRE13TUNKZExDSndJam9pTDNZeUwzTjBiM0psTDNWelpYSXZVSHB1ZURsM1FWbGFkamMyTVM5d2NtOW1hV3hsTHpFMk5EUXdORFF5TnpRMk9UVTNNakU0TkRnaWZRLjhJSnR3V1EwSDdlZ2xvSFFDVld4azRkYnZpYjhPXzE2aVBqbzl4NXlXcW8=">
+			<div class="coment-userInfo">
+				<p class="coment-username">김다원</p>
+			</div>
+			<div class="_action_1cqxl_56 _rating_1cqxl_68 _body2Medium_1dosp_141">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="15"
+					fill="none" viewBox="0 0 14 15">
+					<path fill="currentColor" fill-rule="evenodd"
+						d="M6.62 1.4 4.86 5.04l-.07.05-3.93.58c-.35.06-.49.5-.24.75l2.85 2.83.02.08-.67 4c-.06.36.31.63.62.46l3.52-1.88h.08l3.52 1.88c.31.17.68-.1.62-.46l-.67-4q0-.05.02-.08l2.84-2.83c.26-.25.12-.7-.23-.75L9.2 5.1l-.07-.05L7.38 1.4a.42.42 0 0 0-.76 0"
+						clip-rule="evenodd"></path></svg>
+				<p>3.0</p>
+			</div>
+		</header></a>
+	<hr class="coment-hr">
+	<a class="coment-content" href="/ko-KR/comments/W4zQrOnOBpEw1">
+	<p class="coment-content2"><왕과 사는 남자>는 분명 매력적인 역사적 소재를 지녔지만, 이를 풀어내는 방식은 지나치게 불친절하고 낡았다. 영화는 관객이 이미 모든 역사적 배경을 알고 있다는 전제 위에서 전개된다. '한명회'가 어떤 인물인지, '이홍위(단종)'가 어떤 비극적 상황에 놓인 존재인지를 설명하는 최소한의 빌드업조차 없다. 한국사에 익숙하지 않은 관객에게 한명회는 그저 인상 나쁘게 생긴 빌런으로만 보일 뿐, 영화 속에서 그의 행동이 지닌 정치적 맥락과 역사적 무게는 전혀 전달되지 않는다. 인물 설명의 부재는 곧 서사의 빈약함으로 이어진다.
+주인공인 유배지 촌장 엄흥도와 이홍위 사이의 관계 형성 역시 설득력이 부족하다. 두 사람이 마음을 열고 유대감을 쌓아가는 과정은 거의 생략되다시피 하고, 밥 몇 번 함께 먹는 장면 뒤 곧바로 서로를 위해 오열하는 장면으로 넘어간다. 관객의 감정은 아직 준비되지 않았는데, 인물들만 과도하게 비장해지니 감동보다는 당혹감이 앞선다.
+
+가장 심각한 문제는 역사적 사실에 대한 존중이 결여된 각색이다. 숙종실록에 단종의 죽음은 하인 '공생'이 출세를 위해 주군을 배신하고 직접 목을 졸라 살해한, 당시로서는 상상하기 힘든 패륜적 사건으로 기록되어 있다. 반면 엄흥도는 세조의 명을 거역하고 목숨 걸고 단종의 시신을 수습한 충신이다.
+그럼에도 영화는 이 '패륜아 공생'과 '충신 엄흥도'를 동일 인물로 설정하는 무리수를 둔다. 영화적 상상력이라는 명분으로 보기에는 지나치게 위험한 선택이다. 주인을 죽인 배신자와 주인을 위해 목숨을 건 충신을 한 인물로 뒤섞는 것은 명백한 선 넘은 역사 왜곡에 가깝다.
+이러한 무리한 설정 위에 더해진 촌스럽고 구식의 연출은, 그나마 남아 있던 역사적 비극의 무게감마저 가볍게 증발시켜 버린다.
+
+</p></a>
+	<hr class="coment-hr">
+	
+	<ul class="coment-content-3">
+		<li class="coment-like">
+		<button class="coment-btn" type="button">좋아요<span>679</span>
+		</button>
+		</li>
+        <li class="coment-like">
+        <button class="coment-btn" type="button">댓글<span>22</span>
+		</button></li>
+	</ul>
+	<div class="comment-bottom">
+		<ul class="coment-icon">
+			<li>
+			<button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M10.2 2.03c.28-.64.92-1.03 1.6-1.03a3.25 3.25 0 0 1 3.27 3.22V7.3h3.16c2.28 0 4.08 2 3.72 4.27l-.99 6.3A3.75 3.75 0 0 1 17.24 21H4.84A2.8 2.8 0 0 1 2 18.2v-6.3c0-1.57 1.3-2.8 2.85-2.8h2.12zM8.6 19h8.63c.89 0 1.62-.63 1.75-1.44l.99-6.3c.16-1-.64-1.96-1.75-1.96H15a1.9 1.9 0 0 1-1.93-1.9V4.22c0-.6-.47-1.14-1.12-1.21L8.77 9.98q-.07.16-.16.28zm-2-7.9V19H4.85a.8.8 0 0 1-.85-.8v-6.3c0-.42.35-.8.85-.8z"
+							clip-rule="evenodd"></path></svg>
+			</button>
+			</li>
+			<li><button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M7.76 2h8.48q1.2-.01 2.01.04c.56.05 1.07.15 1.56.39.75.37 1.36.97 1.75 1.7.25.49.35 1 .4 1.55q.05.8.04 1.96v5.35q.01 1.17-.04 1.96a4 4 0 0 1-.4 1.54c-.39.74-1 1.34-1.75 1.72-.49.24-1 .33-1.56.38q-.8.05-2 .04H9.67c-.66 0-.86 0-1.03.04q-.27.05-.52.17c-.16.08-.31.2-.83.6l-2.41 1.88q-.29.24-.54.4c-.16.1-.46.28-.85.28-.45 0-.88-.2-1.16-.55-.26-.3-.3-.66-.32-.85q-.03-.3-.02-.66V7.64q-.01-1.17.04-1.96c.05-.55.15-1.06.4-1.54.39-.74 1-1.34 1.75-1.71.49-.24 1-.34 1.56-.39Q6.55 2 7.76 2M5.91 4.04c-.44.03-.67.1-.83.18q-.58.29-.87.84c-.07.15-.14.36-.17.78C4 6.28 4 6.84 4 7.68v11.8l2.07-1.61.07-.06c.42-.33.74-.58 1.1-.76q.48-.24 1.01-.34c.4-.08.8-.08 1.35-.08h6.6c.86 0 1.44 0 1.9-.04.43-.03.66-.1.82-.18q.58-.28.87-.84c.07-.15.14-.36.17-.78.04-.44.04-1 .04-1.84V7.68c0-.83 0-1.4-.04-1.84-.03-.42-.1-.63-.17-.78q-.3-.56-.87-.84a2 2 0 0 0-.83-.18C17.64 4 17.06 4 16.2 4H7.8c-.86 0-1.44 0-1.9.04"
+							clip-rule="evenodd"></path></svg>
+				</button>
+				</li>
+			<li class="_dropDownList_1ovnc_42">
+			<button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M18 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0m2 0a3 3 0 0 1-4.77 2.43l-7.28 4.04a3 3 0 0 1-.05 1.32l7.02 4.05A2.99 2.99 0 0 1 20 19a3 3 0 1 1-5.98-.37l-7.27-4.2Q6 14.99 5 15a3 3 0 1 1 1.96-5.27l7.14-3.96A3 3 0 1 1 20 5M6 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0m11 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
+							clip-rule="evenodd"></path></svg>
+			</button></li>
+		</ul>
+		
+		<ul class="coment-bottomright">
+			<li class="_dropDownList_1ovnc_42">
+			<button class="_coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M13.62 12a1.62 1.62 0 1 1-3.24 0 1.62 1.62 0 0 1 3.24 0m-5.6 0a1.62 1.62 0 1 1-3.24 0 1.62 1.62 0 0 1 3.24 0m9.58 1.62a1.62 1.62 0 1 0 0-3.24 1.62 1.62 0 0 0 0 3.24"
+							clip-rule="evenodd"></path></svg>
+				</button>
+				</li>
+		</ul>
+	</div>
+	</article>
+</li>
+<li class="coment-card">
+        		<article class="coment-container">
+	<a class="coment-container-a" href="/ko-KR/users/6ADvG2LB8AqzZ">
+		<header class="coment-container-header">
+			<img class="coment-user"
+				src="https://an2-img.amz.wtchn.net/image/v2/51fXRAK7UVVuPmOePuR0ZA.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk16QXdlRE13TUNKZExDSndJam9pTDNZeUwzTjBiM0psTDNWelpYSXZlVXRhZUROdVlrRmxSRFUwWkM5d2NtOW1hV3hsTHpFeE5EVXhOVGd3T1RNNE1UY3dNalVpZlEuOERBalFJbWVWdnNva18yckxodU9LREtaMzVVcWVLZVhlYzB1eVhKNVhxRQ==">
+			<div class="coment-userInfo">
+				<p class="coment-username">내일</p>
+			</div>
+			<div class="_action_1cqxl_56 _rating_1cqxl_68 _body2Medium_1dosp_141">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="15"
+					fill="none" viewBox="0 0 14 15">
+					<path fill="currentColor" fill-rule="evenodd"
+						d="M6.62 1.4 4.86 5.04l-.07.05-3.93.58c-.35.06-.49.5-.24.75l2.85 2.83.02.08-.67 4c-.06.36.31.63.62.46l3.52-1.88h.08l3.52 1.88c.31.17.68-.1.62-.46l-.67-4q0-.05.02-.08l2.84-2.83c.26-.25.12-.7-.23-.75L9.2 5.1l-.07-.05L7.38 1.4a.42.42 0 0 0-.76 0"
+						clip-rule="evenodd"></path></svg>
+				<p>1.0</p>
+			</div>
+		</header></a>
+	<hr class="coment-hr">
+	<a class="coment-content" href="/ko-KR/comments/W4zQrOnOBpEw1">
+	<p class="coment-content2">박지훈이라는 원색의 꽃
+유해진이라는 역동적인 나비
+청령포의 봄
+
+</p></a>
+	<hr class="coment-hr">
+	
+	<ul class="coment-content-3">
+		<li class="coment-like">
+		<button class="coment-btn" type="button">좋아요<span>612</span>
+		</button>
+		</li>
+        <li class="coment-like">
+        <button class="coment-btn" type="button">댓글<span>0</span>
+		</button></li>
+	</ul>
+	<div class="comment-bottom">
+		<ul class="coment-icon">
+			<li>
+			<button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M10.2 2.03c.28-.64.92-1.03 1.6-1.03a3.25 3.25 0 0 1 3.27 3.22V7.3h3.16c2.28 0 4.08 2 3.72 4.27l-.99 6.3A3.75 3.75 0 0 1 17.24 21H4.84A2.8 2.8 0 0 1 2 18.2v-6.3c0-1.57 1.3-2.8 2.85-2.8h2.12zM8.6 19h8.63c.89 0 1.62-.63 1.75-1.44l.99-6.3c.16-1-.64-1.96-1.75-1.96H15a1.9 1.9 0 0 1-1.93-1.9V4.22c0-.6-.47-1.14-1.12-1.21L8.77 9.98q-.07.16-.16.28zm-2-7.9V19H4.85a.8.8 0 0 1-.85-.8v-6.3c0-.42.35-.8.85-.8z"
+							clip-rule="evenodd"></path></svg>
+			</button>
+			</li>
+			<li><button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M7.76 2h8.48q1.2-.01 2.01.04c.56.05 1.07.15 1.56.39.75.37 1.36.97 1.75 1.7.25.49.35 1 .4 1.55q.05.8.04 1.96v5.35q.01 1.17-.04 1.96a4 4 0 0 1-.4 1.54c-.39.74-1 1.34-1.75 1.72-.49.24-1 .33-1.56.38q-.8.05-2 .04H9.67c-.66 0-.86 0-1.03.04q-.27.05-.52.17c-.16.08-.31.2-.83.6l-2.41 1.88q-.29.24-.54.4c-.16.1-.46.28-.85.28-.45 0-.88-.2-1.16-.55-.26-.3-.3-.66-.32-.85q-.03-.3-.02-.66V7.64q-.01-1.17.04-1.96c.05-.55.15-1.06.4-1.54.39-.74 1-1.34 1.75-1.71.49-.24 1-.34 1.56-.39Q6.55 2 7.76 2M5.91 4.04c-.44.03-.67.1-.83.18q-.58.29-.87.84c-.07.15-.14.36-.17.78C4 6.28 4 6.84 4 7.68v11.8l2.07-1.61.07-.06c.42-.33.74-.58 1.1-.76q.48-.24 1.01-.34c.4-.08.8-.08 1.35-.08h6.6c.86 0 1.44 0 1.9-.04.43-.03.66-.1.82-.18q.58-.28.87-.84c.07-.15.14-.36.17-.78.04-.44.04-1 .04-1.84V7.68c0-.83 0-1.4-.04-1.84-.03-.42-.1-.63-.17-.78q-.3-.56-.87-.84a2 2 0 0 0-.83-.18C17.64 4 17.06 4 16.2 4H7.8c-.86 0-1.44 0-1.9.04"
+							clip-rule="evenodd"></path></svg>
+				</button>
+				</li>
+			<li class="_dropDownList_1ovnc_42">
+			<button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M18 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0m2 0a3 3 0 0 1-4.77 2.43l-7.28 4.04a3 3 0 0 1-.05 1.32l7.02 4.05A2.99 2.99 0 0 1 20 19a3 3 0 1 1-5.98-.37l-7.27-4.2Q6 14.99 5 15a3 3 0 1 1 1.96-5.27l7.14-3.96A3 3 0 1 1 20 5M6 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0m11 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
+							clip-rule="evenodd"></path></svg>
+			</button></li>
+		</ul>
+		
+		<ul class="coment-bottomright">
+			<li class="_dropDownList_1ovnc_42">
+			<button class="_coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M13.62 12a1.62 1.62 0 1 1-3.24 0 1.62 1.62 0 0 1 3.24 0m-5.6 0a1.62 1.62 0 1 1-3.24 0 1.62 1.62 0 0 1 3.24 0m9.58 1.62a1.62 1.62 0 1 0 0-3.24 1.62 1.62 0 0 0 0 3.24"
+							clip-rule="evenodd"></path></svg>
+				</button>
+				</li>
+		</ul>
+	</div>
+	</article>
+</li>
+<li class="coment-card">
+        		<article class="coment-container">
+	<a class="coment-container-a" href="/ko-KR/users/6ADvG2LB8AqzZ">
+		<header class="coment-container-header">
+			<img class="coment-user"
+				src="https://an2-img.amz.wtchn.net/image/v2/-qoOXQ4QvwaxVmY8e3mxWw.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk16QXdlRE13TUNKZExDSndJam9pTDNZeUwzTjBiM0psTDNWelpYSXZUMnRsZUVwV2JsWm5lR1JpZHk5d2NtOW1hV3hsTHpFMk16QXdPVE14TlRBM05EQXhOREl3T0RBaWZRLlFaWWlBQlduSkdPanFYVERzbTFFVW54OVU2Q2tWNEN1Vk1tVzVsenBtUDA=">
+			<div class="coment-userInfo">
+				<p class="coment-username">김수진</p>
+			</div>
+			<div class="_action_1cqxl_56 _rating_1cqxl_68 _body2Medium_1dosp_141">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="15"
+					fill="none" viewBox="0 0 14 15">
+					<path fill="currentColor" fill-rule="evenodd"
+						d="M6.62 1.4 4.86 5.04l-.07.05-3.93.58c-.35.06-.49.5-.24.75l2.85 2.83.02.08-.67 4c-.06.36.31.63.62.46l3.52-1.88h.08l3.52 1.88c.31.17.68-.1.62-.46l-.67-4q0-.05.02-.08l2.84-2.83c.26-.25.12-.7-.23-.75L9.2 5.1l-.07-.05L7.38 1.4a.42.42 0 0 0-.76 0"
+						clip-rule="evenodd"></path></svg>
+				<p>4.0</p>
+			</div>
+		</header></a>
+	<hr class="coment-hr">
+	<a class="coment-content" href="/ko-KR/comments/W4zQrOnOBpEw1">
+	<p class="coment-content2">너무 재밌어요</p></a>
+	<hr class="coment-hr">
+	
+	<ul class="coment-content-3">
+		<li class="coment-like">
+		<button class="coment-btn" type="button">좋아요<span>120</span>
+		</button>
+		</li>
+        <li class="coment-like">
+        <button class="coment-btn" type="button">댓글<span>2</span>
+		</button></li>
+	</ul>
+	<div class="comment-bottom">
+		<ul class="coment-icon">
+			<li>
+			<button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M10.2 2.03c.28-.64.92-1.03 1.6-1.03a3.25 3.25 0 0 1 3.27 3.22V7.3h3.16c2.28 0 4.08 2 3.72 4.27l-.99 6.3A3.75 3.75 0 0 1 17.24 21H4.84A2.8 2.8 0 0 1 2 18.2v-6.3c0-1.57 1.3-2.8 2.85-2.8h2.12zM8.6 19h8.63c.89 0 1.62-.63 1.75-1.44l.99-6.3c.16-1-.64-1.96-1.75-1.96H15a1.9 1.9 0 0 1-1.93-1.9V4.22c0-.6-.47-1.14-1.12-1.21L8.77 9.98q-.07.16-.16.28zm-2-7.9V19H4.85a.8.8 0 0 1-.85-.8v-6.3c0-.42.35-.8.85-.8z"
+							clip-rule="evenodd"></path></svg>
+			</button>
+			</li>
+			<li><button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M7.76 2h8.48q1.2-.01 2.01.04c.56.05 1.07.15 1.56.39.75.37 1.36.97 1.75 1.7.25.49.35 1 .4 1.55q.05.8.04 1.96v5.35q.01 1.17-.04 1.96a4 4 0 0 1-.4 1.54c-.39.74-1 1.34-1.75 1.72-.49.24-1 .33-1.56.38q-.8.05-2 .04H9.67c-.66 0-.86 0-1.03.04q-.27.05-.52.17c-.16.08-.31.2-.83.6l-2.41 1.88q-.29.24-.54.4c-.16.1-.46.28-.85.28-.45 0-.88-.2-1.16-.55-.26-.3-.3-.66-.32-.85q-.03-.3-.02-.66V7.64q-.01-1.17.04-1.96c.05-.55.15-1.06.4-1.54.39-.74 1-1.34 1.75-1.71.49-.24 1-.34 1.56-.39Q6.55 2 7.76 2M5.91 4.04c-.44.03-.67.1-.83.18q-.58.29-.87.84c-.07.15-.14.36-.17.78C4 6.28 4 6.84 4 7.68v11.8l2.07-1.61.07-.06c.42-.33.74-.58 1.1-.76q.48-.24 1.01-.34c.4-.08.8-.08 1.35-.08h6.6c.86 0 1.44 0 1.9-.04.43-.03.66-.1.82-.18q.58-.28.87-.84c.07-.15.14-.36.17-.78.04-.44.04-1 .04-1.84V7.68c0-.83 0-1.4-.04-1.84-.03-.42-.1-.63-.17-.78q-.3-.56-.87-.84a2 2 0 0 0-.83-.18C17.64 4 17.06 4 16.2 4H7.8c-.86 0-1.44 0-1.9.04"
+							clip-rule="evenodd"></path></svg>
+				</button>
+				</li>
+			<li class="_dropDownList_1ovnc_42">
+			<button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M18 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0m2 0a3 3 0 0 1-4.77 2.43l-7.28 4.04a3 3 0 0 1-.05 1.32l7.02 4.05A2.99 2.99 0 0 1 20 19a3 3 0 1 1-5.98-.37l-7.27-4.2Q6 14.99 5 15a3 3 0 1 1 1.96-5.27l7.14-3.96A3 3 0 1 1 20 5M6 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0m11 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
+							clip-rule="evenodd"></path></svg>
+			</button></li>
+		</ul>
+		
+		<ul class="coment-bottomright">
+			<li class="_dropDownList_1ovnc_42">
+			<button class="_coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M13.62 12a1.62 1.62 0 1 1-3.24 0 1.62 1.62 0 0 1 3.24 0m-5.6 0a1.62 1.62 0 1 1-3.24 0 1.62 1.62 0 0 1 3.24 0m9.58 1.62a1.62 1.62 0 1 0 0-3.24 1.62 1.62 0 0 0 0 3.24"
+							clip-rule="evenodd"></path></svg>
+				</button>
+				</li>
+		</ul>
+	</div>
+	</article>
+</li>
+<li class="coment-card">
+        		<article class="coment-container">
+	<a class="coment-container-a" href="/ko-KR/users/6ADvG2LB8AqzZ">
+		<header class="coment-container-header">
+			<img class="coment-user"
+				src="https://an2-img.amz.wtchn.net/image/v2/W3MGDA5Oj26nDEw6EOaqvQ.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk16QXdlRE13TUNKZExDSndJam9pTDNZeUwzTjBiM0psTDNWelpYSXZOa0ZFZGtjelpEUlhkbnBhYkM5d2NtOW1hV3hsTHpFMk1UazBNRFUyT0Rjd01qTTJOakEyTURFaWZRLldhckU1eU5uem9rZ1VMYzh2VFpzMmdvLVg5VDhueC1XN3NIQVVkVGlJejQ=">
+			<div class="coment-userInfo">
+				<p class="coment-username">개구리</p>
+			</div>
+			<div class="_action_1cqxl_56 _rating_1cqxl_68 _body2Medium_1dosp_141">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="15"
+					fill="none" viewBox="0 0 14 15">
+					<path fill="currentColor" fill-rule="evenodd"
+						d="M6.62 1.4 4.86 5.04l-.07.05-3.93.58c-.35.06-.49.5-.24.75l2.85 2.83.02.08-.67 4c-.06.36.31.63.62.46l3.52-1.88h.08l3.52 1.88c.31.17.68-.1.62-.46l-.67-4q0-.05.02-.08l2.84-2.83c.26-.25.12-.7-.23-.75L9.2 5.1l-.07-.05L7.38 1.4a.42.42 0 0 0-.76 0"
+						clip-rule="evenodd"></path></svg>
+				<p>4.0</p>
+			</div>
+		</header></a>
+	<hr class="coment-hr">
+	<a class="coment-content" href="/ko-KR/comments/W4zQrOnOBpEw1">
+	<p class="coment-content2">완전 좋은 영화</p></a>
+	<hr class="coment-hr">
+	
+	<ul class="coment-content-3">
+		<li class="coment-like">
+		<button class="coment-btn" type="button">좋아요<span>90</span>
+		</button>
+		</li>
+        <li class="coment-like">
+        <button class="coment-btn" type="button">댓글<span>1</span>
+		</button></li>
+	</ul>
+	<div class="comment-bottom">
+		<ul class="coment-icon">
+			<li>
+			<button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M10.2 2.03c.28-.64.92-1.03 1.6-1.03a3.25 3.25 0 0 1 3.27 3.22V7.3h3.16c2.28 0 4.08 2 3.72 4.27l-.99 6.3A3.75 3.75 0 0 1 17.24 21H4.84A2.8 2.8 0 0 1 2 18.2v-6.3c0-1.57 1.3-2.8 2.85-2.8h2.12zM8.6 19h8.63c.89 0 1.62-.63 1.75-1.44l.99-6.3c.16-1-.64-1.96-1.75-1.96H15a1.9 1.9 0 0 1-1.93-1.9V4.22c0-.6-.47-1.14-1.12-1.21L8.77 9.98q-.07.16-.16.28zm-2-7.9V19H4.85a.8.8 0 0 1-.85-.8v-6.3c0-.42.35-.8.85-.8z"
+							clip-rule="evenodd"></path></svg>
+			</button>
+			</li>
+			<li><button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M7.76 2h8.48q1.2-.01 2.01.04c.56.05 1.07.15 1.56.39.75.37 1.36.97 1.75 1.7.25.49.35 1 .4 1.55q.05.8.04 1.96v5.35q.01 1.17-.04 1.96a4 4 0 0 1-.4 1.54c-.39.74-1 1.34-1.75 1.72-.49.24-1 .33-1.56.38q-.8.05-2 .04H9.67c-.66 0-.86 0-1.03.04q-.27.05-.52.17c-.16.08-.31.2-.83.6l-2.41 1.88q-.29.24-.54.4c-.16.1-.46.28-.85.28-.45 0-.88-.2-1.16-.55-.26-.3-.3-.66-.32-.85q-.03-.3-.02-.66V7.64q-.01-1.17.04-1.96c.05-.55.15-1.06.4-1.54.39-.74 1-1.34 1.75-1.71.49-.24 1-.34 1.56-.39Q6.55 2 7.76 2M5.91 4.04c-.44.03-.67.1-.83.18q-.58.29-.87.84c-.07.15-.14.36-.17.78C4 6.28 4 6.84 4 7.68v11.8l2.07-1.61.07-.06c.42-.33.74-.58 1.1-.76q.48-.24 1.01-.34c.4-.08.8-.08 1.35-.08h6.6c.86 0 1.44 0 1.9-.04.43-.03.66-.1.82-.18q.58-.28.87-.84c.07-.15.14-.36.17-.78.04-.44.04-1 .04-1.84V7.68c0-.83 0-1.4-.04-1.84-.03-.42-.1-.63-.17-.78q-.3-.56-.87-.84a2 2 0 0 0-.83-.18C17.64 4 17.06 4 16.2 4H7.8c-.86 0-1.44 0-1.9.04"
+							clip-rule="evenodd"></path></svg>
+				</button>
+				</li>
+			<li class="_dropDownList_1ovnc_42">
+			<button class="coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M18 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0m2 0a3 3 0 0 1-4.77 2.43l-7.28 4.04a3 3 0 0 1-.05 1.32l7.02 4.05A2.99 2.99 0 0 1 20 19a3 3 0 1 1-5.98-.37l-7.27-4.2Q6 14.99 5 15a3 3 0 1 1 1.96-5.27l7.14-3.96A3 3 0 1 1 20 5M6 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0m11 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
+							clip-rule="evenodd"></path></svg>
+			</button></li>
+		</ul>
+		
+		<ul class="coment-bottomright">
+			<li class="_dropDownList_1ovnc_42">
+			<button class="_coment-iconbtn" type="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+						fill="none" viewBox="0 0 24 24">
+						<path fill="currentColor" fill-rule="evenodd"
+							d="M13.62 12a1.62 1.62 0 1 1-3.24 0 1.62 1.62 0 0 1 3.24 0m-5.6 0a1.62 1.62 0 1 1-3.24 0 1.62 1.62 0 0 1 3.24 0m9.58 1.62a1.62 1.62 0 1 0 0-3.24 1.62 1.62 0 0 0 0 3.24"
+							clip-rule="evenodd"></path></svg>
+				</button>
+				</li>
+		</ul>
+	</div>
+	</article>
+</li>
+       <!-- 총 8개  -->
+        </ul>
+    </section>
+    <!-- 매거진 -->
+<section class="magazine">
+    	<header class="magazine-header">
+    		<h2 class="magazine-title" th:href="@{/series/detail}">매거진</h2>
+    		<span class="magazine-rate">1</span>
+    	</header>
+    	<!-- 매거진 컨텐츠 -->
+    	<div class="magazine-content">
+    	<ul class="magazine-list">
+        <li class="magazine-card">
+            <a class="magazine-link" href="/ko-KR/magazine/garQmEDa0">
+                <article class="magazine-article">
+                    <header class="magazine-article-header">
+                        <img class="magazine-icon" src="https://an2-img.amz.wtchn.net/image/v2/y5o5pJW31HWbqBR-MzjT_Q.png?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKd0lqb2lMM1l5TDNOMGIzSmxMM1ZwYldGblpTODBNakl6TnpJME1qSTFNak00TXpNNUluMC5MWVVSUHNXT0JKQmdQSVlHQ3RyYlFFWXoxQ1ZvOE52djFNUjc2Q21EZzk0&ts=1721280755" alt="icon about header" width="18" height="18">
+                        <p class="magazine-category">큐레이션</p>
+                    </header>
+                    <div class="magazine-inner">
+                        <div class="magazine-content-text">
+                            <p class="magazine-title-text">2026년 개봉을 앞둔 기대작 모음 🎬</p>
+                            <p class="magazine-description">큰일났어 내년에도 극장에서 살아야 돼</p>
+                        </div>
+                        <div class="magazine-image-container">
+                            <div class="magazine-image-border"></div>
+                            <div class="magazine-image-fallback" style="background-image: url('data:image/svg+xml,...');"></div>
+                            <img class="magazine-image" src="https://an2-img.amz.wtchn.net/image/v2/ow-J3y8WrMPsij6XEaQh1g.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1Ua3lNSGd4TURnd2NUZ3dJbDBzSW5BaU9pSXZkakl2YzNSdmNtVXZZWEowYVdOc1pTOHhNakF4TnpFMk1UVXpPRE16TWpNd0luMC5CRHFwNG5KWUpQOWcxSGxRa1hGdDRsbkFhaWU0SEJjWS1KOENmWFJ3MmhN">
+                        </div>
+                    </div>
+                </article>
+            </a>
+        </li>
+        <div class="magazine-loadmore"></div>
+    </ul>
+    	</div>
+</section>
+ <!-- 사진 -->
+ <section class="gallery">
+    	<header class="gallerye-header">
+    		<h2 class="gallery-title">갤러리</h2>
+    	</header>
+    	<section class="gallery-container">
+    	<div class="gallery-content">
+    		<ul class="gallery-item">
+    			<li class="gallery-item2"  th:switch="${movie.workId}">
+    				<div class="gallery-img">
+    				<div class="gallery-img2">
+    				<img th:case="1" src="https://an2-img.amz.wtchn.net/image/v2/CQTvkdgFTmMz3gJszFw0Gg.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5qUXdlRE0yTUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFNE1UVXlPVFUxTURJeE5EZ3hOU0o5LmlMQ0pkOGdDR2Y0UFhxV1BZU0pyRk4yakVxM0NuUGw5YmMzUXVJZm95ajA=">
+    				<img th:case="2" src="https://an2-img.amz.wtchn.net/image/v2/u-ituMafEQVDOjHSwbXDFw.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5qUXdlRE0yTUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFeU1ERTJNak01T1RNd05qYzJPVFl6SW4wLjBnLS1NMG1JRkNsSEJrcGVCVVJxSG1md1F4YmhzZldSTmhVaGdTa0prUmM=">
+    				<img th:case="3" src="https://an2-img.amz.wtchn.net/image/v2/t-gHsCrGVJ0wvPIe6nMHAg.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5qUXdlRE0yTUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpjeU5qQXpOVEEwTVRFeE1qQTNPU0o5LnVpSDVpcUVETGpJZktNclZHSFB3TV9zSXk0SDhmR0llclRtblpHTVhBUVk=">
+    				<img th:case="4" src="https://an2-img.amz.wtchn.net/image/v2/HyChF5VyYlJZMT5XROOEfQ.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5qUXdlRE0yTUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpJM01Ua3hOVEUwTWpFeU16ZzNNQ0o5LjM4bnNYV3h5MlZTVDVDZDJGbjM4NlJZa1BTNTRBVmNtbTMtOEZYVEM2Ymc=">
+    				<img th:case="5" src="https://an2-img.amz.wtchn.net/image/v2/F0ay9CAwxgTMzWSgJP3H-g.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5qUXdlRE0yTUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFNE9URTFNakk1TlRZd09UWXhPQ0o5LlZja3lid3dteU9JMWJVaGd6ams5RDJONWIxeFoxRUlpY08yZXNJcXMxdkE=">
+    				</div>
+    				</div>
+    			</li>	
+    			<li class="gallery-item2"  th:switch="${movie.workId}">
+    				<div class="gallery-img">
+    				<div class="gallery-img2">
+    				<img th:case="1" src="https://an2-img.amz.wtchn.net/image/v2/vWPd0ZiJuPe_ag80u-2yaw.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5qUXdlRE0yTUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFNE1URXpPREl5TnpNeE9UUXpOaUo5LmFTMEthanpWc3ltdlJ5ZFBncXhpY2hOcS02ZXBMb0xWVVlfamRTdnZBblk=">
+    				<img th:case="2" src="https://an2-img.amz.wtchn.net/image/v2/iOBqq030QvjPUAv907sKmg.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5qUXdlRE0yTUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpjME1EUTNPVFUyTmpNd056SXpNalVpZlEudWh5Q0VRak5ReGNSTVo0dl91REJ4dXhrWXdqbXNHd3VaUVpkc2dlZUpZQQ==">
+    				<img th:case="3" src="https://an2-img.amz.wtchn.net/image/v2/mYUoXQxBW6bm0gBkFSn2Zw.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5qUXdlRE0yTUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFeE56YzNNakkxTkRJME16SXpNekFpZlEuUkFXQVBGR2kybGpzQ2VMT0NUamdfdHNSY013SlFEUndJWGxjNUZKLVI1NA==">
+    				<img th:case="4" src="https://an2-img.amz.wtchn.net/image/v2/Coy1YOhM9RdQud9YbS8LvQ.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5qUXdlRE0yTUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpJeU16azBNemN4TmpZek56a3hNRElpZlEuTDJXUzhJeDE5cjRhSDA0OWx0cHd5bFQtTGJUdkxGTWlGYVFKQlQ2eG5vNA==">
+    				<img th:case="5" src="https://an2-img.amz.wtchn.net/image/v2/cvsOSy30o1AZj9R9Xe1gFA.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5qUXdlRE0yTUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFNE56WXdNakF4T1RFME5UZ3pNVFFpZlEuV29PMHBjdi1nUndhbGxQb01ndm9jVVU2ZS1GSzJ4bDFoZHZiR2FtOWdNVQ==">
+    				
+    				</div>
+    				</div>
+    			</li>
+    			<li class="gallery-item2"  th:switch="${movie.workId}">
+    				<div class="gallery-img">
+    				<div class="gallery-img2">
+    				<img th:case="1" src="https://an2-img.amz.wtchn.net/image/v2/rwLVpRyHCU7bVnRzMM3m_w.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5qUXdlRE0yTUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFNE1URXpNemd3TmpNMU5qSXdNeUo5LkkwVjI3WlZ2NG9hejBGRUFOX3JpWTVwVHJYRFZQR19BVldVMFNXN2NnRzA=">
+    				<img th:case="2" src="https://an2-img.amz.wtchn.net/image/v2/sjMpTkY0MZS7m7-JBQp2Dw.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5qUXdlRE0yTUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpZME9ETXhPVGN6TnpFd01qWTROek1pZlEucFlHQnlKMk5zQmdTcUZUVnRiMnpjNFI0VlhQbm9pR3FkcTRoU2pCNjg2dw==">
+    				<img th:case="3" src="https://an2-img.amz.wtchn.net/image/v2/oI-L6pFR6RnC-8668YHL-g.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5qUXdlRE0yTUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFek1EWTBOemM0TkRJME1qRTJNemdpZlEuT3dJal9vTmRfOURycVFrNG9Fd1YtMXYybG1mcTF4djFsenJTZjlRck0yRQ==">
+    				<img th:case="4" src="https://an2-img.amz.wtchn.net/image/v2/-TUmKtLdQKTpWNnJ-u1S8g.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5qUXdlRE0yTUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFNU1UTTFNakkxT1RZd05ESTFNRGtpZlEuRFFSNXlVZ1d4ZzE5bnN3alJndDBtNXo0bWxvMW9WWXNab1RnZ2dlNW5Ocw==">
+    				<img th:case="5" src="https://an2-img.amz.wtchn.net/image/v2/O_DoVwbxIU8uFhYGkhMEsw.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5qUXdlRE0yTUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpreU5EUXdNRFF4TkRjMk9EVTFOeUo5LmZNSzFhQ1IzaGpnSHoyMlRWb1hGWjRfQlJWUUtVWm1XdnBmQW9IODNJUjQ=">
+    				</div>
+    				</div>
+    			</li>
+    		</ul>
+    	</div>
+    	</section>
+ </section>
+ <!-- 동영상 -->
+ <section class="video" th:if="${movie.workId == 1}">
+    <header class="video-header">
+        <h2 class="video-title">동영상</h2>
+    </header>
+
+    <section class="video-container">
+        <div class="video-content">
+            <ul class="video-item">
+                <li class="video-item2">
+                    <div class="video-img">
+                        <div class="video-img2" style="background-image: url('https://img.youtube.com/vi/9sxEZuJskvM/0.jpg');">
+                            <div class="video-play-icon">
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="24" cy="24" r="22.5" fill="#00000080" fill-opacity="0.5" stroke="currentColor"></circle>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M33.225 23.564a.5.5 0 0 1 0 .872l-14.48 8.145a.5.5 0 0 1-.745-.436v-16.29a.5.5 0 0 1 .745-.436l14.48 8.145Z" fill="currentColor"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-title-wrapper">
+                        <p class="video-title-text">공식 예고편</p>
+                    </div>
+                </li>
+                <li class="video-item2">
+                    <div class="video-img">
+                        <div class="video-img2" style="background-image: url('https://img.youtube.com/vi/vmzXycdth6o/0.jpg');">
+                            <div class="video-play-icon">
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="24" cy="24" r="22.5" fill="#00000080" fill-opacity="0.5" stroke="currentColor"></circle>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M33.225 23.564a.5.5 0 0 1 0 .872l-14.48 8.145a.5.5 0 0 1-.745-.436v-16.29a.5.5 0 0 1 .745-.436l14.48 8.145Z" fill="currentColor"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-title-wrapper">
+                        <p class="video-title-text">리뷰 예고편</p>
+                    </div>
+                </li>
+                <li class="video-item2">
+                    <div class="video-img">
+                        <div class="video-img2" style="background-image: url('https://img.youtube.com/vi/TpG4W2WwYBU/0.jpg');">
+                            <div class="video-play-icon">
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="24" cy="24" r="22.5" fill="#00000080" fill-opacity="0.5" stroke="currentColor"></circle>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M33.225 23.564a.5.5 0 0 1 0 .872l-14.48 8.145a.5.5 0 0 1-.745-.436v-16.29a.5.5 0 0 1 .745-.436l14.48 8.145Z" fill="currentColor"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-title-wrapper">
+                        <p class="video-title-text">리액션 예고편</p>
+                    </div>
+                </li>
+                <!-- li 추가 가능 -->
+            </ul>
+            <div class="video-loadmore"></div>
+        </div>
+    </section>
+
+    <!-- 좌우 버튼 -->
+    <div class="video-arrow video-arrow-right">
+        <button class="video-arrow-btn" type="button" title="오른쪽">
+            <!-- 화살표 SVG -->
+        </button>
+    </div>
+    <div class="video-arrow video-arrow-left video-arrow-disabled">
+        <button class="video-arrow-btn" type="button" title="왼쪽">
+            <!-- 화살표 SVG -->
+        </button>
+    </div>
+</section>
+</div>
+<script>
+const wrap = document.querySelector(".rating-wrap");
+const fill = document.querySelector(".stars-fill");
+
+wrap.addEventListener("mousemove", e=>{
+    const percent = e.offsetX / wrap.offsetWidth;
+    const step = Math.round(percent * 10) / 10; // 0.5 단위
+    fill.style.width = (step * 100) + "%";
+});
+
+wrap.addEventListener("click", e=>{
+    const percent = e.offsetX / wrap.offsetWidth;
+    const score = Math.round(percent * 10) / 2; // 0.5점
+    console.log("rating:", score);
+});
+</script>
+</section>
+</html>
+

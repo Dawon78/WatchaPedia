@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::section})">
+<section>
+    <link rel="stylesheet" th:href="@{/collection/collectionDetail.css}">
+
+    <main class="coll-detail-main">
+        <div class="coll-detail-header">
+            <div class="coll-bg-container">
+        <div th:each="work, iterStat : ${collection.works}" 
+             th:if="${iterStat.index < 5}" 
+             class="coll-bg-item">
+            <img th:src="@{'/images/' + ${work.workThumbnail}}" class="coll-bg-img">
+        </div>
+        <img th:if="${#lists.isEmpty(collection.works)}" 
+             th:src="@{/images/default-bg.png}" class="coll-bg-img">
+    </div>
+            
+            <div class="coll-bg-overlay"></div> 
+
+            <div class="coll-header-content">
+                <div class="coll-user-row">
+                    <img th:src="@{/images/default-profile.jpg}" class="coll-user-img">
+                    <span class="coll-header-user" th:text="${author?.memberName}">작성자 이름</span>
+                </div>
+
+                <button class="coll-more-btn" onclick="toggleMoreMenu(event)">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <circle cx="5" cy="12" r="2" fill="white"/><circle cx="12" cy="12" r="2" fill="white"/><circle cx="19" cy="12" r="2" fill="white"/>
+                    </svg>
+                </button>
+                
+                <div id="more-dropdown" class="coll-dropdown">
+                    <button th:onclick="'location.href=\'/collection/edit?id=' + ${collection.collectionId} + '\''">수정하기</button>
+                    <hr>
+                    <button class="delete-btn" th:onclick="'deleteCollection(' + ${collection.collectionId} + ')'">삭제하기</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="coll-action-bar">
+            <h1 class="coll-header-title" th:text="${collection.collectionTitle}">컬렉션 제목</h1>
+            <p class="coll-header-sub" th:text="${collection.collectionDesc}">컬렉션 설명</p>
+            <div class="coll-stats">
+        좋아요 <span id="stats-like-count" th:text="${collection.likeCount ?: 0}">0</span> · 
+        댓글 0 · 
+        <span th:text="${#temporals.format(collection.collectionCreateDate, 'yyyy.MM.dd')}">2024.03.03</span> 업데이트
+    </div>
+            <div class="coll-btns">
+        <button class="coll-btn like-btn" 
+                th:id="'detail-like-btn-' + ${collection.collectionId}"
+                th:classappend="${isLiked} ? 'active' : ''"
+                th:onclick="'toggleLike(' + ${collection.collectionId} + ')'">
+            <span class="like-text">♥️ 좋아요</span> 
+            <span class="like-count" th:id="'like-count-display'" th:text="${collection.likeCount ?: 0}">0</span>
+        </button>
+        <button class="coll-btn">💬 댓글</button>
+        <button class="coll-btn">📤 공유</button>
+    </div>
+        </div>
+
+        <div class="coll-ad-banner">
+            <img th:src="@{/banner.png}" alt="광고">
+        </div>
+
+        <div class="coll-work-section">
+            <div class="coll-count-text">
+                작품들 <span th:text="${collection.works.size()}">0</span>
+            </div>
+
+            <div class="coll-grid-3" id="work-grid">
+        <div class="coll-work-item" th:each="work, iterStat : ${collection.works}"
+             th:classappend="${iterStat.index >= 6} ? 'is-hidden' : ''">
+            <div class="coll-poster-box">
+                <img th:src="@{'/images/' + ${work.workThumbnail}}" th:alt="${work.workTitle}">
+            </div>
+            <p class="coll-work-name" th:text="${work.workTitle}">작품 제목</p>
+            <p class="coll-work-meta">
+                평균 ★ <span th:text="${work.hotScore / 10.0}">0.0</span>
+            </p>
+            <p class="coll-work-meta" th:text="${work.workType}">타입</p>
+        </div>
+    </div>
+
+    <button id="btn-load-more" class="btn-more-coll" 
+            th:if="${collection.works.size() > 6}"
+            onclick="showAllWorks()">더보기 ⌵</button>
+
+            <section class="coll-comment-section">
+                <div class="comment-header">댓글 <span>0</span></div>
+                <div class="comment-input-wrapper">
+                    <input type="text" placeholder="컬렉션에 댓글을 남겨보세요." class="comment-input">
+                    <button class="comment-submit-btn">💬 등록</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script th:src="@{/collection/CollectionDetail.js}"></script>
+</section>
+</html>

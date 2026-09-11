@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout(~{::section})">
+<section>
+    <link rel="stylesheet" th:href="@{/collection/CreateCollection.css}" />
+
+    <div class="create-container">
+        <form th:action="@{/collection/save}" method="post" id="collectionForm">
+            <div id="hidden-inputs">
+                <input type="hidden" name="workIds" th:value="${work.workId}" th:id="'input-' + ${work.workId}">
+            </div>
+
+            <header class="create-header">
+                <h2 class="create-title">새 컬렉션</h2>
+                <button type="submit" class="submit-btn" id="submitBtn" disabled>만들기</button>
+            </header>
+
+            <div class="input-section">
+                <input type="text" name="collectionTitle" id="colTitle" placeholder="컬렉션 제목" required autocomplete="off">
+                <textarea name="collectionDesc" placeholder="설명 입력하기.."></textarea>
+            </div>
+
+            <div class="work-preview-section">
+                <div class="work-section-header">
+                    <div class="work-count">
+                        작품들 <span id="total-work-count">(1/1000)</span>
+                    </div>
+                    
+                    <div id="edit-mode-default">
+                        <span class="edit-link" onclick="toggleEditMode(true)">수정하기</span>
+                    </div>
+                    
+                    <div id="edit-mode-active" style="display: none;">
+                        <span class="edit-cancel" onclick="toggleEditMode(false)">취소</span>
+                        <span id="remove-btn" class="edit-remove" onclick="removeSelectedWorks()">0개 제거</span>
+                    </div>
+                </div>
+
+                <div class="work-list-wrapper">
+                    <div class="add-work-btn" onclick="openSearchModal()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 5V19M5 12H19" stroke="#ccc" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                        <span>작품 추가</span>
+                    </div>
+
+                    <div class="work-card-sm" th:id="'work-' + ${work.workId}">
+                        <div class="card-img-container">
+                            <div class="delete-badge" th:onclick="'markForDelete(' + ${work.workId} + ', this)'">-</div>
+                            <img th:src="@{'/images/' + ${work.workThumbnail}}" alt="poster">
+                        </div>
+                        <span class="work-card-title" th:text="${work.workTitle}">작품 제목</span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div th:replace="~{collection/SearchWork :: workSearchModal}"></div>
+    <script th:src="@{/collection/CreateCollection.js}"></script>
+</section>
+</html>

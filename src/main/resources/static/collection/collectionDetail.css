@@ -1,0 +1,217 @@
+@charset "UTF-8";
+
+body {
+    margin: 0;
+    background-color: #f8f8f8;
+}
+
+.coll-detail-main { 
+    max-width: 640px; 
+    margin: 30px auto 0px auto; 
+    background: #fff; 
+    border: 1px solid #e0e0e0; 
+    border-radius: 12px;
+}
+
+/* --- 💡 헤더 영역 --- */
+.coll-detail-header { 
+    border-radius: 12px 12px 0px 0px;
+    position: relative; 
+    width: 100%; 
+    height: 320px; 
+    overflow: hidden; 
+    background-color: #000;
+}
+
+/* 배경 이미지 컨테이너 (포스터들을 가로로 나열) */
+.coll-bg-container {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; /* 포스터들을 가로로 배치 */
+    overflow: hidden; 
+    z-index: 1;
+    filter: blur(10px) brightness(0.7); /* 블러와 밝기 조절 */
+    transform: scale(1.1);
+}
+
+.coll-bg-item { 
+    flex: 1; /* 모든 포스터가 동일한 비율로 영역 차지 */
+    height: 100%; 
+    min-width: 20%; /* 포스터 개수가 적어도 영역을 꽉 채우도록 */
+}
+
+.coll-bg-img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
+
+/* 💡 배경 오버레이: 왓챠 스타일의 이중 그라데이션 (우측 & 하단 암전) */
+.coll-bg-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* 오른쪽으로 갈수록, 그리고 아래로 갈수록 어두워지게 설정 */
+    background: linear-gradient(to right, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1) 100%),
+                linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%);
+    z-index: 2;
+}
+
+/* 헤더 상단 레이어 (정보 및 버튼 배치 기준) */
+.coll-header-content {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    color: white;
+}
+
+/* 작성자 정보: 좌측 하단 배치 */
+.coll-user-row { 
+    position: absolute;
+    bottom: 25px;
+    left: 20px;
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+}
+
+.coll-user-img { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(255,255,255,0.2); }
+.coll-header-user { font-size: 14px; font-weight: 500; }
+
+/* 더보기 버튼: 우측 상단 고정 */
+.coll-more-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+
+.coll-more-btn:hover { opacity: 0.7; }
+
+/* 드롭다운 메뉴 스타일 */
+.coll-dropdown {
+    display: none; 
+    position: absolute; 
+    right: 20px; 
+    top: 55px; 
+    background: white; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    width: 120px; 
+    z-index: 100;
+    overflow: hidden;
+}
+
+.coll-dropdown.active { display: block; }
+
+.coll-dropdown button {
+    width: 100%; 
+    padding: 12px; 
+    border: none; 
+    background: none; 
+    cursor: pointer; 
+    text-align: center;
+    font-size: 14px;
+    color: #292a32;
+}
+
+.coll-dropdown button:hover { background-color: #f8f8f8; }
+.coll-dropdown hr { border: 0; border-top: 1px solid #eee; margin: 0; }
+.delete-btn { color: #ff2f6e !important; font-weight: bold; }
+
+/* --- 메인 타이틀 & 설명 --- */
+.coll-action-bar { 
+    padding: 20px 20px 15px; 
+}
+.coll-header-title { font-size: 26px; font-weight: bold; margin-bottom: 8px; line-height: 1.3; color: #292a32; }
+.coll-header-sub { font-size: 15px; color: #4a4a4a; margin-bottom: 20px; line-height: 1.5; }
+
+.coll-stats { font-size: 13px; color: #8e8e93; margin-bottom: 15px; }
+
+.coll-btns { 
+    display: flex; border-top: 1px solid #f0f0f0; padding-top: 10px;
+}
+.coll-btn { 
+    flex: 1; background: none; border: none; font-size: 14px; color: #292a32; 
+    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; 
+    padding: 10px 0; font-weight: 500;
+}
+
+/* --- 작품 리스트 섹션 --- */
+.coll-work-section { padding: 30px 20px; }
+.coll-count-text { font-size: 17px; font-weight: bold; margin-bottom: 20px; }
+.coll-count-text span { color: #ff2f6e; margin-left: 4px; }
+
+.coll-grid-3 { 
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px 15px; 
+}
+.coll-work-item { text-align: left; }
+.coll-poster-box { 
+    width: 100%; aspect-ratio: 2/3; border-radius: 4px; overflow: hidden; 
+    border: 1px solid #eaeaea; margin-bottom: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.coll-poster-box img { width: 100%; height: 100%; object-fit: cover; }
+
+.coll-work-name { 
+    font-size: 14px; font-weight: bold; color: #292a32; 
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; 
+}
+.coll-work-meta { font-size: 12px; color: #8e8e93; margin-top: 2px; }
+
+/* 광고 배너 */
+.coll-ad-banner { 
+    padding: 10px 20px; display: flex; justify-content: center;
+}
+.coll-ad-banner img { 
+    width: 100%; height: 80px; border-radius: 8px; object-fit: cover; 
+}
+.coll-work-item.is-hidden {
+    display: none;
+}
+/* 버튼: 더보기 */
+.btn-more-coll {
+    display: block; width: 100%; margin: 40px auto 20px auto; 
+    padding: 12px 0; background-color: #fff; border: 1px solid #e3e3e3; 
+    border-radius: 4px; color: #292a32; font-size: 14px; font-weight: 500; 
+    text-align: center; cursor: pointer;
+}
+
+/* 댓글 섹션 */
+.coll-comment-section { padding: 30px 20px 0px; border-top: 1px solid #f0f0f0; }
+.comment-header { font-size: 16px; font-weight: bold; margin-bottom: 20px; }
+.comment-input-wrapper { display: flex; align-items: center; background: #f5f5f7; border-radius: 8px; padding: 10px 15px; }
+.comment-input { flex: 1; border: none; background: transparent; font-size: 14px; outline: none; }
+.comment-submit-btn { background: none; border: none; color: #ccc; cursor: pointer; }
+
+/* 푸터 */
+.coll-site-footer {
+    max-width: 640px; margin: 40px auto 60px; padding: 25px 20px;
+    background-color: #f0f0f2; border-radius: 8px; text-align: center;
+}
+.coll-site-footer p { font-size: 11px; color: #8e8e93; line-height: 1.6; }
+
+/* 기본 상태 */
+.coll-btn.like-btn {
+    color: #292a32; /* 기본 글자색 */
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+/* 💡 클릭되어 'active' 클래스가 붙었을 때 */
+.coll-btn.like-btn.active {
+    color: #ff2f6e !important; /* 핑크색으로 변경 */
+    border-color: #ff2f6e !important;
+}
+
+/* 숫자 부분 간격 */
+.like-count {
+    margin-left: 4px;
+}

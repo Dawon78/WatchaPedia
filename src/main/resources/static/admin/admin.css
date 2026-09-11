@@ -1,0 +1,150 @@
+/* ===== 기본 설정 ===== */
+body {
+    margin: 0;
+    padding: 0;
+    background: #f5f6f8;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* ===== 중앙 컨테이너 ===== */
+.main {
+    max-width: 1200px;
+    margin: 60px auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* ===== 제목 ===== */
+.maintext {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #222;
+}
+
+/* ===== 탭 버튼 ===== */
+.admin-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.admin-tabs button {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 30px;
+    background: #e4e6eb;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.admin-tabs button:hover {
+    background: #333;
+    color: #fff;
+}
+
+/* ===== 섹션 제목 ===== */
+.tab-section {
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+/* ===== 폼 디자인 ===== */
+form {
+    margin: 20px 0 30px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+form input,
+form select,
+form textarea {
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+form textarea {
+    resize: vertical;
+}
+
+form button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    background: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+form button:hover {
+    background: #555;
+}
+
+/* ===== 테이블 ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+table thead {
+    background: #f2f3f5;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+table th {
+    background: #f4f4f4;
+    font-weight: 700;
+}
+
+table tr:hover {
+    background: #fafafa;
+}
+
+/* ===== 이미지 ===== */
+table img {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* ===== 삭제 버튼 빨간색 ===== */
+table form button {
+    background: #e74c3c;
+}
+
+table form button:hover {
+    background: #c0392b;
+}
+
+/* ===== 반응형 ===== */
+@media (max-width: 768px) {
+    .main {
+        padding: 20px;
+    }
+
+    form {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .admin-tabs {
+        flex-direction: column;
+        align-items: center;
+    }
+}

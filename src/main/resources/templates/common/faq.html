@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>FAQ</title>
+
+<style>
+body {
+    margin: 0;
+    padding-top : 90px;
+    background: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+/* 전체 영역 */
+.faq-container {
+    width: 900px;
+    margin: 0 auto;
+}
+
+/* 검색창 */
+.faq-search {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.faq-search input {
+    width: 500px;
+    height: 44px;
+    padding: 0 15px;
+    border-radius: 8px;
+    border: none;
+    background: #e9e9e9;
+    font-size: 14px;
+    outline: none;
+}
+
+.faq-title-btn {
+    width: 100%;
+    border: 2px solid #ff2f6e;
+    border-radius: 4px;
+    background: #fff;
+    padding: 18px 0;
+    margin-bottom: 40px;
+    color: #ff2f6e;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.faq-title-btn:hover {
+    background: #fff0f5;
+}
+
+/* 리스트 */
+.faq-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.faq-item {
+    padding: 18px 0;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+
+.faq-item:hover {
+    color: #ff2f6e;
+}
+/* 기본 컨테이너 */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* 도토리 + 아이콘 버튼 */
+.dropdown-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 텍스트와 아이콘 사이 간격 */
+  padding: 5px;
+}
+
+.brand-name {
+  color: #ff3366; /* 이미지의 붉은 계열 색상 */
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* 햄버거 아이콘 모양 만들기 */
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.menu-icon span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: #888;
+}
+/* 드롭다운 메뉴 스타일 부분에 추가하세요 */
+.dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -15px; /* 버튼과 메뉴 사이의 간격만큼 위로 확장 */
+  left: 0;
+  width: 100%;
+  height: 15px; /* 투명한 연결 통로 생성 */
+  background: transparent;
+}
+/* 드롭다운 메뉴 (기본 상태: 숨김) */
+.dropdown-menu {
+  display: none; 
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  min-width: 140px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  list-style: none;
+  padding: 10px 0;
+  margin-top: 5px;
+  z-index: 10;
+}
+
+/* 메뉴 리스트 아이템 */
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f5f5f5;
+}
+
+/* 마우스를 올렸을 때 메뉴 보이기 (클릭 방식으로 바꾸려면 JS 필요) */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+</style>
+</head>
+
+<body>
+<nav th:fragment="watchaNavbar"
+	style="width: 100%; height: 62px; background: #fff;  display: flex; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; z-index: 1000; font-family: 'Apple SD Gothic Neo', 'NanumBarunGothic', sans-serif;">
+
+	<div
+		style="width: 100%; max-width: 1300px; display: flex; align-items: center; padding: 0 20px;">
+
+		<div style="margin-right: 30px; flex-shrink: 0;">
+			<a th:href="@{/main}" style="text-decoration: none;"> <span
+				style="color: #ff0558; font-size: 24px; font-weight: 900; letter-spacing: -1.5px;">WATCHA</span>
+				<span
+				style="color: #292a32; font-size: 24px; font-weight: 900; letter-spacing: -1.5px;">PEDIA</span>
+			</a>
+		</div>
+
+
+<div style="display: flex; gap: 10px; align-items: center; font-size: 14px; flex-shrink: 0; margin-left: 800px;">
+	
+	<div class="dropdown">
+  <button class="dropdown-btn">
+    <div class="menu-icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a th:href="@{/support}">문의 내역</a></li>
+    <li><a th:href="@{/supportwrite}">문의 등록</a></li>
+  </ul>
+</div>
+		</div>
+
+
+	</div>
+</nav>
+
+<div class="faq-container">
+
+    <!-- 검색창 -->
+    <div class="faq-search">
+        <input type="text" placeholder="검색">
+    </div>
+<a href="/faqall" style="text-decoration: none; color: inherit;">
+<button type="button" class="faq-title-btn">
+    FAQ
+</button>
+</a>
+
+<ul class="faq-list">
+    <th:block th:if="${faqList != null and !faqList.isEmpty()}">
+        <li class="faq-item-container" th:each="faq : ${faqList}" style="border-bottom: 1px solid #ddd; list-style: none;">
+            
+            <div class="faq-item" onclick="toggleFaq(this)" style="display: flex; align-items: center; justify-content: space-between; padding: 18px 0; cursor: pointer;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span th:if="${faq.faqfix == 'Y'}" 
+                          style="background: #ff2f6e; color: #fff; font-size: 11px; padding: 2px 6px; border-radius: 3px; font-weight: bold;">공지</span>
+                    
+                    <span th:text="${faq.faqtitle}" style="font-size: 15px; color: #333;">질문 제목이 들어갑니다.</span>
+                </div>
+                <span class="faq-arrow" style="transition: transform 0.3s; color: #ccc; font-size: 12px;">▼</span>
+            </div>
+
+            <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: all 0.3s ease; background: #fafafa; border-radius: 4px;">
+                <div style="padding: 20px; line-height: 1.6; color: #666; white-space: pre-wrap; font-size: 14px;" 
+                     th:text="${faq.faqcontent}">
+                    답변 내용이 여기에 출력됩니다.
+                </div>
+            </div>
+        </li>
+    </th:block>
+
+    <th:block th:unless="${faqList != null and !faqList.isEmpty()}">
+        <li style="text-align: center; padding: 80px 0; color: #bbb; list-style: none; font-size: 14px;">
+            등록된 자주 묻는 질문이 없습니다.
+        </li>
+    </th:block>
+</ul>
+
+</div>
+<footer th:fragment="watchaFooter"
+        style="background-color: #ff2f6e; color: #ffffff; padding: 25px 0; font-size: 13px; line-height: 20px; margin-top: 200px;">
+
+    <div style="max-width: 1300px; margin: 0 auto; padding: 0 20px;">
+        
+
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="text-align: left;">
+                <ul style="list-style: none; padding: 0; display: flex; gap: 15px; margin-bottom: 5px; color: #ffffff; font-weight: 500;">
+                    <li>서비스 이용약관</li>
+                    <li style="font-weight: bold; border-left: 1px solid #ffffff; padding-left: 15px;">개인정보 처리방침</li>
+                    <li style="border-left: 1px solid #ffffff; padding-left: 15px;">회사 안내</li>
+                </ul>
+                <p style="margin: 2px 0;">고객센터 | cs@watchapedia.com, 02-515-9985</p>
+                <p style="margin: 2px 0;">광고 문의 | ad-sales@watcha.com / 최신 광고 소개서</p>
+                <p style="margin: 2px 0;">제휴 및 대외 협력 | https://watcha.team/contact</p>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid #ffffff; padding-top: 15px; margin-top: 15px;">
+            <div style="text-align: left;">
+                <p style="margin: 1px 0;">주식회사 왓챠 | 대표 박태훈 | 서울특별시 서초구 강남대로 343 신덕빌딩 3층</p>
+                <p style="margin: 1px 0;">사업자 등록 번호 211-88-66013</p>
+                <p style="margin: 10px 0 0 0; font-weight: 800; letter-spacing: -0.5px; font-size: 14px;">
+                    WATCHA PEDIA 
+                    <span style="font-weight: normal; margin-left: 10px; color: #ffffff; font-size: 12px;">
+                        © 2026 by WATCHA, Inc. All rights reserved.
+                    </span>
+                </p>
+            </div>
+            
+        </div>
+
+    </div>
+</footer>
+<script>
+function toggleFaq(element) {
+    const container = element.parentElement;
+    const answer = container.querySelector('.faq-answer');
+    const arrow = element.querySelector('.faq-arrow');
+    
+    // 현재 열려있는지 확인
+    const isOpen = container.classList.contains('active');
+    
+    // 초기화 (다른거 닫고 싶으면 주석 해제)
+    /*
+    document.querySelectorAll('.faq-item-container').forEach(item => {
+        item.classList.remove('active');
+        item.querySelector('.faq-answer').style.maxHeight = '0';
+        item.querySelector('.faq-arrow').style.transform = 'rotate(0deg)';
+    });
+    */
+
+    if (!isOpen) {
+        container.classList.add('active');
+        answer.style.maxHeight = answer.scrollHeight + "px"; // 내용 높이만큼 펼치기
+        arrow.style.transform = 'rotate(180deg)';
+    } else {
+        container.classList.remove('active');
+        answer.style.maxHeight = '0';
+        arrow.style.transform = 'rotate(0deg)';
+    }
+}
+</script>
+</body>
+</html>

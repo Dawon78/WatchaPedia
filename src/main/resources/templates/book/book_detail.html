@@ -1,0 +1,371 @@
+   <!DOCTYPE html>
+   <html xmlns:th="http://www.thymeleaf.org"
+         th:replace="~{layout2 :: layout2(~{::section})}">
+   <section>
+       <link rel="stylesheet" type="text/css" th:href="@{/book/book_detail.css}">
+   
+       <div class="main">
+           <div class="hero">
+               <div class="hero-image" 
+                    th:style="'background-image: linear-gradient(to top, rgba(0,0,0,0.8), transparent), 
+                               url(/images/star-bg.png), 
+                               url(/images/' + ${work.work?.workThumbnail} + ');'">
+               </div>    
+   
+               <section class="hero-info">
+                   <div class="hero-info-inner" style="margin-left: 300px;">
+                       <h1 class="hero-title" th:text="${work.work?.workTitle}">작품 제목</h1>
+                       <div class="hero-meta">
+                           <span th:text="${#temporals.format(work.work?.workPublishDate, 'yyyy')}">2024</span> · 
+                           <span class="credit-name" th:text="${work.work?.writer?.writerName}">작가이름</span> · 
+                           <span th:text="${work.work?.workType}">장르</span>
+                       </div>
+                       <div class="hero-details">
+                           <span th:if="${work.work?.workType?.name() == 'MOVIE'}" th:text="${work.work?.movieDetail?.runningTime} + '분'">시간</span>
+                           <span th:if="${work.work?.workType?.name() == 'WEBTOON'}" th:text="${work.work?.webtoonDetail?.webtoonState}">연재상태</span>
+                       </div>
+                   </div>
+               </section>
+           </div>
+   
+           <div class="content">
+               <div class="content-info-wrapper">
+                   <div class="content_info">
+                       <div class="content_info_left">
+                           <img th:src="@{'/images/' + ${work.work?.workThumbnail}}">
+                           <div class="content_info_left2">
+                               <div class="rating">별점 그래프 (추후 구현)</div>
+                               <span class="rating2">평균
+                                   <svg viewBox="0 0 24 24" width="12" height="12" style="fill: #ff2f6e; margin-right: 2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> 
+                                   <span th:text="${work.work?.hotScore / 10.0}">3.3</span> 
+                                   <span class="rating-count">(4.1만명)</span>
+                               </span>
+                           </div>
+                       </div>
+             
+                       <div class="content_info_right">
+                           <div class="right-top">
+                               <div class="rating-summary">
+                                   <div class="rating-wrap">
+                                       <div class="stars-bg">★★★★★
+                                           <div class="stars-fill" th:style="'width: ' + (${myRating ?: 0} * 20) + '%'">★★★★★</div>
+                                       </div>
+                                       <div class="rating-text1" th:text="${(myRating ?: 0) > 0 ? myRating : '평가하기'}">평가하기</div>
+                                   </div>
+                               </div>
+   
+                               <div class="rating-info">
+                                   <div class="rating-info-left">
+                                       <div class="rating-number" th:text="${avgRating ?: 0.0}">0.0</div>
+                                       <div class="rating-text2">평균 별점 (<span th:text="${ratingCount ?: 0}">0</span>명)</div>
+                                   </div>
+                               </div>
+   
+                               <div class="rating-buttons">
+                                   <button class="btn storage-btn" th:data-work-id="${work.work?.workId}" data-status="보고싶어요" th:classappend="${userStorageStatus == '보고싶어요' ? 'active' : ''}">
+                                       <svg viewBox="0 0 24 24"><path d="M12 4v16M4 12h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>보고싶어요
+                                   </button>
+   
+                                   <button class="btn" th:onclick="openCommentModal([[${work.work?.workTitle}]], [[${work.work?.workId}]])">
+                                       <svg viewBox="0 0 24 24"><path d="M4 4h16v11H7l-3 3V4z" fill="currentColor"/></svg>코멘트
+                                   </button>
+   
+                                   <button class="btn storage-btn" th:data-work-id="${work.work?.workId}" data-status="보는중" th:classappend="${userStorageStatus == '보는중' ? 'active' : ''}">
+                                       <svg viewBox="0 0 24 24"><path d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 11a4 4 0 100-8 4 4 0 000 8z" fill="currentColor"/></svg>보는 중
+                                   </button>
+                                   
+                                   <button class="btn" id="more-btn">
+                                       <svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2" fill="currentColor"/><circle cx="12" cy="12" r="2" fill="currentColor"/><circle cx="19" cy="12" r="2" fill="currentColor"/></svg>더보기
+                                   </button>
+                                   
+                                   <div id="more-dropdown-menu" class="dropdown-menu" style="display: none;">
+                                       <ul class="dropdown-list">
+                                           <li><button type="button" class="dropdown-item">관심없어요</button></li>
+                                           <li><button type="button" class="dropdown-item" id="add-to-collection-btn">컬렉션에 추가</button></li>
+                                           <li><button type="button" class="dropdown-item">본 날짜 추가</button></li>
+                                       </ul>
+                                   </div>
+                               </div>
+                           </div>
+   
+        
+   
+                           <div class="right-desc">
+                               <p th:text="${work.work?.workDesc}">작품 설명</p>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+       
+               <section id="content-credits" class="credits">
+                   <header class="credits-header"><h2 class="credits-title">작가</h2></header>
+                   <div class="credits-slider">
+                       <ul class="credits-list">
+                           <li class="credit-item" th:if="${work.work?.writer != null}">
+                               <a href="#" class="credit-card">
+                                   <img th:src="@{/images/default-profile.jpg}" alt="프로필">
+                                   <div class="credit-info">
+                                       <span class="credit-name" th:text="${work.work.writer.writerName}">작가이름</span>
+                                       <span class="credit-role">작가</span>
+                                   </div>
+                               </a>
+                           </li>
+                       </ul>
+                   </div>
+               </section>
+   
+               <section class="coment">
+                   <header class="coment-header">
+                       <h2 class="coment-title">코멘트</h2>
+                       <span class="coment-rate" th:text="${work.work?.comments != null ? work.work.comments.size() + '+' : '0'}">0</span>
+                   </header>
+                   
+                   <ul class="coment-section">
+                       <li class="coment-card" th:each="comment : ${work.work?.comments}">
+                           <article class="coment-container">
+                               <header class="coment-container-header">
+                                   <img class="coment-user" src="https://an2-img.amz.wtchn.net/image/v2/XSb9y--R5gOdYGIZBbQhfQ.jpg">
+                                   <div class="coment-userInfo">
+                                       <p class="coment-username" th:text="${comment.memberId}">사용자</p>
+                                   </div>
+                               </header>
+                               <hr class="coment-hr">
+                               <p class="coment-content2" th:text="${comment.commentContent}">내용</p>
+                               <hr class="coment-hr">
+                               <ul class="coment-content-3">
+                                   <li class="coment-like">
+    <button class="coment-btn" type="button" 
+            th:onclick="'toggleLike(' + ${comment.commentId} + ', this)'">
+        좋아요 
+        <span class="like-count" th:text="${comment.likeCount}">0</span>
+    </button>
+</li>
+                                   <li class="coment-like"><button class="coment-btn">댓글 <span>0</span></button></li>
+                               </ul>
+                           </article>
+                       </li>
+                   </ul>
+               </section>
+           </div>
+   
+           <div id="commentModal" class="modal-overlay" style="display: none;">
+               <div class="comment-modal-content">
+                   <div class="comment-modal-header">
+                       <h2 id="modalWorkTitle" class="work-title">작품 제목</h2>
+                       <button class="close-btn" onclick="closeCommentModal()">&times;</button>
+                   </div>
+                   <div class="comment-modal-body">
+                       <textarea id="commentTextarea" placeholder="이 작품에 대한 생각을 자유롭게 표현해주세요."></textarea>
+                   </div>
+                   <div class="comment-modal-footer">
+                       <div class="footer-left">
+                           <div class="spoiler-group">
+                               <span>스포일러</span>
+                               <label class="switch"><input type="checkbox" id="spoilerCheck"><span class="slider round"></span></label>
+                           </div>
+                       </div>
+                       <div class="footer-right">
+                           <span id="charCount">0/10000</span>
+                           <button class="btn-save" id="saveCommentBtn" disabled>저장</button>
+                       </div>
+                   </div>
+               </div>
+               <input type="hidden" id="modalWorkId">
+           </div>
+   
+           <div th:replace="~{collection/UpdateCollection :: collectionModal}"></div>
+           <div th:replace="~{fragments/login-modal :: loginModal}"></div>    
+       </div>
+   
+<script th:inline="javascript">
+    // 1. 주석 안에 넣고 뒤에 dummy 값을 적어주면 에디터가 조용해집니다.
+    const isLoggedIn = /*[[${#authentication.principal != 'anonymousUser'}]]*/ false;
+    
+    // 2. 숫자의 경우도 마찬가지입니다.
+    const workId = /*[[${work.work?.workId}]]*/ 0;
+    const wrap = document.querySelector(".rating-wrap");
+    const fill = document.querySelector(".stars-fill");
+
+    // 별점 효과 및 저장 로직은 기존과 동일하되 workId만 work.work?.workId로 사용
+    wrap.addEventListener("mousemove", e => {
+        const percent = e.offsetX / wrap.offsetWidth;
+        const step = Math.ceil(percent * 10) / 10; 
+        fill.style.width = (step * 100) + "%";
+    });
+
+    wrap.addEventListener("click", e => {
+        const percent = e.offsetX / wrap.offsetWidth;
+        const score = Math.ceil(percent * 10) / 2;
+        fetch('/api/rating/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ratingScore: score, workId: workId })
+        }).then(response => {
+            if (response.ok) alert(score + "점 저장!");
+            else alert("로그인이 필요합니다.");
+        });
+    });
+
+    // 코멘트 모달 제어 함수
+    function openCommentModal(title, id) {
+        document.getElementById('modalWorkTitle').innerText = title;
+        document.getElementById('modalWorkId').value = id;
+        document.getElementById('commentModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeCommentModal() {
+        document.getElementById('commentModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    const textarea = document.getElementById('commentTextarea');
+    const saveBtn = document.getElementById('saveCommentBtn');
+    if(textarea) {
+        textarea.addEventListener('input', function() {
+            const len = this.value.length;
+            document.getElementById('charCount').innerText = `${len}/10000`;
+            saveBtn.disabled = len === 0;
+        });
+    }
+
+    if(saveBtn) {
+        saveBtn.addEventListener('click', function() {
+            const data = {
+                workId: document.getElementById('modalWorkId').value,
+                content: textarea.value,
+                isSpoiler: document.getElementById('spoilerCheck').checked
+            };
+            fetch('/api/review/save', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(response => {
+                if(response.ok) {
+                    alert('저장되었습니다!');
+                    location.reload();
+                }
+            });
+        });
+    }
+
+    // 드롭다운 및 보관함 로직 유지...
+    document.addEventListener("DOMContentLoaded", function() {
+        const moreBtn = document.getElementById('more-btn');
+        const moreMenu = document.getElementById('more-dropdown-menu');
+        const addToCollectionBtn = document.getElementById('add-to-collection-btn');
+
+        if (moreBtn) {
+            moreBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                moreMenu.style.display = moreMenu.style.display === 'block' ? 'none' : 'block';
+            });
+        }
+
+        // 💡 이 부분만 추가되었습니다.
+        if (addToCollectionBtn) {
+            addToCollectionBtn.addEventListener('click', function() {
+                if (!isLoggedIn) {
+                    const loginModal = document.getElementById('login-modal');
+                    if (loginModal) loginModal.style.display = 'flex';
+                } else {
+                    const colModal = document.getElementById('collection-modal');
+                    if (colModal) colModal.style.display = 'flex';
+                }
+                moreMenu.style.display = 'none'; // 클릭 후 메뉴 닫기
+            });
+        }
+        
+        // 외부 클릭 시 메뉴 닫기 (선택사항)
+        document.addEventListener('click', () => {
+            if(moreMenu) moreMenu.style.display = 'none';
+        });
+    });
+    function toggleLike(commentId, btnElement) {
+        // 💡 로그인 여부 확인 (이전 스크립트에서 선언한 isLoggedIn 변수 활용)
+        if (!isLoggedIn) {
+            alert("로그인이 필요한 서비스입니다.");
+            return;
+        }
+
+        // 서버의 toggleLike API 호출
+        fetch('/api/review/like', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                commentId: commentId
+            })
+        })
+        .then(response => {
+            if (!response.ok) throw new Error("네트워크 응답에 문제가 있습니다.");
+            return response.json();
+        })
+        .then(data => {
+            // 💡 1. 좋아요 숫자 업데이트 (data.newLikeCount)
+            const countSpan = btnElement.querySelector('.like-count');
+            if (countSpan) {
+                countSpan.innerText = data.newLikeCount;
+            }
+
+            // 💡 2. 버튼 활성화 상태 표시 (data.liked 여부에 따라 클래스 토글)
+            if (data.liked) {
+                btnElement.classList.add('active');
+                // 필요하다면 여기서 애니메이션 효과나 알림을 줄 수 있습니다.
+            } else {
+                btnElement.classList.remove('active');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("좋아요 처리 중 오류가 발생했습니다.");
+        });
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+
+        document.querySelectorAll('.storage-btn').forEach(button => {
+
+            button.addEventListener('click', function() {
+
+                const workId = this.dataset.workId;
+                const status = this.dataset.status;
+
+                fetch('/api/storage/toggle', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        workId: workId,
+                        status: status
+                    })
+                })
+                .then(response => {
+
+                    if (!response.ok) {
+                        alert("로그인이 필요한 서비스입니다.");
+                        return;
+                    }
+
+                    // 🔥 무조건 서버 성공 후 다시 계산
+                    const alreadyActive = this.classList.contains('active');
+
+                    // 같은 영역 안에서만 찾기
+                    const container = this.closest('.rating-buttons');
+                    container.querySelectorAll('.storage-btn')
+                             .forEach(btn => btn.classList.remove('active'));
+
+                    if (!alreadyActive) {
+                        this.classList.add('active');
+                    }
+
+                });
+
+            });
+
+        });
+
+    });
+</script>
+   </section>
+   </html>

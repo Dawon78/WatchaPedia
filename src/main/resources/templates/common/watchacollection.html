@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::section})">
+
+<section>
+	  <link rel="stylesheet" th:href="@{/common/watchacollection.css}">
+
+<div class="collection" style ="margin-bottom: 400px;">
+    <div class="container">
+        <h2 class="category-title">맨부커 상 - 영국 최고 문학상</h2>
+
+        <div class="book-grid">
+            <div class="book-item">
+                <div class="poster-wrapper">
+                    <img src="https://via.placeholder.com/150x220" alt="셔기 베인">
+                </div>
+                <div class="book-info">
+                    <div class="title">셔기 베인</div>
+                    <div class="rating">평균 ★ 3.9</div>
+                </div>
+            </div>
+
+            <div class="book-item">
+                <div class="poster-wrapper">
+                    <img src="https://via.placeholder.com/150x220" alt="소녀, 여자, 다른">
+                </div>
+                <div class="book-info">
+                    <div class="title">소녀, 여자, 다른...</div>
+                    <div class="rating">평균 ★ 4.2</div>
+                </div>
+            </div>
+            
+            </div>
+
+    </div>
+    
+</div>
+
+</section>
+</html>

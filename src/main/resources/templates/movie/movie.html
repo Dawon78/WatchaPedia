@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::section})">
+<section>
+<link rel="stylesheet" th:href="@{/movie/movie.css}">
+<!-- 메인 -->
+<main class="main-container">
+
+<!-- 홈 배너 -->
+<div class="home-banner">
+    <div class="banner-wrapper">
+        <a href="https://watcha.com/ko-KR/promotions/watchapromotion2026?browser_open_type=external"
+           target="_blank">
+           <img alt="[내부] 구독권 할인 프로모션 보드배너_2차 " class="banner-image" height="80" 
+           src="https://an2-img.amz.wtchn.net/image/v2/4_7LYNxBgYhErgEg4020dw.png?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKd0lqb2lMM1l5TDNOMGIzSmxMM0J5YjIxdmRHbHZiaTh4TkRBeE5qVXhNamMxTmpZeE1UZzRJbjAuMWlIRkgwVXN5aV9mTFNzU0E2cmtuQ1BGMGRIVkhfT1hYWDk2bWE5SHpDbw==">
+        </a>
+    </div>
+</div>
+
+<!-- 랭킹 시작 -->
+<!-- 박스오피스 순위 -->
+<div class="ranking-section">
+    <div class="section-title">
+        <p>박스오피스 순위</p>
+    </div>
+
+    <ul class="ranking-list" data-count="5">
+    
+        <!-- ✅ DB 반복 -->
+        <li class="ranking-item"
+            th:each="movie, stat : ${movies1}">
+
+            <!-- 상세페이지 이동 -->
+            <a th:href="@{/movie/detail/{id}(id=${movie.workId})}">
+
+                <div class="poster">
+
+                    <!-- 썸네일 -->
+                    <img th:src="@{'/images/' + ${movie.thumbnail}}"
+                         th:alt="${movie.title}">
+
+                    <!-- 순위 (rank 있으면 rank, 없으면 반복 index) -->
+                    <span class="rank"
+                          th:text="${movie.rank != null ? movie.rank : stat.count}">
+                    </span>
+
+                </div>
+
+                <div class="info">
+
+                    <!-- 제목 -->
+                    <h3 class="title"
+                        th:text="${movie.title}">
+                    </h3>
+
+                    <!-- 연도 (publishDate에서 year 추출) -->
+                  <p class="year-nation"
+   th:text="${#temporals.year(movie.publishDate)} + ' ・ ' + ${movie.movieDetail.country}">
+</p>
+
+                    <!-- ⭐ UI 유지용 (DB에 없음 → 고정값) -->
+       <!--              <p class="rating">
+                        평균
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12">
+                            <path fill="currentColor"
+                            d="M5.65 1.8a.38.38 0 0 1 .67 0l1.36 2.76q.03.06.1.07l3.04.45c.31.04.43.42.21.63l-2.2 2.15a.1.1 0 0 0-.04.11L9.31 11c.05.31-.27.54-.54.4L6.05 9.97a.1.1 0 0 0-.12 0L3.2 11.4a.38.38 0 0 1-.55-.4l.52-3.03q.01-.07-.03-.1L.95 5.7a.38.38 0 0 1 .2-.63l3.05-.45q.06 0 .09-.07z"/>
+                        </svg>
+                        <span>5.0</span>
+                    </p> -->
+
+                    <!-- ⭐ UI 유지용 -->
+  <p class="stats">
+    <span th:if="${movie.movieDetail.bookingRate != null}">
+        예매율 <span th:text="${#numbers.formatDecimal(movie.movieDetail.bookingRate, 1, 1)} + '%'">0%</span> ・ 
+    </span>
+    
+    누적 관객 
+   <span th:text="${movie.movieDetail.totalAudience != null
+    ? (movie.movieDetail.totalAudience >= 10000
+        ? #numbers.formatDecimal(movie.movieDetail.totalAudience / 10000, 1, 0) + '만명'
+        : movie.movieDetail.totalAudience + '명')
+    : '0명'}">
+    0명
+</span>
+</p>
+                </div>
+            </a>
+
+        </li>
+         <li class="ranking-item">
+            <a href="/ko-KR/contents/m5ZlLw9">
+                <div class="poster">
+                    <img src="https://an2-img.amz.wtchn.net/image/v2/Dqovs7KPFDr0ZalkZwcklg.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5Ea3dlRGN3TUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFeU9EWXhOemcxTmpVd01qVXpOakVpZlEuRTFQUXZ5RW9yRmNwTHVBTEhmSm94NEp0ZnlySFl1dVRYZVpuS2Jfc29zQQ=="
+                     alt="왕과 사는 남자">
+                    <span class="rank">5</span>
+                </div>
+                <div class="info">
+                    <h3 class="title">왕과 사는 남자</h3>
+                    <p class="year-nation">2024 ・ 한국</p>
+                    <p class="rating">
+    				평균
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12">
+    <path fill="currentColor" d="M5.65 1.8a.38.38 0 0 1 .67 0l1.36 2.76q.03.06.1.07l3.04.45c.31.04.43.42.21.63l-2.2 2.15a.1.1 0 0 0-.04.11L9.31 11c.05.31-.27.54-.54.4L6.05 9.97a.1.1 0 0 0-.12 0L3.2 11.4a.38.38 0 0 1-.55-.4l.52-3.03q.01-.07-.03-.1L.95 5.7a.38.38 0 0 1 .2-.63l3.05-.45q.06 0 .09-.07z"/>
+    </svg>
+    <span>5.0</span>
+</p>
+                    <p class="stats">예매율 55% ・ 누적 관객 602.4만명</p>
+                </div>
+            </a>
+        </li>
+    </ul>
+       <!-- 슬라이더 -->
+     <div class="slider-right">
+                        <button class="slider-btn" title="right" type="button">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                              <path fill="currentColor" d="M8.07 3a.76.76 0 0 0 0 1.09l8.65 8.46a.8.8 0 0 0 1.11 0 .76.76 0 0 0 0-1.1L9.18 3a.8.8 0 0 0-1.12 0"></path>
+                              <path fill="currentColor" d="M8.07 21a.8.8 0 0 0 1.12 0l8.64-8.45a.76.76 0 0 0 0-1.1.8.8 0 0 0-1.11 0l-8.65 8.46a.76.76 0 0 0 0 1.09"></path>
+                           </svg>
+                        </button>
+                     </div>
+               
+                     <div class="slider-left">
+                       <button class="slider-btn"
+                               title="left"
+                               type="button">
+               
+                         <svg xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              fill="none"
+                              viewBox="0 0 24 24">
+               
+                           <path fill="currentColor"
+                                 d="M16.5 3a.76.76 0 0 1 0 1.09l-8.65 8.46a.8.8 0 0 1-1.12 0 .76.76 0 0 1 0-1.1L15.38 3a.8.8 0 0 1 1.12 0">
+                           </path>
+               
+                           <path fill="currentColor"
+                                 d="M16.5 21a.8.8 0 0 1-1.12 0l-8.65-8.45a.76.76 0 0 1 0-1.1.8.8 0 0 1 1.12 0l8.64 8.46a.76.76 0 0 1 0 1.09Z">
+                           </path>
+               
+                         </svg>
+               
+                       </button>
+                     </div>    
+</div>
+<!-- 랭킹 리스트 2 -->
+<div class="ranking-section">
+    <div class="section-title">
+        <p>왓챠 구매 순위</p>
+    </div>
+
+    <ul class="ranking-list" data-count="5">
+    
+        <!-- ✅ DB 반복 -->
+        <li class="ranking-item"
+            th:each="movie, stat : ${movies2}">
+
+            <!-- 상세페이지 이동 -->
+            <a th:href="@{/movie/detail/{id}(id=${movie.workId})}">
+
+                <div class="poster">
+
+                    <!-- 썸네일 -->
+                    <img th:src="@{'/images/' + ${movie.thumbnail}}"
+                         th:alt="${movie.title}">
+
+                    <!-- 순위 (rank 있으면 rank, 없으면 반복 index) -->
+                    <span class="rank"
+                          th:text="${movie.rank != null ? movie.rank : stat.count}">
+                    </span>
+
+                </div>
+
+                <div class="info">
+
+                    <!-- 제목 -->
+                    <h3 class="title"
+                        th:text="${movie.title}">
+                    </h3>
+
+                    <!-- 연도 (publishDate에서 year 추출) -->
+                              <p class="year-nation"
+   th:text="${#temporals.year(movie.publishDate)} + ' ・ ' + ${movie.movieDetail.country}">
+</p>
+
+                    <!-- ⭐ UI 유지용 (DB에 없음 → 고정값) -->
+                    <p class="rating">
+                        평균
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12">
+                            <path fill="currentColor"
+                            d="M5.65 1.8a.38.38 0 0 1 .67 0l1.36 2.76q.03.06.1.07l3.04.45c.31.04.43.42.21.63l-2.2 2.15a.1.1 0 0 0-.04.11L9.31 11c.05.31-.27.54-.54.4L6.05 9.97a.1.1 0 0 0-.12 0L3.2 11.4a.38.38 0 0 1-.55-.4l.52-3.03q.01-.07-.03-.1L.95 5.7a.38.38 0 0 1 .2-.63l3.05-.45q.06 0 .09-.07z"/>
+                        </svg>
+                        <span>5.0</span>
+                    </p>
+
+
+
+                </div>
+            </a>
+
+        </li>
+ 		        <li class="ranking-item">
+            <a href="/ko-KR/contents/m5ZlLw9">
+                <div class="poster">
+                    <img src="https://an2-img.amz.wtchn.net/image/v2/Dqovs7KPFDr0ZalkZwcklg.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5Ea3dlRGN3TUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFeU9EWXhOemcxTmpVd01qVXpOakVpZlEuRTFQUXZ5RW9yRmNwTHVBTEhmSm94NEp0ZnlySFl1dVRYZVpuS2Jfc29zQQ=="
+                     alt="왕과 사는 남자">
+                    <span class="rank">5</span>
+                </div>
+                <div class="info">
+                    <h3 class="title">왕과 사는 남자</h3>
+                    <p class="year-nation">2024 ・ 한국</p>
+                    <p class="rating">
+    				평균
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12">
+    <path fill="currentColor" d="M5.65 1.8a.38.38 0 0 1 .67 0l1.36 2.76q.03.06.1.07l3.04.45c.31.04.43.42.21.63l-2.2 2.15a.1.1 0 0 0-.04.11L9.31 11c.05.31-.27.54-.54.4L6.05 9.97a.1.1 0 0 0-.12 0L3.2 11.4a.38.38 0 0 1-.55-.4l.52-3.03q.01-.07-.03-.1L.95 5.7a.38.38 0 0 1 .2-.63l3.05-.45q.06 0 .09-.07z"/>
+    </svg>
+    <span>5.0</span>
+</p>
+              
+                </div>
+            </a>
+        </li>
+    </ul>
+       <!-- 슬라이더 -->
+     <div class="slider-right">
+                        <button class="slider-btn" title="right" type="button">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                              <path fill="currentColor" d="M8.07 3a.76.76 0 0 0 0 1.09l8.65 8.46a.8.8 0 0 0 1.11 0 .76.76 0 0 0 0-1.1L9.18 3a.8.8 0 0 0-1.12 0"></path>
+                              <path fill="currentColor" d="M8.07 21a.8.8 0 0 0 1.12 0l8.64-8.45a.76.76 0 0 0 0-1.1.8.8 0 0 0-1.11 0l-8.65 8.46a.76.76 0 0 0 0 1.09"></path>
+                           </svg>
+                        </button>
+                     </div>
+               
+                     <div class="slider-left">
+                       <button class="slider-btn"
+                               title="left"
+                               type="button">
+               
+                         <svg xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              fill="none"
+                              viewBox="0 0 24 24">
+               
+                           <path fill="currentColor"
+                                 d="M16.5 3a.76.76 0 0 1 0 1.09l-8.65 8.46a.8.8 0 0 1-1.12 0 .76.76 0 0 1 0-1.1L15.38 3a.8.8 0 0 1 1.12 0">
+                           </path>
+               
+                           <path fill="currentColor"
+                                 d="M16.5 21a.8.8 0 0 1-1.12 0l-8.65-8.45a.76.76 0 0 1 0-1.1.8.8 0 0 1 1.12 0l8.64 8.46a.76.76 0 0 1 0 1.09Z">
+                           </path>
+               
+                         </svg>
+               
+                       </button>
+                     </div>    
+</div>
+<!-- 이벤트/프로모션 섹션 -->
+<!-- 이벤트 섹션 -->
+<div class="ranking-section">
+    <div class="section-title">
+        <p>이벤트
+         <a class="show-more" href="/ko-KR/notifications?type=promotions">
+        <span>더보기</span>
+        
+        <img alt="arrow" src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20width='9px'%20height='14px'%20viewBox='0%200%209%2014'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3ctitle%3eHome/Section/Header/z_Items/Arrow%3c/title%3e%3cg%20id='Home/Section/Header/z_Items/Arrow'%20stroke='none'%20stroke-width='1'%20fill='none'%20fill-rule='evenodd'%20stroke-linecap='round'%3e%3cpolyline%20id='Path-Copy-6'%20stroke='%23A5A5AA'%20stroke-width='2'%20points='1%201%207%207%201%2013'%3e%3c/polyline%3e%3c/g%3e%3c/svg%3e">
+
+  </a>
+    </p>
+    </div>
+
+    <ul class="promotion-list">
+        <li class="promotion-item">
+       
+                <div class="promotion-img">
+                    <img src="https://an2-img.amz.wtchn.net/image/v2/1nIDVtXREzbttf2b7KWEBw.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1KbklsMHNJbkFpT2lJdmRqSXZjM1J2Y21VdmNISnZiVzkwYVc5dUx6Z3dNakl3TXpZMk5ERTJNakkyT1NKOS5laDhGVFJTZjRKcXUtc2dpRFppNWtLNGRsVWt4c3dMY21uR2M2aXdwTzA4" 
+                         alt="류승완 《재미의 조건》 도서 증정 이벤트">
+                </div>
+                <p class="promotion-title">
+                    류승완 《재미의 조건》 도서 증정 이벤트
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12">
+                        <path fill="currentColor" d="M4.03 1.5a.4.4 0 0 0 0 .55l4.33 4.22a.4.4 0 0 0 .56 0 .4.4 0 0 0 0-.54L4.59 1.5a.4.4 0 0 0-.56 0Z"/>
+                        <path fill="currentColor" d="M4.04 10.5a.4.4 0 0 0 .55 0l4.33-4.23a.4.4 0 0 0 0-.54.4.4 0 0 0-.56 0L4.04 9.95a.4.4 0 0 0 0 .55"/>
+                    </svg>
+                </p>   
+                 
+        </li>
+    </ul>
+</div>
+<!-- 랭킹 리스트 3 (7개 영화) -->
+<div class="ranking-section">
+    <div class="section-title">
+        <p>주간 인기 영화</p>
+    </div>
+
+    <ul class="ranking-list" data-count="6">
+        <!-- 1번 영화 -->
+        <li class="ranking-item"
+            th:each="movie : ${movies3}">
+
+            <a th:href="@{/movie/detail/{id}(id=${movie.workId})}">
+
+                <div class="poster">
+                    <!-- 썸네일 -->
+                    <img th:src="@{'/images/' + ${movie.thumbnail}}"
+                         th:alt="${movie.title}">
+                </div>
+
+                <div class="info">
+                    <!-- 제목 -->
+                    <h3 class="title"
+                        th:text="${movie.title}">
+                    </h3>
+                </div>
+
+            </a>
+
+        </li>
+      		        <li class="ranking-item">
+            <a href="/ko-KR/contents/m5ZlLw9">
+                <div class="poster">
+                    <img src="https://an2-img.amz.wtchn.net/image/v2/2WlYygjZt755ioNhXYMSXw.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5Ea3dlRGN3TUhFNE1DSmRMQ0p3SWpvaUwzWXhMMlZ3ZWpWelpqTnViRFk0WkRCeWVXSm9kbVJwSW4wLnJ6Z1FfWFVnTkVwcHFxVzJwaEZtVEtOVmlPMVBpMHJZYml1RTVkd1lLSTQ="
+                     alt="왕과 사는 남자">
+                    <span class="rank">76/span>
+                </div>
+                <div class="info">
+                    <h3 class="title">도쿄</h3>
+
+
+                 
+                </div>
+            </a>
+        </li>   
+	
+
+    </ul>
+       <!-- 슬라이더 -->
+     <div class="slider-right">
+                        <button class="slider-btn" title="right" type="button">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                              <path fill="currentColor" d="M8.07 3a.76.76 0 0 0 0 1.09l8.65 8.46a.8.8 0 0 0 1.11 0 .76.76 0 0 0 0-1.1L9.18 3a.8.8 0 0 0-1.12 0"></path>
+                              <path fill="currentColor" d="M8.07 21a.8.8 0 0 0 1.12 0l8.64-8.45a.76.76 0 0 0 0-1.1.8.8 0 0 0-1.11 0l-8.65 8.46a.76.76 0 0 0 0 1.09"></path>
+                           </svg>
+                        </button>
+                     </div>
+               
+                     <div class="slider-left">
+                       <button class="slider-btn"
+                               title="left"
+                               type="button">
+               
+                         <svg xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              fill="none"
+                              viewBox="0 0 24 24">
+               
+                           <path fill="currentColor"
+                                 d="M16.5 3a.76.76 0 0 1 0 1.09l-8.65 8.46a.8.8 0 0 1-1.12 0 .76.76 0 0 1 0-1.1L15.38 3a.8.8 0 0 1 1.12 0">
+                           </path>
+               
+                           <path fill="currentColor"
+                                 d="M16.5 21a.8.8 0 0 1-1.12 0l-8.65-8.45a.76.76 0 0 1 0-1.1.8.8 0 0 1 1.12 0l8.64 8.46a.76.76 0 0 1 0 1.09Z">
+                           </path>
+               
+                         </svg>
+               
+                       </button>
+                     </div>    
+</div>
+
+</main>
+
+<footer class="footer">
+    <!-- Footer 내용 -->
+</footer>
+<!-- 슬라이더 -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+	  document.querySelectorAll(".ranking-section").forEach(section => {
+
+	    const scrollDiv = section.querySelector(".ranking-list");
+	    const rightBtn  = section.querySelector(".slider-right");
+	    const leftBtn   = section.querySelector(".slider-left button");
+	    const card      = section.querySelector(".ranking-item");
+
+	    if (!scrollDiv || !rightBtn || !leftBtn || !card) return;
+
+	    const gap = 16;
+	    const unit = card.offsetWidth + gap;
+
+	    function updateButtons() {
+	      const maxScroll = scrollDiv.scrollWidth - scrollDiv.clientWidth;
+
+	      leftBtn.parentElement.style.display =
+	        scrollDiv.scrollLeft <= 0 ? "none" : "block";
+
+	      rightBtn.style.display =
+	        scrollDiv.scrollLeft >= maxScroll - 1 ? "none" : "block";
+	    }
+
+	    rightBtn.addEventListener("click", () => {
+	      scrollDiv.scrollBy({ left: unit, behavior: "smooth" });
+	    });
+
+	    leftBtn.addEventListener("click", () => {
+	      scrollDiv.scrollBy({ left: -unit, behavior: "smooth" });
+	    });
+
+	    scrollDiv.addEventListener("scroll", updateButtons);
+	    updateButtons();
+	  });
+
+	});
+</script>
+</section>
+</html>

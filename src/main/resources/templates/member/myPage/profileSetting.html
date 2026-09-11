@@ -1,0 +1,133 @@
+<div th:fragment="profileSettingFragment">
+	<style>
+		.u-settings-window {
+            background: #fff; width: 400px; height: 650px; border-radius: 16px; 
+            overflow: hidden; display: flex; flex-direction: column; position: relative;
+        }
+
+        /* 💡 본문 영역 스크롤 설정 */
+        .u-settings-body { 
+            flex: 1; 
+            overflow-y: auto; 
+            padding: 0 20px 30px; 
+        }
+        
+        /* 스크롤바 디자인 */
+        .u-settings-body::-webkit-scrollbar { width: 6px; }
+        .u-settings-body::-webkit-scrollbar-thumb { background: #e3e3e3; border-radius: 10px; }
+
+        /* 💡 헤더 구성: X 버튼 아래에 '설정' 글자 배치 */
+        .u-mod-settings-head {
+            padding: 15px 20px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .u-mod-close-x {
+            background: none; border: none; font-size: 24px; color: #ff0558; 
+            cursor: pointer; padding: 0; margin-bottom: 10px;
+        }
+
+        .u-mod-title-left { 
+        	padding-top:30px;
+            font-size: 20px; font-weight: bold; color: #000; margin: 0; 
+        }
+
+        /* 섹션 및 구분선(hr) */
+        .u-settings-section { margin-top: 20px; }
+        .u-settings-label { font-size: 14px; color: #8e8e93; margin: 25px 0 10px; font-weight: 500; }
+        
+        .u-settings-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; cursor: pointer; }
+        .u-settings-row span { font-size: 16px; color: #292a32; }
+        
+        /* 💡 항목 사이의 구분선 스타일 */
+        .u-settings-hr { border: 0; border-top: 1px solid #f0f0f0; margin: 0; }
+
+        /* 토글 버튼 */
+        .u-toggle { position: relative; width: 46px; height: 26px; background: #e3e3e3; border-radius: 13px; transition: .3s; }
+        .u-toggle.active { background: #ff0558; }
+        .u-toggle::after { 
+            content: ''; position: absolute; top: 2px; left: 2px; width: 22px; height: 22px; 
+            background: #fff; border-radius: 50%; transition: .3s;
+        }
+        .u-toggle.active::after { left: 22px; }
+        
+        .u-settings-val { font-size: 14px; color: #a5a5a7; }
+        .u-settings-row.danger span { color: #8e8e93; font-size: 14px; }
+	</style>
+<!-- 프로필 설정  -->
+	<div id="uModSettingsLayer" class="u-mod-overlay" style="display: none;">
+        <div class="u-settings-window">
+            <div class="u-mod-settings-head">
+                <button class="u-mod-close-x" onclick="toggleProfileSettings(false)">✕</button>
+                <h2 class="u-mod-title-left">설정</h2>
+            </div>
+            
+            <div class="u-settings-body">
+                <div class="u-settings-section">
+                    <div class="u-settings-row"><span>마케팅 정보</span></div>
+                    <hr class="u-settings-hr"> <div class="u-settings-row"><span>공개 설정</span></div>
+                    <hr class="u-settings-hr"> </div>
+                
+                <div class="u-settings-section">
+                    <p class="u-settings-label">SNS 연동 설정</p>
+                    <div class="u-settings-row"><span>카카오</span><div class="u-toggle"></div></div>
+                    <hr class="u-settings-hr">
+                    <div class="u-settings-row"><span>구글</span><div class="u-toggle active"></div></div>
+                    <hr class="u-settings-hr">
+                    <div class="u-settings-row"><span>X</span><div class="u-toggle"></div></div>
+                    <hr class="u-settings-hr">
+                    <div class="u-settings-row"><span>애플</span><div class="u-toggle"></div></div>
+                    <hr class="u-settings-hr">
+                    <div class="u-settings-row"><span>라인</span><div class="u-toggle"></div></div>
+                </div>
+                
+                <div class="u-settings-section">
+                    <p class="u-settings-label">서비스 설정</p>
+                    <div class="u-settings-row"><span>언어</span><span class="u-settings-val">한국어</span></div>
+                    <hr class="u-settings-hr">
+                    <div class="u-settings-row"><span>국가 및 지역</span><span class="u-settings-val">대한민국</span></div>
+                    <hr class="u-settings-hr">
+                    <div class="u-settings-row"><span>홈 화면에서 지금 뜨는 코멘트 숨기기</span><div class="u-toggle"></div></div>
+                    <hr class="u-settings-hr">
+                    <div class="u-settings-row"><span>다크모드</span><div class="u-toggle"></div></div>
+                </div>
+
+<div class="u-settings-section">
+    <p class="u-settings-label">고객센터</p>
+    
+    <a th:href="@{/faq}" style="text-decoration: none; color: inherit;">
+        <div class="u-settings-row">
+            <span>문의하기 / FAQ</span>
+        </div>
+    </a>
+    
+    <hr class="u-settings-hr">
+    
+    <div class="u-settings-row">
+        <span>DB 수정/추가 요청하기</span>
+    </div>
+    <hr class="u-settings-hr">
+</div>
+
+                <div class="u-settings-section">
+<div class="u-settings-row"
+     onclick="toggleMypageNotice(true)"
+     style="cursor: pointer;">
+    <span>공지사항</span>
+</div>
+                    <hr class="u-settings-hr">
+                </div>
+
+                <div class="u-settings-section" style="border:none;">
+                    <div class="u-settings-row" onclick="location.href='/logout'"><span>로그아웃</span></div>
+                    <hr class="u-settings-hr">
+                    <div class="u-settings-row"><span>탈퇴하기</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+</div>>

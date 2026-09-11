@@ -1,0 +1,218 @@
+body{
+	margin: 0;
+}
+
+.writer-container {
+    max-width: 1300px;
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 15px;
+    font-family: 'Malgun Gothic', dotum, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 헤더 영역 */
+.writer-profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.writer-profile-img {
+    width: 70px;
+    height: 85px; /* 이미지 비율에 맞춰 조정 */
+    border-radius: 4px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.writer-name {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.writer-subtitle {
+    font-size: 14px;
+    color: #666;
+}
+
+/* 구분선 */
+.writer-divider {
+    border: 0;
+    border-top: 1px solid #eeeeee;
+    margin: 15px 0;
+}
+
+/* 본문 영역 */
+.writer-section-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.writer-content {
+    font-size: 14px;
+    color: #444;
+    text-align: justify;
+    word-break: keep-all;
+}
+
+.writer-more {
+    color: #999;
+    font-size: 12px;
+    cursor: pointer;
+    margin-left: 5px;
+    text-decoration: underline;
+}
+
+.writer-source {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 12px;
+}
+
+/* 하단 좋아요 */
+.writer-like-section {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #666;
+    justify-content: center;
+}
+
+.writer-like-icon {
+    margin-right: 6px;
+    filter: grayscale(1); /* 원본의 차분한 톤 유지 */
+}
+
+.writer-like-count strong {
+    color: #333;
+}
+
+/* --- 필모그래피 컨테이너 (고정 기능을 위해 align-items 추가) --- */
+.writer-filmography-container {
+    display: flex;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Malgun Gothic', sans-serif;
+    gap: 40px;
+    align-items: flex-start; /* ★ 추가: sticky 작동을 위해 필수 */
+}
+
+.writer-main-content {
+    flex: 1;
+}
+
+/* --- 사이드바 (고정 속성 추가) --- */
+.writer-sidebar {
+    width: 150px;
+    position: sticky; /* ★ 추가 */
+    top: 20px;        /* ★ 추가: 스크롤 시 멈출 높이 */
+}
+
+.writer-section-header {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* 테이블 헤더 - 서비스 컬럼 제거 및 비율 조정 */
+.writer-table-header {
+    display: flex;
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+}
+
+.writer-col-title { flex: 5; text-align: left; padding-left: 60px; }
+.writer-col-role { flex: 2; }
+.writer-col-rating { flex: 2; }
+
+/* 리스트 아이템 */
+.writer-work-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #f2f2f2;
+    font-size: 13px;
+    text-align: center;
+}
+
+.writer-work-year {
+    width: 40px;
+    font-size: 12px;
+    color: #999;
+    text-align: left;
+}
+
+.writer-work-info {
+    flex: 5; /* 제목 영역 비중을 높임 */
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.writer-poster {
+    width: 45px;
+    height: 65px;
+    border-radius: 4px;
+    margin-right: 15px;
+    background-color: #eee;
+}
+
+.writer-work-name {
+    font-weight: 500;
+}
+
+.writer-work-role { flex: 2; color: #666; }
+.writer-work-rating { flex: 2; color: #666; }
+
+/* 더보기 버튼 */
+.writer-more-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #555;
+    cursor: pointer;
+    margin-bottom: 40px;
+}
+
+/* 사이드바 스타일 (이전과 동일) */
+.writer-sidebar {
+    width: 150px;
+}
+
+.writer-side-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.writer-side-nav li {
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+}
+
+.writer-nav-category {
+    font-size: 16px;
+    color: #aaa !important;
+    margin-left: -12px;
+    margin-top: 15px;
+    padding-bottom: 5px;
+}
+
+.writer-nav-active {
+    background: #222;
+    color: #fff !important;
+    border-radius: 4px;
+}

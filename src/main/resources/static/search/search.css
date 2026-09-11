@@ -1,0 +1,320 @@
+/* ===============================
+   기본 레이아웃
+================================= */
+
+.search-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 0 60px;
+}
+
+/* ===============================
+   검색 타이틀 영역
+================================= */
+
+.search-title-bar {
+  background: #f5f5f5;
+  padding: 18px 0;
+}
+
+.search-title-bar .inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.search-result-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* ===============================
+   탭
+================================= */
+
+.search-tab-wrapper {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.search-tab-wrapper .inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.search-tab {
+  display: flex;
+  gap: 20px;
+  padding: 12px 0;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.search-tab::-webkit-scrollbar {
+  display: none;
+}
+
+.search-tab li {
+  list-style: none;
+  cursor: pointer;
+  padding-bottom: 6px;
+  font-size: 15px;
+  color: #666;
+}
+
+.search-tab li.active {
+  font-weight: 600;
+  border-bottom: 2px solid #000;
+  color: #000;
+}
+
+/* ===============================
+   🔥 상단 대표 결과 (가로 카드)
+================================= */
+
+.search-highlight {
+  margin: 30px 0;
+}
+
+.highlight-list {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.highlight-list::-webkit-scrollbar {
+  display: none;
+}
+
+.highlight-item {
+  flex: 0 0 auto;
+  width: 150px;
+  cursor: pointer;
+}
+
+.highlight-item img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.highlight-info {
+  margin-top: 8px;
+}
+
+.highlight-info .title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.highlight-info .meta {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 2px;
+}
+
+.highlight-info .type {
+  font-size: 11px;
+  color: #aaa;
+}
+
+/* ===============================
+   타입별 섹션
+================================= */
+
+.category-section {
+  margin-top: 40px;
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.category-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.category-header .more {
+  font-size: 13px;
+  color: #999;
+  cursor: pointer;
+}
+
+/* ===============================
+   타입별 리스트 (세로 목록)
+================================= */
+
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.category-item {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.category-item img {
+  width: 70px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.category-item .info {
+  display: flex;
+  flex-direction: column;
+}
+
+.category-item .title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.category-item .meta {
+  font-size: 13px;
+  color: #888;
+}
+
+/* 탭 패널 전환 */
+.tab-panel {
+  display: none;
+}
+.tab-panel.is-active {
+  display: block;
+}
+
+/* 인물 리스트 */
+.person-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.person-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.person-thumb {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.person-name {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.person-sub {
+  font-size: 13px;
+  color: #888;
+}
+
+.cast {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #777;
+}
+
+.cast-name::after {
+  content: ", ";
+}
+
+.cast-name:last-child::after {
+  content: "";
+}
+
+/* ============================= */
+/* 인물 카드 레이아웃 */
+/* ============================= */
+
+.person-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 40px;
+  margin-top: 20px;
+}
+
+.person-card {
+  display: flex;
+  gap: 15px;
+  padding: 16px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.person-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #f3f3f3;
+}
+
+.person-content {
+  flex: 1;
+}
+
+.person-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.person-name {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.person-role {
+  font-size: 13px;
+  color: #888;
+}
+
+.person-works {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.work-tag {
+  font-size: 12px;
+  padding: 4px 8px;
+  background: #f3f3f3;
+  border-radius: 4px;
+  color: #666;
+}
+
+.person-more {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.person-more button {
+  padding: 8px 18px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.person-more button:hover {
+  background: #f5f5f5;
+}

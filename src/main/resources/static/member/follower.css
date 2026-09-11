@@ -1,0 +1,121 @@
+/* 페이지 전체 배경 및 중앙 정렬 */
+body {
+    background-color: #fff;
+    margin: 0;
+    font-family: 'Pretendard', -apple-system, sans-serif;
+}
+
+.u-mod-friend-page-container {
+    display: flex;
+    justify-content: center;
+    padding: 50px 20px;
+    margin-bottom: 200px;
+}
+
+.u-mod-friend-content {
+    width: 100%;
+    max-width: 640px; /* 리스트 가독성을 위한 너비 제한 */
+}
+
+/* 페이지 제목 */
+.u-mod-friend-page-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+/* 리스트 아이템 레이아웃 */
+.u-mod-friend-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0; /* 좌우 패딩은 컨테이너가 담당하므로 0 */
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* 프로필 이미지 */
+.u-mod-friend-profile {
+    width: 50px; 
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 14px;
+    background: #f0f0f0;
+    flex-shrink: 0;
+}
+
+.u-mod-friend-profile img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
+
+/* 텍스트 정보 */
+.u-mod-friend-info { 
+    flex: 1; 
+    min-width: 0; 
+}
+
+.u-mod-friend-name {
+    font-size: 15px; 
+    font-weight: bold;
+    display: flex; 
+    align-items: center; 
+    gap: 4px;
+    color: #292a32;
+}
+
+.u-mod-friend-badge { 
+    color: #ff0558; 
+    font-size: 13px; 
+}
+
+.u-mod-friend-meta {
+    font-size: 13px; 
+    color: #8e8e93;
+    margin: 4px 0 0 0;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+/* 팔로우 버튼 (이미지처럼 각진 스타일 적용 가능) */
+.u-mod-friend-follow-btn {
+    padding: 6px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background: #fff;
+    color: #ff2f6e;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 10px;
+    flex-shrink: 0;
+}
+
+.u-mod-friend-follow-btn:hover {
+    background: #fafafa;
+}
+
+/* 팔로잉 상태일 때 (회색) */
+.u-mod-friend-follow-btn.following {
+    color: #a0a0a0;
+    background: #f5f5f5;
+}
+
+/* 목록이 비어있을 때 정렬 */
+.u-mod-friend-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 0;
+    color: #a0a0a0;
+}
+
+.u-mod-friend-empty p {
+    font-size: 16px;
+    margin: 0;
+    /* 왓챠 특유의 연한 회색 느낌 */
+    color: #8e8e93; 
+}

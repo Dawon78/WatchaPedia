@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::section})">
+      
+<section>
+    <link rel="stylesheet" th:href="@{/member/following.css}">
+    
+    <div class="u-mod-friend-page-container">
+        <div class="u-mod-friend-content">
+            <div class="u-mod-friend-head">
+                <h2 class="u-mod-friend-page-title">팔로워</h2>
+            </div>
+
+            <div class="u-mod-friend-body">
+                
+                <div th:if="${#lists.isEmpty(followerList)}" class="u-mod-friend-empty" style="text-align:center; padding: 100px 0;">
+                    <p style="color: #8e8e93; font-size: 15px;">나를 팔로우하는 사람이 아직 없어요.</p>
+                </div>
+
+                <div th:unless="${#lists.isEmpty(followerList)}" 
+                     class="u-mod-friend-item" th:each="follower : ${followerList}">
+                    
+                    <div class="u-mod-friend-profile">
+                        <img th:src="${follower.memberPhoto ?: '/images/default-profile.png'}" alt="프로필">
+                    </div>
+                    
+                    <div class="u-mod-friend-info">
+                        <div class="u-mod-friend-name">
+                            <span th:text="${follower.memberName ?: follower.memberId}">사용자 이름</span> 
+                        </div>
+                        <p class="u-mod-friend-meta" th:text="${follower.memberId}">아이디</p>
+                    </div>
+                    
+                    <button class="u-mod-friend-follow-btn" 
+                            th:data-id="${follower.memberId}"
+                            onclick="toggleUniqueFollow(this.getAttribute('data-id'), this)">
+                        팔로우
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/login/findFriends.js}"></script>
+</section>
+</html>

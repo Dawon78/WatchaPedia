@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::section})">
+
+<section>
+  <link rel="stylesheet" th:href="@{/search/search.css}">
+
+  <!-- 검색 결과 타이틀 -->
+  <div class="search-title-bar">
+    <div class="inner">
+      <p class="search-result-title">
+        "<span th:text="${keyword}"></span>"의 검색결과
+      </p>
+    </div>
+  </div>
+
+  <!-- 탭 -->
+  <div class="search-tab-wrapper">
+    <div class="inner">
+      <ul class="search-tab">
+        <li class="active" data-filter="content">콘텐츠</li>
+        <li data-filter="person">인물</li>
+        <li data-filter="collection">컬렉션</li>
+        <li data-filter="user">유저</li>
+        <li data-filter="magazine">매거진</li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="search-wrapper">
+
+    <!-- ===================== -->
+    <!-- 콘텐츠 탭 -->
+    <!-- ===================== -->
+    <div class="tab-panel tab-panel--content is-active" data-panel="content">
+
+      <div class="search-highlight" th:if="${allList.size() > 0}">
+        <div class="highlight-list">
+          <div class="highlight-item" th:each="work : ${allList}">
+            <img th:src="@{'/images/' + ${work.workThumbnail}}" alt="">
+            <div class="highlight-info">
+              <p class="title" th:text="${work.workTitle}"></p>
+              <p class="meta">
+                <span th:text="${#temporals.format(work.workPublishDate,'yyyy')}"></span> · 한국
+              </p>
+              <p class="type" th:text="${work.workType}"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 영화 -->
+      <div class="category-section" th:if="${movieList.size() > 0}">
+        <div class="category-header"><h3>영화</h3></div>
+        <div class="category-list">
+          <div class="category-item" th:each="work : ${movieList}">
+            <img th:src="@{'/images/' + ${work.workThumbnail}}" alt="">
+            <div class="info">
+              <p class="title" th:text="${work.workTitle}"></p>
+              <p class="meta">
+                <span th:text="${#temporals.format(work.workPublishDate,'yyyy')}"></span> · 한국
+              </p>
+
+              <!-- 출연자 최대 3명 -->
+              <div class="cast"
+                   th:if="${work.personWorks != null and !work.personWorks.isEmpty()}">
+                <span th:each="pw, stat : ${work.personWorks}"
+                      th:if="${stat.index < 3}"
+                      th:text="${pw.person.name}"
+                      class="cast-name">
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 시리즈 -->
+   <div class="category-section" th:if="${seriesList.size() > 0}">
+     <div class="category-header"><h3>시리즈</h3></div>
+     <div class="category-list">
+       <div class="category-item" th:each="work : ${seriesList}">
+         <img th:src="@{'/images/' + ${work.workThumbnail}}" alt="">
+         <div class="info">
+           <p class="title" th:text="${work.workTitle}"></p>
+           <p class="meta">
+             <span th:text="${#temporals.format(work.workPublishDate,'yyyy')}"></span> · 한국
+           </p>
+         </div>
+       </div>
+     </div>
+   </div>
+   
+   <!-- 책 -->
+   <div class="category-section" th:if="${bookList.size() > 0}">
+     <div class="category-header"><h3>책</h3></div>
+     <div class="category-list">
+       <div class="category-item" th:each="work : ${bookList}">
+         <img th:src="@{'/images/' + ${work.workThumbnail}}" alt="">
+         <div class="info">
+           <p class="title" th:text="${work.workTitle}"></p>
+           <p class="meta">
+             <span th:text="${#temporals.format(work.workPublishDate,'yyyy')}"></span> · 한국
+           </p>
+         </div>
+       </div>
+     </div>
+   </div>
+   
+   <!-- 웹툰 -->
+   <div class="category-section" th:if="${webtoonList.size() > 0}">
+     <div class="category-header"><h3>웹툰</h3></div>
+     <div class="category-list">
+       <div class="category-item" th:each="work : ${webtoonList}">
+         <img th:src="@{'/images/' + ${work.workThumbnail}}" alt="">
+         <div class="info">
+           <p class="title" th:text="${work.workTitle}"></p>
+           <p class="meta">
+             <span th:text="${#temporals.format(work.workPublishDate,'yyyy')}"></span> · 한국
+           </p>
+         </div>
+       </div>
+     </div>
+   </div>
+      <div class="search-empty" th:if="${allList.size() == 0}">
+        검색 결과 없음
+      </div>
+
+    </div>
+
+    <!-- ===================== -->
+    <!-- 인물 탭 -->
+    <!-- ===================== -->
+    <div class="tab-panel tab-panel--person" data-panel="person">
+
+      <div class="person-section" th:if="${personList.size() > 0}">
+        <div class="category-header">
+          <h3>인물</h3>
+        </div>
+
+        <div class="person-grid">
+
+          <div class="person-card"
+               th:each="p : ${personList}">
+
+            <!-- 프로필 -->
+            <img class="person-avatar"
+                 th:src="${#strings.isEmpty(p.profileUrl) 
+                          ? '/images/default_profile.jpg' 
+                          : '/images/' + p.profileUrl}"
+                 alt="">
+
+            <div class="person-content">
+
+              <!-- 이름 + 역할 -->
+              <div class="person-top">
+                <span class="person-name"
+                      th:text="${p.name}"></span>
+
+                <!-- 역할은 PersonWork에서 가져옴 -->
+                <span class="person-role"
+                      th:text="${#lists.isEmpty(p.personWorks) 
+                                ? '인물' 
+                                : p.personWorks.get(0).roleType}">
+                </span>
+              </div>
+
+              <!-- 출연 작품 태그 -->
+              <div class="person-works">
+                <span class="work-tag"
+                      th:each="pw, stat : ${p.personWorks}"
+                      th:if="${stat.index < 4}"
+                      th:text="${pw.work.workTitle}">
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="person-more">
+          <button type="button">더보기 ▼</button>
+        </div>
+
+      </div>
+
+      <div class="search-empty" th:if="${personList.size() == 0}">
+        인물 검색 결과 없음
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- 탭 스크립트 -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const tabs = document.querySelectorAll(".search-tab li");
+      const panels = document.querySelectorAll(".tab-panel");
+
+      tabs.forEach(tab => {
+        tab.addEventListener("click", function () {
+          tabs.forEach(t => t.classList.remove("active"));
+          this.classList.add("active");
+
+          const filter = this.dataset.filter;
+          panels.forEach(p => p.classList.remove("is-active"));
+
+          const target = document.querySelector('.tab-panel[data-panel="' + filter + '"]');
+          if (target) target.classList.add("is-active");
+        });
+      });
+    });
+  </script>
+
+</section>
+</html>

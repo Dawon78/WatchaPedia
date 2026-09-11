@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="workSearchModal">
+    <style>
+        /* 작품 추가 모달 레이어 */
+        .search-modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5); z-index: 11000;
+            display: none; align-items: center; justify-content: center;
+        }
+        .search-modal-content {
+            background: #fff; width: 375px; height: 650px;
+            border-radius: 16px; display: flex; flex-direction: column; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* 헤더: X 아이콘 - 타이틀 - n개 추가하기 */
+        .search-modal-header {
+            padding: 16px; border-bottom: 1px solid #f0f0f0;
+            display: flex; justify-content: space-between;
+            flex-direction: column;
+        }
+        .close-icon { cursor: pointer; color: #ff0558; font-size: 20px; font-weight: bold; }
+        .search-modal-title { font-size: 17px; font-weight: bold; margin: 0;  align-items: left;}
+        .add-count-btn { font-size: 14px; color: #ccc; cursor: default; transition: color 0.2s; align-items: right;}
+        .add-count-btn.active { color: #ff0558; cursor: pointer; font-weight: bold; }
+
+        /* 검색창 */
+        .search-input-wrapper { padding: 12px 16px; }
+        .search-input-box {
+            background: #f5f5f7; border-radius: 8px; display: flex; align-items: center; padding: 10px 12px;
+        }
+        .search-input-box input {
+            background: none; border: none; outline: none; width: 100%; font-size: 15px; margin-left: 10px;
+        }
+
+        /* 검색 결과 리스트 */
+        .search-results-body { flex: 1; overflow-y: auto; }
+        .search-item {
+            display: flex; align-items: center; padding: 12px 16px; 
+            cursor: pointer; transition: background 0.2s;
+        }
+        .search-item:hover { background: #f9f9f9; }
+        .search-item img { width: 45px; height: 65px; object-fit: cover; border-radius: 4px; }
+        .search-item-info { margin-left: 15px; flex: 1; }
+        .search-item-title { font-size: 15px; font-weight: 500; color: #292a32; }
+        .search-item-meta { font-size: 13px; color: #8e8e93; margin-top: 4px; }
+
+        /* 체크 표시 서클 (사진 디자인 반영) */
+        .check-circle {
+            width: 24px; height: 24px; border: 2px solid #eee; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+        }
+        .search-item.selected .check-circle {
+            background: #ff0558; border-color: #ff0558;
+        }
+        .search-item.selected .check-circle::after {
+            content: '✓'; color: #fff; font-size: 14px; font-weight: bold;
+        }
+
+        .no-result-text { text-align: center; color: #8e8e93; margin-top: 150px; font-size: 15px; }
+  
+  		.search-column {
+    display: flex;
+    flex-direction: row; /* 수평 정렬 */
+    align-items: center; /* 글자 높이 맞춤 */
+    justify-content: space-between; /* 양 끝으로 배치 */
+    flex: 1; /* 남은 공간을 다 차지해서 버튼을 오른쪽 끝으로 밀어냄 */
+}
+  
+    </style>
+
+    <div id="work-search-modal" class="search-modal-overlay">
+        <div class="search-modal-content">
+            <header class="search-modal-header">
+                <span class="close-icon" onclick="closeSearchModal()">✕</span>
+                <div class="search-column">
+                <h3 class="search-modal-title">작품 추가</h3>
+                <span id="add-submit-btn" class="add-count-btn">0개 추가하기</span>
+                </div>
+            </header>
+            
+            <div class="search-input-wrapper">
+                <div class="search-input-box">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8e8e93" stroke-width="3"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" id="work-search-input" placeholder="검색하여 작품 추가하기" oninput="searchWorks(this.value)">
+                </div>
+            </div>
+
+            <div class="search-results-body" id="search-results">
+                <p class="no-result-text">검색어를 입력해 주세요.</p>
+            </div>
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+        let tempSelectedWorks = []; // 모달 내에서 임시로 선택된 작품들
+
+        window.openSearchModal = function() {
+            document.getElementById('work-search-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.closeSearchModal = function() {
+            document.getElementById('work-search-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            // 모달 닫을 때 초기화
+            tempSelectedWorks = [];
+            updateAddBtn();
+        };
+
+        // 1. 실시간 검색 로직
+        function searchWorks(query) {
+            const resultArea = document.getElementById('search-results');
+            if(query.trim().length < 1) {
+                resultArea.innerHTML = '<p class="no-result-text">검색어를 입력해 주세요.</p>';
+                return;
+            }
+
+            // 💡 컨트롤러의 @GetMapping("/work/search") 호출
+            fetch(`/work/search?q=${encodeURIComponent(query)}`)
+                .then(res => res.json())
+                .then(data => {
+                    resultArea.innerHTML = '';
+                    if(data.length === 0) {
+                        resultArea.innerHTML = '<p class="no-result-text">검색 결과가 없습니다.</p>';
+                        return;
+                    }
+
+                    data.forEach(work => {
+                        const isSelected = tempSelectedWorks.some(w => w.workId === work.workId);
+                        const item = document.createElement('div');
+                        item.className = `search-item ${isSelected ? 'selected' : ''}`;
+                        item.innerHTML = `
+                            <img src="/images/${work.workThumbnail || 'default.jpg'}">
+                            <div class="search-item-info">
+                                <div class="search-item-title">${work.workTitle}</div>
+                                <div class="search-item-meta">${work.workType}</div>
+                            </div>
+                            <div class="check-circle"></div>
+                        `;
+                        item.onclick = () => toggleWorkSelection(work, item);
+                        resultArea.appendChild(item);
+                    });
+                });
+        }
+
+        // 2. 작품 선택 토글
+        function toggleWorkSelection(work, element) {
+            const index = tempSelectedWorks.findIndex(w => w.workId === work.workId);
+            if (index > -1) {
+                tempSelectedWorks.splice(index, 1);
+                element.classList.remove('selected');
+            } else {
+                tempSelectedWorks.push(work);
+                element.classList.add('selected');
+            }
+            updateAddBtn();
+        }
+
+        // 3. 상단 버튼 업데이트
+        function updateAddBtn() {
+            const btn = document.getElementById('add-submit-btn');
+            const count = tempSelectedWorks.length;
+            btn.innerText = `${count}개 추가하기`;
+            
+            if (count > 0) {
+                btn.classList.add('active');
+                btn.onclick = finalizeSelection;
+            } else {
+                btn.classList.remove('active');
+                btn.onclick = null;
+            }
+        }
+
+        // 4. 부모 페이지 리스트로 데이터 전송
+        function finalizeSelection() {
+            if (tempSelectedWorks.length === 0) return;
+            
+            // CreateCollection.html에 정의된 함수 호출
+            if (window.appendWorksToForm) {
+                window.appendWorksToForm(tempSelectedWorks);
+            }
+            closeSearchModal();
+        }
+    </script>
+</div>
+</html>

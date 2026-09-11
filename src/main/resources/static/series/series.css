@@ -1,0 +1,322 @@
+/* 공통 */
+*, *::before, *::after {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+/* 메인 */
+.main-container {
+    max-width: 1300px;   /* 원하는 전체 폭 */
+    margin: 0 auto;      /* 가운데 정렬 */
+    padding: 0 16px;     /* 좌우 여백 */
+}
+
+/* 배너 */
+.home-banner {
+    display: flex;
+    justify-content: center; /* 페이지 가로 중앙 정렬 */
+    padding: 10px 0;
+}
+
+.banner-wrapper {
+    position: relative;
+    overflow: hidden;
+    background-color: #20000a; /* --bg 대신 직접 색 지정 */
+    border-radius: 5px;
+    max-width: 100%;
+    width: 100%;
+    display: flex; 
+    justify-content: center; /* 내부 이미지 중앙 */
+      height: 80px;  /* 높이는 그대로 유지 */
+}
+
+.banner-wrapper img {
+    height: 100%;       /* 높이는 80px 그대로 */
+    width: auto;        /* 가로 비율 유지 */
+    min-width: 100%;    /* 컨테이너 폭 최소 보장 */
+    display: block;
+    margin: 0 auto;     /* 가운데 정렬 */
+}
+
+/* 랭킹 섹션 전체 컨테이너 */
+.ranking-section {
+    width: 100%;
+    max-width: 1300px;  /* 메인 컨테이너 폭 */
+    margin: 0 auto;
+     position: relative; 
+    
+}
+
+/* 섹션 타이틀 */
+.section-title p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.show-more {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #888;
+    text-decoration: none;
+}
+/* 더보기 */
+.show-more img {
+    width: 9px;
+    height: 14px;
+}
+
+/* 영화 리스트 - 그리드 적용 */
+/* ✅ 슬라이더 전용 구조 */
+.ranking-list {
+    display: flex;            /* grid ❌ → flex ✅ */
+    gap: 16px;
+
+    overflow-x: auto;         /* 가로 스크롤 */
+    scroll-behavior: smooth;
+
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    flex-wrap: nowrap;        /* 줄바꿈 금지 ⭐ 핵심 */
+}
+
+.ranking-item {
+    flex: 0 0 calc((100% - 64px) / 5);
+}
+
+.ranking-list[data-count="6"] .ranking-item {
+    flex: 0 0 calc((100% - 80px) / 6);
+}
+
+
+/* 포스터 */
+.poster {
+    position: relative;
+    width: 100%;
+    padding-top: 150%; /* 비율에 맞춰 세로 길이 확보 */
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.poster img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1;
+}
+
+/* 랭크 배지 */
+.rank {
+   	position: absolute;
+    top: 3px;      /* 위쪽 3px */
+    left: 3px;     /* 왼쪽 3px */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 6px;
+    line-height: 22px;
+    color: #fff; /* 흰색 */
+    text-align: center;
+    vertical-align: top;
+    background-color: rgba(0, 0, 0, 0.7); /* 반투명 배경 */
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+/* 영화 정보 링크 스타일 */
+.ranking-item a {
+    text-decoration: none; /* 밑줄 제거 */
+    color: inherit;        /* 글자색 상속 */
+    line-height: 1.2;       /* 글자들 간의 위아래 간격을 좁힘 */
+}
+
+/* 영화 정보 */
+.info {
+    text-align: left;
+    margin: 0;       /* 불필요한 마진 제거, 필요하면 위쪽만 조절 */
+    width: 100%;     /* 전체 카드 폭에 맞춤 */
+}
+
+.info > * {
+    margin: 2px 0;   /* 글자 사이 간격 좁게 */
+    line-height: 1.2;
+}
+/* 영화 제목 영역 */
+.title {
+    font-size: 16px;
+    font-weight: 500; /* medium */
+    line-height: 22px;
+    letter-spacing: 0;
+    color: #000;      /* var(--color-primary-text) 대체 */
+    margin-bottom: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 영화 연도 및 국가 정보 */
+.year-nation {
+    font-size: 14px;
+    font-weight: 400; /* regular */
+    line-height: 20px;
+    letter-spacing: 0;
+    color: #000;      /* var(--color-primary-text) 대체 */
+    padding-bottom: 1px;
+    display: block;   /* 항상 표시 */
+}
+
+/* 평균 평점 영역 */
+.rating {
+    display: inline-flex;       /* 한 줄로 정렬 */
+    align-items: center;        /* 세로 중앙 정렬 */
+    gap: 4px;                   /* 텍스트와 별, 점수 간격 */
+    font-size: 13px;           
+    font-weight: 400;       
+    line-height: 18px;        
+    letter-spacing: 0;
+    color: #666;               
+}
+
+.rating svg {
+    width: 12px;
+    height: 12px;
+    fill: #666;                 
+    vertical-align: middle;
+}
+
+.rating span {
+    font-weight: 400;           
+    color: #666;                
+}
+
+/* 영화 예매율/누적관객 정보 */
+.stats {
+    font-size: 13px;
+    font-weight: 400;       /* regular */
+    line-height: 18px;
+    letter-spacing: 0;
+    color: #666;             /* 회색 계열 */
+    margin-top: 5px;
+    white-space: normal;     /* 여러 줄 가능 */
+}
+
+/* 프로모션 카드 리스트 */
+.promotion-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 16px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+/* 카드 */
+.promotion-item {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    border-radius: 8px;
+}
+
+/* 이미지 영역 */
+.promotion-img {
+    width: 100%;
+    overflow: hidden;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.promotion-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+/* 이벤트 카드 제목 */
+.promotion-title {
+    flex: 0;
+    padding: 20px 12px;              /* 상하 13px, 좌우 10px */
+    font-size: 12px;                  /* 글자 크기 */
+    font-weight: 700;                 /* Bold */
+    color: white;        /* 흰색 글씨 */
+    text-overflow: ellipsis;          /* 길면 ... 처리 */
+    overflow: hidden;
+    white-space: nowrap;
+    background: #00A0FF;  /* 배경 색상 */
+    display: flex;                    /* 아이콘 있을 경우 한 줄 배치 */
+    justify-content: space-between;   /* 텍스트와 아이콘 분리 */
+    align-items: center;
+    margin:0;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    
+}
+
+.promotion-title svg {
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
+    fill: #fff; /* 화이트 아이콘 */
+}
+/* 슬라이더 */
+.ranking-list::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* 오른쪽 버튼 */
+.slider-right {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+
+/* 왼쪽 버튼 */
+.slider-left {
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+
+/* 버튼 공통 스타일 */
+.slider-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 50%;
+
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+
+    cursor: pointer;
+}
+
+
+/* svg 아이콘 */
+._button_iz3nw_1 > svg {
+    width: 14px;
+    height: 14px;
+    color: #555;
+}

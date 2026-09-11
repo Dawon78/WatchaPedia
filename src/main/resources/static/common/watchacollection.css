@@ -1,0 +1,107 @@
+/* 전체 컨테이너 및 폰트 설정 */
+
+body {
+    background-color: #ffffff;
+    margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.collection {
+    background-color: #fff;
+    color: #292a32;
+    padding-top: 20px;
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    line-height: 1.5;
+}
+
+.collection .container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* 카테고리 제목 */
+.collection .category-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    letter-spacing: -0.5px;
+}
+
+/* 그리드 레이아웃: 반응형으로 자동 조절 */
+.collection .book-grid {
+    display: grid;
+    /* 140px에서 120px로 변경하여 한 줄에 더 많이 배치되게 함으로써 개별 크기를 줄임 */
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); 
+    /* 간격을 15px에서 20px로 살짝 넓혀 여유 공간 확보 */
+    gap: 30px 20px; 
+    margin-bottom: 80px;
+}
+
+/* 개별 도서 아이템 */
+.collection .book-item {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    max-width: 150px; /* 이미지가 무한정 커지는 것을 방지 */
+}
+
+.collection .poster-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1.45; /* 도서 표지 비율 */
+    border: 1px solid #eae9e8;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #f8f8f8;
+}
+
+.collection .poster-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.collection .book-info {
+    margin-top: 10px;
+}
+
+.collection .book-info .title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #292a32;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* 제목이 길면 말줄임표 */
+    margin-bottom: 4px;
+}
+
+.collection .book-info .rating {
+    font-size: 13px;
+    color: #74747b;
+}
+
+/* 푸터 영역 */
+.collection .footer-notice {
+    text-align: center;
+    padding: 40px 0;
+    background-color: #f8f8f8;
+    color: #a5a5a7;
+    font-size: 12px;
+    line-height: 1.8;
+    margin-top: 40px;
+}
+
+/* 최하단 검은색 바 */
+.collection .stats-bar {
+    background-color: #101113;
+    color: #d1d1d2;
+    text-align: center;
+    padding: 22px 0;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.collection .stats-bar .highlight {
+    color: #ff0558; /* 왓챠 시그니처 핑크 */
+    font-weight: 500;
+}

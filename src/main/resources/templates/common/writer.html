@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::section})">
+      
+ <section>
+	  <link rel="stylesheet" th:href="@{/common/writer.css}">
+
+<div class="writer-container">
+    <header class="writer-profile-header">
+        <img src="https://via.placeholder.com/80" alt="프로필 이미지" class="writer-profile-img">
+    </header>
+
+
+    <section class="writer-biography">
+        <div class="writer-header-text">
+            <h1 class="writer-name">장항준</h1>
+            <p class="writer-subtitle">감독, 배우, 작가, 저자</p>
+        </div>
+        <h2 class="writer-section-title">바이오그래피</h2>
+        <p class="writer-content">
+            영화감독, 드라마PD. 어린 시절 어머니와 이모들이 모여 있는 자리에서 반장이 됐다고 거짓말했는데 모두가 기뻐함. 
+            거짓말로 사람들을 기쁘게 할 수 있다는 사실을 깨달음. 영화 예고편이 없던 시절 홍보 문구만 보고 이야기를 지어내 들려줌. 
+            영화를 해보기로 결심함. 서울예대 연극과 졸업. 영화과에 가려고 했으나 실수로 연극과에 지원서를 냈다고 함. 
+            재학 시절 영화과 수업까지 청강하면서 도서관에 있는 대본을 모두 읽음... <span class="writer-more">더보기</span>
+        </p>
+        <p class="writer-source">도서정보 및 바이오그래피 제공 | 알라딘</p>
+    </section>
+
+    <hr class="writer-divider">
+
+    <footer class="writer-like-section">
+        <span class="writer-like-icon">👍</span>
+        <span class="writer-like-count">좋아요 <strong>344명</strong>이 이 인물을 좋아합니다</span>
+    </footer>
+    <hr class="writer-divider">
+</div>
+<div class="writer-filmography-container">
+    <main class="writer-main-content">
+       <h1 style="font-size: 27px;">영화</h1>
+        <section class="writer-section">
+            <h2 class="writer-section-header">출연</h2>
+            <div class="writer-table-header">
+                <span class="writer-col-title">제목</span>
+                <span class="writer-col-role">역할</span>
+                <span class="writer-col-rating">평가</span>
+            </div>
+
+            <div class="writer-work-item">
+                <div class="writer-work-year">2021</div>
+                <div class="writer-work-info">
+                    <img src="https://via.placeholder.com/45x65" alt="포스터" class="writer-poster">
+                    <span class="writer-work-name">차인표</span>
+                </div>
+                <div class="writer-work-role">특별출연</div>
+                <div class="writer-work-rating">평균 ★ 2.1</div>
+            </div>
+
+            <div class="writer-work-item">
+                <div class="writer-work-year">2016</div>
+                <div class="writer-work-info">
+                    <img src="https://via.placeholder.com/45x65" alt="포스터" class="writer-poster">
+                    <span class="writer-work-name">엽기적인 그녀 2</span>
+                </div>
+                <div class="writer-work-role">조연</div>
+                <div class="writer-work-rating">평균 ★ 1.5</div>
+            </div>
+
+            <button class="writer-more-btn">더보기 ⌵</button>
+        </section>
+
+        <section class="writer-section">
+            <h2 class="writer-section-header">감독</h2>
+            <div class="writer-table-header">
+                <span class="writer-col-title">제목</span>
+                <span class="writer-col-role">역할</span>
+                <span class="writer-col-rating">평가</span>
+            </div>
+
+            <div class="writer-work-item">
+                <div class="writer-work-year">2024</div>
+                <div class="writer-work-info">
+                    <img src="https://via.placeholder.com/45x65" alt="포스터" class="writer-poster">
+                    <span class="writer-work-name">왕과 사는 남자</span>
+                </div>
+                <div class="writer-work-role">감독, 각본</div>
+                <div class="writer-work-rating">평균 ★ 3.3</div>
+            </div>
+             <div class="writer-work-item">
+                <div class="writer-work-year">2024</div>
+                <div class="writer-work-info">
+                    <img src="https://via.placeholder.com/45x65" alt="포스터" class="writer-poster">
+                    <span class="writer-work-name">왕과 사는 남자</span>
+                </div>
+                <div class="writer-work-role">감독, 각본</div>
+                <div class="writer-work-rating">평균 ★ 3.3</div>
+            </div>
+            <div class="writer-work-item">
+                <div class="writer-work-year">2024</div>
+                <div class="writer-work-info">
+                    <img src="https://via.placeholder.com/45x65" alt="포스터" class="writer-poster">
+                    <span class="writer-work-name">왕과 사는 남자</span>
+                </div>
+                <div class="writer-work-role">감독, 각본</div>
+                <div class="writer-work-rating">평균 ★ 3.3</div>
+            </div>
+             <button class="writer-more-btn">더보기 ⌵</button>
+        </section>
+        
+                <section class="writer-section">
+            <h2 class="writer-section-header">각본</h2>
+            <div class="writer-table-header">
+                <span class="writer-col-title">제목</span>
+                <span class="writer-col-role">역할</span>
+                <span class="writer-col-rating">평가</span>
+            </div>
+
+            <div class="writer-work-item">
+                <div class="writer-work-year">2021</div>
+                <div class="writer-work-info">
+                    <img src="https://via.placeholder.com/45x65" alt="포스터" class="writer-poster">
+                    <span class="writer-work-name">차인표</span>
+                </div>
+                <div class="writer-work-role">특별출연</div>
+                <div class="writer-work-rating">평균 ★ 2.1</div>
+            </div>
+
+            <div class="writer-work-item">
+                <div class="writer-work-year">2016</div>
+                <div class="writer-work-info">
+                    <img src="https://via.placeholder.com/45x65" alt="포스터" class="writer-poster">
+                    <span class="writer-work-name">엽기적인 그녀 2</span>
+                </div>
+                <div class="writer-work-role">조연</div>
+                <div class="writer-work-rating">평균 ★ 1.5</div>
+            </div>
+
+            <button class="writer-more-btn">더보기 ⌵</button>
+        </section>
+        
+           <h1 style="font-size: 27px;">시리즈</h1> 
+                  <section class="writer-section">
+            <h2 class="writer-section-header">출연</h2>
+            <div class="writer-table-header">
+                <span class="writer-col-title">제목</span>
+                <span class="writer-col-role">역할</span>
+                <span class="writer-col-rating">평가</span>
+            </div>
+
+            <div class="writer-work-item">
+                <div class="writer-work-year">2021</div>
+                <div class="writer-work-info">
+                    <img src="https://via.placeholder.com/45x65" alt="포스터" class="writer-poster">
+                    <span class="writer-work-name">차인표</span>
+                </div>
+                <div class="writer-work-role">특별출연</div>
+                <div class="writer-work-rating">평균 ★ 2.1</div>
+            </div>
+
+            <div class="writer-work-item">
+                <div class="writer-work-year">2016</div>
+                <div class="writer-work-info">
+                    <img src="https://via.placeholder.com/45x65" alt="포스터" class="writer-poster">
+                    <span class="writer-work-name">엽기적인 그녀 2</span>
+                </div>
+                <div class="writer-work-role">조연</div>
+                <div class="writer-work-rating">평균 ★ 1.5</div>
+            </div>
+
+            <button class="writer-more-btn">더보기 ⌵</button>
+        </section>
+
+        <section class="writer-section">
+            <h2 class="writer-section-header">감독</h2>
+            <div class="writer-table-header">
+                <span class="writer-col-title">제목</span>
+                <span class="writer-col-role">역할</span>
+                <span class="writer-col-rating">평가</span>
+            </div>
+
+            <div class="writer-work-item">
+                <div class="writer-work-year">2024</div>
+                <div class="writer-work-info">
+                    <img src="https://via.placeholder.com/45x65" alt="포스터" class="writer-poster">
+                    <span class="writer-work-name">왕과 사는 남자</span>
+                </div>
+                <div class="writer-work-role">감독, 각본</div>
+                <div class="writer-work-rating">평균 ★ 3.3</div>
+            </div>
+             <div class="writer-work-item">
+                <div class="writer-work-year">2024</div>
+                <div class="writer-work-info">
+                    <img src="https://via.placeholder.com/45x65" alt="포스터" class="writer-poster">
+                    <span class="writer-work-name">왕과 사는 남자</span>
+                </div>
+                <div class="writer-work-role">감독, 각본</div>
+                <div class="writer-work-rating">평균 ★ 3.3</div>
+            </div>
+            <div class="writer-work-item">
+                <div class="writer-work-year">2024</div>
+                <div class="writer-work-info">
+                    <img src="https://via.placeholder.com/45x65" alt="포스터" class="writer-poster">
+                    <span class="writer-work-name">왕과 사는 남자</span>
+                </div>
+                <div class="writer-work-role">감독, 각본</div>
+                <div class="writer-work-rating">평균 ★ 3.3</div>
+            </div>
+             <button class="writer-more-btn">더보기 ⌵</button>
+        </section>     
+           <section class="writer-section">
+            <h2 class="writer-section-header">각본</h2>
+            <div class="writer-table-header">
+                <span class="writer-col-title">제목</span>
+                <span class="writer-col-role">역할</span>
+                <span class="writer-col-rating">평가</span>
+            </div>
+
+            <div class="writer-work-item">
+                <div class="writer-work-year">2021</div>
+                <div class="writer-work-info">
+                    <img src="https://via.placeholder.com/45x65" alt="포스터" class="writer-poster">
+                    <span class="writer-work-name">차인표</span>
+                </div>
+                <div class="writer-work-role">특별출연</div>
+                <div class="writer-work-rating">평균 ★ 2.1</div>
+            </div>
+
+            <div class="writer-work-item">
+                <div class="writer-work-year">2016</div>
+                <div class="writer-work-info">
+                    <img src="https://via.placeholder.com/45x65" alt="포스터" class="writer-poster">
+                    <span class="writer-work-name">엽기적인 그녀 2</span>
+                </div>
+                <div class="writer-work-role">조연</div>
+                <div class="writer-work-rating">평균 ★ 1.5</div>
+            </div>
+
+            <button class="writer-more-btn">더보기 ⌵</button>
+        </section>
+
+                   <h1 style="font-size: 27px;">책</h1> 
+                  <section class="writer-section">
+            <h2 class="writer-section-header">작가</h2>
+            <div class="writer-table-header">
+                <span class="writer-col-title">제목</span>
+                <span class="writer-col-role">역할</span>
+                <span class="writer-col-rating">평가</span>
+            </div>
+
+            <div class="writer-work-item">
+                <div class="writer-work-year">2021</div>
+                <div class="writer-work-info">
+                    <img src="https://via.placeholder.com/45x65" alt="포스터" class="writer-poster">
+                    <span class="writer-work-name">차인표</span>
+                </div>
+                <div class="writer-work-role">특별출연</div>
+                <div class="writer-work-rating">평균 ★ 2.1</div>
+            </div>
+
+            <div class="writer-work-item">
+                <div class="writer-work-year">2016</div>
+                <div class="writer-work-info">
+                    <img src="https://via.placeholder.com/45x65" alt="포스터" class="writer-poster">
+                    <span class="writer-work-name">엽기적인 그녀 2</span>
+                </div>
+                <div class="writer-work-role">조연</div>
+                <div class="writer-work-rating">평균 ★ 1.5</div>
+            </div>
+
+            <button class="writer-more-btn">더보기 ⌵</button>
+        </section>
+                          <h1 style="font-size: 27px;">웹툰</h1> 
+                  <section class="writer-section">
+            <h2 class="writer-section-header">웹툰 작가</h2>
+            <div class="writer-table-header">
+                <span class="writer-col-title">제목</span>
+                <span class="writer-col-role">역할</span>
+                <span class="writer-col-rating">평가</span>
+            </div>
+
+            <div class="writer-work-item">
+                <div class="writer-work-year">2021</div>
+                <div class="writer-work-info">
+                    <img src="https://via.placeholder.com/45x65" alt="포스터" class="writer-poster">
+                    <span class="writer-work-name">차인표</span>
+                </div>
+                <div class="writer-work-role">특별출연</div>
+                <div class="writer-work-rating">평균 ★ 2.1</div>
+            </div>
+
+            <div class="writer-work-item">
+                <div class="writer-work-year">2016</div>
+                <div class="writer-work-info">
+                    <img src="https://via.placeholder.com/45x65" alt="포스터" class="writer-poster">
+                    <span class="writer-work-name">엽기적인 그녀 2</span>
+                </div>
+                <div class="writer-work-role">조연</div>
+                <div class="writer-work-rating">평균 ★ 1.5</div>
+            </div>
+
+            <button class="writer-more-btn">더보기 ⌵</button>
+        </section>
+    </main>
+ 
+<aside class="writer-sidebar">
+        <nav class="writer-side-nav">
+            <ul>
+                <li>바이오그래피</li>
+                <li class="writer-nav-category">영화</li>
+                <li class="writer-nav-active">출연</li>
+                <li>감독</li>
+                <li>각본</li>
+                <li class="writer-nav-category">시리즈</li>
+                <li>출연</li>
+                <li>감독</li>
+                <li>각본</li>
+                <li class="writer-nav-category">책</li>
+                <li>작가</li>
+                <li class="writer-nav-category">웹툰</li>
+                <li>웹툰 작가</li>
+            </ul>
+        </nav>
+    </aside>
+    
+</div>
+
+</section>>
+</html>

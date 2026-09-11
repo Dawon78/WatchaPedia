@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::body})">
+ <body>     
+ <section data-theme="light">
+	  <link rel="stylesheet" th:href="@{/recommendation/recommendation.css}">
+	  
+	  <main class="_mainSection_vjv2a_9 _paddingTop_vjv2a_13 _paddingBottom_vjv2a_17">
+		  <div class="_container_163fv_1">
+		
+		    <h1 class="_pageTitle_163fv_6 _h3_o65ro_67">추천</h1>
+			<div class="_filterContainer_163fv_12">
+
+			  <!-- 영화 / 시리즈 / 책 -->
+			  <div class="_container_1kgw0_1">
+			    <ul class="_ul_1kgw0_17" style="gap: 10px;">
+			      <li>
+			        <button class="_button_10e2m_1 _body2Semibold_1dosp_134 _active_10e2m_9" type="button" data-type="movie">
+			          영화<span class="_numberText_10e2m_13"></span>
+			        </button>
+			      </li>
+			      <li>				
+			      
+			        <button class="_button_10e2m_1 _body2Semibold_1dosp_134" type="button" data-type="series">
+			          시리즈<span class="_numberText_10e2m_13"></span>
+			        </button>
+			      </li>
+			      <li>
+			        <button class="_button_10e2m_1 _body2Semibold_1dosp_134" type="button" data-type="book">
+			          책<span class="_numberText_10e2m_13"></span>
+			        </button>
+			      </li>
+			    </ul>
+			
+			    <div class="_bar_1kgw0_6" style="left: 0px; width: 52px; opacity: 1;"></div>
+			  </div>
+			
+			  <!-- 나의 구독 / 태그 / 토글 -->
+			 <div class="_buttonContainer_163fv_88">
+
+			  <div>
+			
+			    <button class="_tagSetting_163fv_103 _body3Medium_1dosp_169" type="button">
+			      나의 구독
+			      <svg xmlns="http://www.w3.org/2000/svg"
+			           width="16"
+			           height="16"
+			           fill="none"
+			           viewBox="0 0 16 16"
+			           class="_chevronIcon_163fv_119">
+			        <path stroke="currentColor"
+			              stroke-linecap="round"
+			              stroke-linejoin="round"
+			              stroke-width="1.4"
+			              d="m4 6 4 4 4-4"></path>
+			      </svg>
+			    </button>
+			
+			    <button class="_tagSetting_163fv_103 _body3Medium_1dosp_169" type="button">
+			      태그
+			      <svg xmlns="http://www.w3.org/2000/svg"
+			           width="16"
+			           height="16"
+			           fill="none"
+			           viewBox="0 0 16 16"
+			           class="_chevronIcon_163fv_119">
+			        <path stroke="currentColor"
+			              stroke-linecap="round"
+			              stroke-linejoin="round"
+			              stroke-width="1.4"
+			              d="m4 6 4 4 4-4"></path>
+			      </svg>
+			    </button>
+			
+			  </div>
+			
+			  <div class="_toggleContainer_163fv_144">
+			
+			    <button aria-label="toggle"
+			            class="_button_1882y_1"
+			            type="button">
+			      <span class="_bar_1882y_10 _small_1882y_20"></span>
+			      <span class="_circle_1882y_31 _small_1882y_20"></span>
+			    </button>
+			
+			    <span class="_body2Medium_1dosp_141 _toggleTitle_163fv_150">
+			      구독 중인 작품만 보기
+			    </span>
+			
+			  </div>
+			
+			</div>
+		    
+		    <!-- ===================== -->
+		    <!-- #따뜻한 태그 -->
+		    <!-- ===================== -->
+		    <!-- ===================== -->
+<!-- 🔥 자동 생성 장르 섹션 -->
+<!-- ===================== -->
+<section class="_row_163fv_36 _component_82rb0_1 _sunrise_82rb0_17"
+         th:each="entry : ${movieSections}">
+
+  <h2 class="_h4_o65ro_82 _title_163fv_40"
+      th:text="'선호하시는 #' + ${entry.key} + ' 장르의 작품들'">
+    장르명
+  </h2>
+
+  <section class="_horizontalScroll_163fv_46 _container_mz3qo_1">
+    <div class="_listWrapper_mz3qo_13 listWrapper">
+      <ul class="_ul_163fv_55 _list_mz3qo_13">
+
+        <li class="w_exposed_cell _card_1fgyt_1"
+            th:each="c : ${entry.value}">
+
+          <a class="_link_1fgyt_9 _thumbnailContainer_1fgyt_13"
+             th:href="@{/work/{id}(id=${c.workId})}">
+
+            <img class="_thumbnail_1fgyt_13"
+                 th:alt="${c.workTitle}"
+                 th:src="@{${c.workThumbnail}}">
+
+            <div class="_predictedRatingBox_1fgyt_51 _avgRating_1fgyt_72">
+              <span class="_text_1fgyt_60 _medium_o65ro_6 _caption12_o65ro_175">
+                평균 별점
+              </span>
+              <span class="_value_1fgyt_66 _medium_o65ro_6 _body4_o65ro_164"
+                    th:text="${c.avgRating != null ? c.avgRating : '-'}">
+                -
+              </span>
+            </div>
+
+          </a>
+
+          <div class="_bottomContainer_1fgyt_86">
+
+            <div class="_titleContainer_1fgyt_90">
+              <p class="_title_1fgyt_90 _medium_o65ro_6 _subtitle1_o65ro_89"
+                 th:text="${c.workTitle}">
+                제목
+              </p>
+            </div>
+
+            <div class="_genres_1fgyt_116 _body4_o65ro_164"
+                 th:text="${c.workPublishDate != null ? #temporals.format(c.workPublishDate, 'yyyy') : '-'} + ' ・ -'">
+              연도 ・ 국가
+            </div>
+
+          </div>
+
+        </li>
+
+        <div class="_scroll_mz3qo_45 loadmore"></div>
+
+      </ul>
+    </div>
+
+    <!-- 우측 화살표 -->
+    <div class="_buttonContainer_mz3qo_56 arrowButton _right_mz3qo_68">
+      <button class="_button_jl4aw_1" title="right" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M8.07 3a.76.76 0 0 0 0 1.09l8.65 8.46a.8.8 0 0 0 1.11 0 .76.76 0 0 0 0-1.1L9.18 3a.8.8 0 0 0-1.12 0"></path>
+          <path fill="currentColor" d="M8.07 21a.8.8 0 0 0 1.12 0l8.64-8.45a.76.76 0 0 0 0-1.1.8.8 0 0 0-1.11 0l-8.65 8.46a.76.76 0 0 0 0 1.09"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- 좌측 화살표 -->
+    <div class="_buttonContainer_mz3qo_56 arrowButton _left_mz3qo_72 _disabled_mz3qo_64">
+      <button class="_button_jl4aw_1" title="left" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M16.5 3a.76.76 0 0 1 0 1.09l-8.65 8.46a.8.8 0 0 1-1.12 0 .76.76 0 0 1 0-1.1L15.38 3a.8.8 0 0 1 1.12 0"></path>
+          <path fill="currentColor" d="M16.5 21a.8.8 0 0 1-1.12 0l-8.65-8.45a.76.76 0 0 1 0-1.1.8.8 0 0 1 1.12 0l8.64 8.46a.76.76 0 0 1 0 1.09Z"></path>
+        </svg>
+      </button>
+    </div>
+
+  </section>
+
+</section>
+		
+<!-- ===================== -->
+      <!-- 🔥 시리즈/책 EMPTY 영역 -->
+      <!-- ===================== -->
+     <div id="emptySection" style="display:none;">
+
+		  <section class="_row_163fv_36 _component_82rb0_1">
+		
+		    <div class="empty-wrapper">
+		
+		      <svg width="48" height="48" fill="none" viewBox="0 0 24 24"
+		           class="empty-icon">
+		        <path fill="#d0d0d0" d="M3 4h18v12H6l-3 3V4z"/>
+		      </svg>
+		
+		      <p class="empty-text">
+		        조금 더 평가를 매겨 주시면<br>
+		        좋은 작품을 추천해드릴게요
+		      </p>
+		
+		      <button class="empty-btn">
+		        평가하기
+		      </button>
+		
+		    </div>
+		
+		  </section>
+		
+		</div>
+
+		    </section>
+		  </div>
+		</main>
+		
+	
+	</section>
+	<script th:src="@{/recommendation/recommendation.js}" defer></script>
+	</body>
+</html>

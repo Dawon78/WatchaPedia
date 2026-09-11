@@ -1,0 +1,427 @@
+@charset "UTF-8";
+
+/* 1. 전체 배경 및 기본 설정 */
+body {
+    background-color: #f8f8f8 !important;
+    margin: 0;
+    padding: 0;
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+}
+
+/* 2. 메인 컨테이너 */
+.mypage-container {
+    max-width: 640px;
+    margin: 30px auto 50px auto; 
+    background-color: #fff;
+    border: 1px solid #e3e3e3;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.profile-header {
+    padding: 30px 20px 25px;
+    position: relative;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.top-utils {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    display: flex;
+    gap: 15px;
+    color: #333;
+    font-size: 20px;
+}
+
+/* 1. 수직 중앙 정렬의 절대 기준 */
+.profile-info {
+    display: flex !important;
+    align-items: left; /* 💡 이미지와 텍스트 뭉치의 수직 중앙을 강제로 맞춤 */
+    margin-bottom:10px;
+    text-align: left;
+    height: auto !important; 
+    min-height: 80px; 
+    flex-direction: column;
+}
+
+.profile-hr{
+	border: 0;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* 2. 이미지 박스: 텍스트 간섭 방지 */
+.profile-circle {
+    width: 100px;
+    height: 100px;
+    background: #f0f0f0;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0; /* 텍스트가 길어져도 이미지 크기 사수 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 3. 텍스트 그룹: 마진을 완전히 죽여야 정렬이 삽니다. */
+.profile-text-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 내부 요소들끼리도 중앙 정렬 */
+    height: auto !important;
+}
+
+.nickname {
+    font-size: 32px;
+    font-weight: bold;
+    color: #000;
+    margin: 0 !important; 
+    padding: 0 !important;
+    line-height: 1.2; 
+}
+
+.email {
+    font-size: 13px;
+    color: #8e8e93;
+    /* 💡 위아래 간격을 동일하게 줘서 시각적 균형을 맞춥니다. */
+    margin: 4px 0 !important; 
+    padding: 0 !important;
+    line-height: 1;
+}
+
+.follow-counts {
+    font-size: 12px;
+    color: #a5a5a7;
+    padding: 0 !important;
+    line-height: 1;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-gray {
+    flex: 1;
+    padding: 10px 0;
+    background: #f8f8f8;
+    border:none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #292a32;
+    cursor: pointer;
+}
+
+/* 4. 활동 통계 (구분선 디테일 반영) */
+.stats-row {
+    display: flex;
+    padding: 18px 0;
+    border-bottom: 10px solid #f0f0f0;
+    align-items: center;
+}
+
+.stat-box {
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+
+/* 💡 통계 사이 짧은 세로선 */
+.stat-box:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 14px;
+    background-color: #f0f0f0;
+}
+
+.stat-box .count {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+}
+
+.stat-box .label {
+    font-size: 12px;
+    color: #8e8e93;
+    margin-top: 2px;
+}
+
+/* 5. 보관함 섹션 */
+.mypage-section {
+    padding: 25px 20px;
+    border-bottom: 10px solid #f0f0f0;
+}
+
+.mypage-section:last-child {
+    border-bottom: none;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.storage-row {
+    display: flex;
+    justify-content: space-around;
+}
+
+.storage-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #292a32;
+}
+
+.icon-bg {
+    width: 50px;
+    height: 50px;
+    background-color: #f8f8f8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+/* 6. 구독 중인 서비스 */
+.sub-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sub-desc {
+    font-size: 12px;
+    color: #8e8e93;
+    margin: 0;
+}
+
+.btn-register {
+    padding: 6px 14px;
+    background: #f8f8f8;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #292a32;
+    cursor: pointer;
+}
+
+
+.event-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.event-banner img {
+    border-radius: 4px;
+    width: auto;
+    height: 68px;
+    width: auto;
+}
+
+/* 7. 캘린더 */
+.calendar-grid-mock {
+    text-align: center;
+}
+
+.placeholder-img {
+    height: 180px;
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+    font-size: 14px;
+}
+
+.view-all {
+    display: block;
+    margin-top: 15px;
+    font-size: 12px;
+    color: #a5a5a7;
+    text-decoration: none;
+}
+
+/* --- 좋아요 섹션 정밀 디자인 --- */
+
+.like-category {
+    margin-bottom: 28px;
+}
+
+.like-cat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    cursor: pointer;
+}
+
+.like-cat-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #141414;
+}
+
+.like-count {
+    font-size: 16px;
+    font-weight: 400;
+    color: #141414;
+    margin-left: 5px;
+}
+
+.like-arrow {
+    color: #ccc;
+    font-size: 22px;
+    line-height: 1;
+}
+
+/* 가로 스크롤 설정 */
+.like-scroll-wrapper {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    -ms-overflow-style: none; /* IE */
+    scrollbar-width: none; /* Firefox */
+}
+
+.like-scroll-wrapper::-webkit-scrollbar {
+    display: none; /* Chrome 스크롤바 숨김 */
+}
+
+/* --- 인물 카드 디자인 --- */
+.person-card {
+    width: 108px; /* 이미지 너비에 맞춤 */
+    flex-shrink: 0;
+}
+
+.person-img-box {
+    width: 108px;
+    height: 108px;
+    border-radius: 8px; /* 💡 이미지처럼 둥근 사각형 */
+    overflow: hidden;
+    background-color: #f0f0f0;
+    margin-bottom: 7px;
+    border: 1px solid #f0f0f0;
+}
+
+.person-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.person-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: #292a32;
+    margin: 0;
+    text-align: left;
+}
+
+.person-job {
+    font-size: 13px;
+    color: #8e8e93;
+    margin: 2px 0 0 0;
+}
+
+/* --- 컬렉션 카드 디자인 --- */
+.collection-card {
+    width: 117px;
+    flex-shrink: 0;
+}
+
+/* 4분할 그리드 포스터 */
+.poster-grid-4 {
+    width: 117px;
+    height: 181px;
+    border-radius: 5px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1px;
+    background-color: #eee;
+    margin-bottom: 8px;
+}
+
+.poster-grid-4 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 단일 그리드 포스터 */
+.poster-grid-1 {
+    width: 117px;
+    height: 181px;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #eee;
+    margin-bottom: 8px;
+}
+
+.poster-grid-1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.storage-row {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 0;
+    background: #f8f8f8;
+    border-radius: 8px;
+}
+
+.storage-unit {
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.storage-unit:hover {
+    transform: translateY(-5px); /* 마우스 올리면 살짝 들림 */
+}
+
+.icon-bg {
+    font-size: 30px;
+    margin-bottom: 8px;
+    background: white;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.storage-unit span {
+    font-size: 13px;
+    font-weight: 600;
+    color: #4a4a4a;
+}
+
+.collection-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: #292a32;
+    margin: 0;
+    line-height: 1.3;
+}

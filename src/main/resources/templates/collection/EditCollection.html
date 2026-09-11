@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::section})">
+<section>
+    <link rel="stylesheet" th:href="@{/collection/CreateCollection.css}">
+
+    <main class="create-coll-main">
+        <form th:action="@{/collection/update}" method="post">
+            <input type="hidden" name="id" th:value="${collection.collectionId}">
+
+            <header class="create-header">
+                <button type="button" class="btn-close" onclick="history.back()">✕</button>
+                <h1 class="header-title">컬렉션 수정</h1>
+                <button type="submit" class="btn-submit">완료</button>
+            </header>
+
+            <div class="create-body">
+                <div class="input-group">
+                    <input type="text" name="collectionTitle" 
+                           th:value="${collection.collectionTitle}"
+                           placeholder="컬렉션 제목을 입력하세요" 
+                           class="input-title" required>
+                </div>
+
+                <div class="input-group">
+                    <textarea name="collectionDesc" 
+                              th:text="${collection.collectionDesc}"
+                              placeholder="컬렉션에 대한 설명을 적어주세요" 
+                              class="input-desc"></textarea>
+                </div>
+
+                <hr class="divider">
+
+                <div class="work-selection-section">
+                    <div class="section-header">
+                        <span class="section-title">추가된 작품들</span>
+                        <span class="work-count" th:text="${collection.works.size()}">0</span>
+                    </div>
+
+                    <div class="selected-works-grid">
+                        <div class="work-item" th:each="work : ${collection.works}">
+                            <div class="work-poster">
+                                <img th:src="@{'/images/' + ${work.workThumbnail}}" alt="포스터">
+                                <input type="hidden" name="workIds" th:value="${work.workId}">
+                                <button type="button" class="btn-remove-work" onclick="removeWork(this)">✕</button>
+                            </div>
+                            <p class="work-title" th:text="${work.workTitle}">작품 제목</p>
+                        </div>
+                        
+                        <div class="btn-add-work">
+                            <div class="add-icon">+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <script th:src="@{/collection/EditCollection.js}"></script>
+</section>
+</html>

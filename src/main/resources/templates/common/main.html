@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::body})">
+<body>
+<section>
+    <link rel="stylesheet" th:href="@{/main/main.css}">
+    <link rel="stylesheet" th:href="@{/movie/movie.css}">
+    
+
+	<div class="_navContainer_vjv2a_1">
+
+		<main class="_mainSection_vjv2a_9 _paddingTop_vjv2a_13 _paddingBottom_vjv2a_17">
+
+			<!--  wrapper 추가 -->
+			<div class="_wrapper_1ea7l_1 _spaced_1ea7l_63">
+
+				<section class="_section_1ea7l_5">
+
+					<!-- 🔥 맨 위 홈 배너 -->
+					<div class="_homeBannerContainer_1ea7l_10 _eventBanner_1ea7l_71">
+						<div class="_bannerWrapper_uil7j_10">
+							<a>
+								<div class="_wrapper_l4aqv_2"
+									style="--bg:#20000a;--bg-small:#20000a">
+									<div class="_contentWrapper_l4aqv_9 _typeImage_l4aqv_18">
+
+										<img th:src="@{/main/images/banner_small.jpg}" alt="이벤트 배너"
+											class="_image_l4aqv_48 _small_l4aqv_53"> <img
+											th:src="@{/main/images/banner.jpg}" alt="이벤트 배너"
+											class="_image_l4aqv_48 _large_l4aqv_57">
+
+
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+
+					<!-- 🔥 롤링카드 배너 -->
+					<div class="_homeBannerContainer_1ea7l_10">
+					  <div class="_bannerWrapper_uil7j_10">
+					    <section class="_container_15cav_1">
+					      <div class="_scrollDiv_15cav_5">
+					        <ul class="_ul_15cav_14">
+					
+					          <li class="rolling-card" data-exposed-index="0">
+					            <a class="_container_10rfe_1"
+					               href="https://watcha.com/ko-KR/promotions/watchapromotion2026?browser_open_type=external"
+					               rel="noreferrer noopener"
+					               style="background:url(https://an2-img.amz.wtchn.net/image/v2/0P2W7hX9QIy_wo0AhAz2zg.png?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKd0lqb2lMM1l5TDNOMGIzSmxMM0J5YjIxdmRHbHZiaTh4TXpBd016RXdNVGcxT1RReU1Ua3pJbjAuWmxZanBROXhfOHFpcTdrMUJERl9RX3lYUVNLUmZrVXVsdmRiUmUxTllvSQ==) center / cover no-repeat"
+					               target="_blank">
+					
+					              <div class="_rankBadge_4n38t_1 _subtitle2Bold_1dosp_78 _rightBadge_10rfe_12">
+					                AD
+					              </div>
+					
+					              <span aria-label="ad link" class="_link_10rfe_18">
+					                <svg xmlns="http://www.w3.org/2000/svg"
+					                     width="24"
+					                     height="24"
+					                     fill="none"
+					                     viewBox="0 0 24 24"
+					                     aria-hidden="true">
+					
+					                  <g clip-path="url(#link-external-02_svg__a)"
+					                     filter="url(#link-external-02_svg__b)">
+					
+					                    <path fill="currentColor"
+					                          fill-rule="evenodd"
+					                          d="M7.76 2H10a1 1 0 1 1 0 2H7.8c-.86 0-1.44 0-1.89.04-.44.03-.66.1-.82.18a2 2 0 0 0-.87.87c-.08.16-.15.38-.18.82C4 6.36 4 6.94 4 7.8v8.4c0 .86 0 1.44.04 1.89.03.44.1.66.18.82q.3.57.87.87c.16.08.38.15.82.18.45.04 1.03.04 1.89.04h8.4c.86 0 1.44 0 1.89-.04.44-.03.66-.1.82-.18a2 2 0 0 0 .87-.87c.08-.16.15-.38.18-.82.04-.45.04-1.03.04-1.89V14a1 1 0 1 1 2 0v2.24q.01 1.2-.04 2.01a4 4 0 0 1-.4 1.57 4 4 0 0 1-1.74 1.74c-.49.25-1 .35-1.57.4q-.8.05-2 .04h-8.5q-1.2.01-2-.04a4 4 0 0 1-1.57-.4 4 4 0 0 1-1.74-1.74c-.25-.49-.35-1-.4-1.57q-.05-.8-.04-2v-8.5q-.01-1.2.04-2c.05-.56.15-1.08.4-1.57a4 4 0 0 1 1.74-1.74c.49-.25 1-.35 1.57-.4q.8-.05 2-.04M14 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0V5.41l-7.3 7.3a1 1 0 0 1-1.4-1.42L18.58 4H15a1 1 0 0 1-1-1"
+					                          clip-rule="evenodd"></path>
+					
+					                  </g>
+					
+					                  <defs>
+					                    <clipPath id="link-external-02_svg__a">
+					                      <path fill="currentColor" d="M0 0h24v24H0z"></path>
+					                    </clipPath>
+					
+					                    <filter id="link-external-02_svg__b"
+					                            width="24"
+					                            height="24"
+					                            x="0"
+					                            y="0"
+					                            color-interpolation-filters="sRGB"
+					                            filterUnits="userSpaceOnUse">
+					
+					                      <feFlood flood-opacity="0"
+					                               result="BackgroundImageFix"></feFlood>
+					
+					                      <feColorMatrix in="SourceAlpha"
+					                                     result="hardAlpha"
+					                                     values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0">
+					                      </feColorMatrix>
+					
+					                      <feOffset></feOffset>
+					                      <feGaussianBlur stdDeviation="1"></feGaussianBlur>
+					                      <feComposite in2="hardAlpha"
+					                                   operator="out"></feComposite>
+					
+					                      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0">
+					                      </feColorMatrix>
+					
+					                      <feBlend in2="BackgroundImageFix"
+					                               result="effect1_dropShadow_2810_37067">
+					                      </feBlend>
+					
+					                      <feBlend in="SourceGraphic"
+					                               in2="effect1_dropShadow_2810_37067"
+					                               result="shape">
+					                      </feBlend>
+					
+					                    </filter>
+					                  </defs>
+					                </svg>
+					              </span>
+					            </a>
+					          </li>
+					
+					          <li class="rolling-card" data-exposed-index="1">
+								<a class="_container_j68s1_1"
+									style="background-image: url(https://an2-img.amz.wtchn.net/image/v2/rpLLfiOP1K0dXek_F9UmJw.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1KbklsMHNJbkFpT2lJdmRqSXZjM1J2Y21VdmFXMWhaMlV2TWpVeU5UUTJNekUwTmpVek5qY3lNaUlzSW5jaU9qRXlPREFzSW1OeWIzQWlPblJ5ZFdVc0luRWlPamd3ZlEubHVtV0lRYTBjNHJ3dnAtN0hYWGJaTlM3UHFDVXZQSWhuNk5nNVF4R2ctdw==)"
+									title="셰익스피어라는 거대한 이름 뒤에는 🎭" data-discover="true"
+									href="/ko-KR/magazine/gar3j3LL0">
+	
+										<div class="_dim_j68s1_30"></div>
+										<p class="_rightBadge_j68s1_16">인기 아티클</p>
+	
+										<div class="_category_j68s1_42">
+											<img alt="icon"
+												src="https://an2-img.amz.wtchn.net/image/v2/y5o5pJW31HWbqBR-MzjT_Q.png?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKd0lqb2lMM1l5TDNOMGIzSmxMM1ZwYldGblpTODBNakl6TnpJME1qSTFNak00TXpNNUluMC5MWVVSUHNXT0JKQmdQSVlHQ3RyYlFFWXoxQ1ZvOE52djFNUjc2Q21EZzk0&amp;ts=1721280755">
+											<p class="_categoryName_j68s1_55">아티클</p>
+										</div>
+	
+										<p class="_title_j68s1_61">셰익스피어라는 거대한 이름 뒤에는 🎭</p>
+										<p class="_description_j68s1_73">상실을 받아들이는 방법 〈햄넷〉</p>
+									</a>
+							  </li>
+							
+							
+							<li class="rolling-card" data-exposed-index="2">
+							  <a class="_container_19r8n_1"
+							     title="레이디 두아"
+							     data-discover="true"
+							     href="/ko-KR/contents/tRaDjQj">
+							
+							    <div class="_contentBg_19r8n_10"
+							         style="background-image:url(https://an2-img.amz.wtchn.net/image/v2/K20i4YzDMDWhwPcBGEtzdQ.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1qZ3dlRFF3TUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFMk5EZ3dOVFV3TURVNE5UTTJNek1pZlEuSlFFc0hkOEJZVjRqekJXTUN3Ui1YdkE0WC1WM2VVSDdBQW5oTWhqLTlvbw==)">
+							    </div>
+							
+							    <div class="_dim_19r8n_20"></div>
+							    <p class="_rightBadge_19r8n_32">지금 가장 핫한 작품</p>
+							
+							    <div class="_contentImage_19r8n_47">
+							      <div class="_imgContainer_19r8n_55">
+							        <img alt="poster"
+							             src="https://an2-img.amz.wtchn.net/image/v2/K20i4YzDMDWhwPcBGEtzdQ.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1qZ3dlRFF3TUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFMk5EZ3dOVFV3TURVNE5UTTJNek1pZlEuSlFFc0hkOEJZVjRqekJXTUN3Ui1YdkE0WC1WM2VVSDdBQW5oTWhqLTlvbw==">
+							        <span class="_rankBadge_19r8n_74">1</span>
+							      </div>
+							    </div>
+							
+							    <div class="_contentInfo_19r8n_89">
+							      <div class="_contentMeta_19r8n_94">
+							        <p class="_contentTitle_19r8n_101">레이디 두아</p>
+							        <p class="_contentDescription_19r8n_110">평균★3.5 · Netflix · 범죄</p>
+							      </div>
+							
+							      <div class="_ottBadge_19r8n_118">
+							        <img alt="넷플릭스"
+							             src="https://an2-glx.amz.wtchn.net/images/ex_netflix_logo_square.png">
+							      </div>
+							    </div>
+							
+							  </a>
+							</li>
+							
+							
+							<li class="rolling-card" data-exposed-index="3">
+							  <div class="_container_xgzus_1">
+							
+							    <p class="_description_xgzus_12">그로구 온대요</p>
+							
+							    <div class="_img_xgzus_20">
+							      <div class="_dim_xgzus_110"></div>
+							
+							      <div class="_external_xgzus_89">
+							        <img alt="logo"
+							             src="https://an2-img.amz.wtchn.net/image/v2/JAnHHE_6Ev9KhtV-AjM49w.png?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKd0lqb2lMM1l5TDNOMGIzSmxMM1ZwYldGblpTOHhNakEzTVRJeU9UZzNPREkxTXpJMEluMC4tX19VUk9kRUhvRmlPbzZDYkxVQ2FiNks3bGo2a1hCNlBqR0dCNHB5bDRV&amp;ts=1727254658">
+							        [만달로리안과 그로구] 메인 예고편
+							      </div>
+							
+							      <a class="_playButton_xgzus_30"
+							         href="https://www.youtube.com/watch?v=3GN7DfLqUKM"
+							         rel="noreferrer noopener"
+							         target="_blank"
+							         title="[  만달로리안과 그로구] 메인 예고편">
+							
+							        <img alt="play"
+							             src="data:image/svg+xml,%3csvg%20width='32'%20height='32'%20viewBox='0%200%2032%2032'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3ccircle%20cx='16'%20cy='16'%20r='15'%20fill='black'%20fill-opacity='0.51'/%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M16%2030C23.732%2030%2030%2023.732%2030%2016C30%208.269%2023.732%202%2016%202C8.268%202%202%208.269%202%2016C2%2023.732%208.268%2030%2016%2030ZM16%2032C7.163%2032%200%2024.837%200%2016C0%207.164%207.163%200%2016%200C24.837%200%2032%207.164%2032%2016C32%2024.837%2024.837%2032%2016%2032Z'%20fill='white'/%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M12%2022.0899V9.91086C12%209.51686%2012.436%209.27686%2012.769%209.48886L22.337%2015.5779C22.646%2015.7749%2022.646%2016.2259%2022.337%2016.4219L12.769%2022.5119C12.436%2022.7229%2012%2022.4849%2012%2022.0899Z'%20fill='white'/%3e%3c/svg%3e">
+							      </a>
+							
+							      <img alt="thumbnail"
+							           src="https://img.youtube.com/vi/3GN7DfLqUKM/maxresdefault.jpg">
+							    </div>
+							
+							    <div class="_bottom_xgzus_46">
+							      <div class="_contentInfo_xgzus_51">
+							        <p class="_title_xgzus_56">만달로리안과 그로구</p>
+							        <p class="_meta_xgzus_66">액션 · 미국</p>
+							      </div>
+							
+							      <a class="_link_xgzus_75"
+							         title="만달로리안과 그로구"
+							         data-discover="true"
+							         href="/ko-KR/contents/mdj2ogl">
+							        상세보기
+							      </a>
+							    </div>
+							
+							  </div>
+							</li>
+					
+					        </ul>
+					      </div>
+					
+					      <div class="_rightButton_15cav_33">
+					      	<button class="_button_iz3nw_1" title="right" type="button">
+					      		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+					      			<path fill="currentColor" d="M8.07 3a.76.76 0 0 0 0 1.09l8.65 8.46a.8.8 0 0 0 1.11 0 .76.76 0 0 0 0-1.1L9.18 3a.8.8 0 0 0-1.12 0"></path>
+					      			<path fill="currentColor" d="M8.07 21a.8.8 0 0 0 1.12 0l8.64-8.45a.76.76 0 0 0 0-1.1.8.8 0 0 0-1.11 0l-8.65 8.46a.76.76 0 0 0 0 1.09"></path>
+					      		</svg>
+					      	</button>
+					      </div>
+					
+					      <div class="_leftButton_15cav_39">
+					        <button class="_button_iz3nw_1"
+					                title="left"
+					                type="button">
+					
+					          <svg xmlns="http://www.w3.org/2000/svg"
+					               width="24"
+					               height="24"
+					               fill="none"
+					               viewBox="0 0 24 24">
+					
+					            <path fill="currentColor"
+					                  d="M16.5 3a.76.76 0 0 1 0 1.09l-8.65 8.46a.8.8 0 0 1-1.12 0 .76.76 0 0 1 0-1.1L15.38 3a.8.8 0 0 1 1.12 0">
+					            </path>
+					
+					            <path fill="currentColor"
+					                  d="M16.5 21a.8.8 0 0 1-1.12 0l-8.65-8.45a.76.76 0 0 1 0-1.1.8.8 0 0 1 1.12 0l8.64 8.46a.76.76 0 0 1 0 1.09Z">
+					            </path>
+					
+					          </svg>
+					
+					        </button>
+					      </div>
+					
+					    </section>
+					  </div>
+					</div>
+						
+					<!-- 🔥 카테고리 퀵	 메뉴 배너 -->
+					<div class="_homeBannerContainer_1ea7l_10">
+					  <section class="_bannerWrapper_uil7j_10">
+					
+					    <ul class="_ul_1866w_1">
+					
+					      <!-- 매거진 -->
+					      <li class="_li_1866w_7">
+					        <a data-discover="true" th:href="@{/magazine}">
+					           <img alt="매거진 icon"
+						         class="_icon_1866w_34"
+						         th:src="@{/main/images/an1-img.png}">
+					          <p class="_name_1866w_56 _medium_o65ro_6 _body3_o65ro_153">
+					            매거진
+					          </p>
+					        </a>
+					      </li>
+					
+					      <!-- 이벤트 -->
+					      <li class="_li_1866w_7">
+					        <a data-discover="true" th:href="@{/event}">
+					          <img alt="매거진 icon"
+						         class="_icon_1866w_34"
+						         th:src="@{/main/images/an2-img.png}">
+					          <p class="_name_1866w_56 _medium_o65ro_6 _body3_o65ro_153">
+					            이벤트
+					          </p>
+					        </a>
+					      </li>
+					
+					      <!-- 평가 -->
+					      <li class="_li_1866w_7 _evaluationLi_1866w_14">
+					        <a data-discover="true" th:href="@{/mainreview}">
+					          <img alt="매거진 icon"
+						         class="_icon_1866w_34"
+						         th:src="@{/main/images/an3-img.png}">
+					          <p class="_name_1866w_56 _medium_o65ro_6 _body3_o65ro_153">
+					            평가
+					          </p>
+					        </a>
+					
+					        <!-- 말풍선 -->
+					        <div class="_container_1tmkw_1 _speechBubble_1866w_18">
+					          <div class="_arrow_1tmkw_8"></div>
+					          <div class="_bubble_1tmkw_18">
+					            <div class="_textWrapper_1tmkw_32">
+					              <span class="_text_1tmkw_32 _hiddenText_1tmkw_51">
+					                봤던 작품, 별점으로 남겨둘 수 있어요.
+					              </span>
+					              <span class="_text_1tmkw_32 _currentText_1tmkw_70">
+					                기억은 흐려져도, 평가는 남아요.
+					              </span>
+					              <span class="_text_1tmkw_32 _nextText_1tmkw_79">
+					                봤던 콘텐츠를 한 줄로 정리해보세요.
+					              </span>
+					            </div>
+					          </div>
+					        </div>
+					      </li>
+					
+					      <!-- 취향분석 -->
+					      <li class="_li_1866w_7">
+					        <a data-discover="true" th:href="@{/analysis}">
+					          <img alt="매거진 icon"
+						         class="_icon_1866w_34"
+						         th:src="@{/main/images/an4-img.png}">
+					          <p class="_name_1866w_56 _medium_o65ro_6 _body3_o65ro_153">
+					            취향분석
+					          </p>
+					        </a>
+					      </li>
+					
+					      <!-- 추천 -->
+					      <li class="_li_1866w_7">
+					        <a data-discover="true" th:href="@{/recommendation}">
+					         <img alt="매거진 icon"
+						         class="_icon_1866w_34"
+						         th:src="@{/main/images/an5-img.png}">
+					          <p class="_name_1866w_56 _medium_o65ro_6 _body3_o65ro_153">
+					            추천
+					          </p>
+					        </a>
+					      </li>
+					
+					    </ul>
+					
+					  </section>
+					</div>
+					
+					<!-- 🔥 박스오피스 순위 -->
+					<div class="_container_60mdw_1">
+						<div class="ranking-section movie-section">
+											
+						    <div class="section-title">
+						        <p>왓챠피디아 HOT 랭킹</p>
+						    </div>
+						
+						    <ul class="ranking-list">
+						        <li class="ranking-item" th:each="work, stat : ${hotMovieList}">
+						            <a th:href="@{/movie/detail(id=${work.workId})}">
+						                <div class="poster">
+						                     <img th:src="@{'/main/images/hot' + (${stat.index} + 1) + '.jpg'}">
+						                     <span class="rank" th:text="${stat.index + 1}"></span>
+						                </div>
+						                <div class="info">
+						                    <h3 class="title" th:text="${work.workTitle}"></h3>			                   
+						                    <p class="rating">
+											    평균 ★ 
+											    <span th:text="${#numbers.formatDecimal(4.2 - stat.index * 0.1, 1, 1)}"></span>
+											</p>			                   
+						                </div>
+						            </a>
+						        </li>
+						    </ul>
+						
+						 
+						</div>
+					</div>
+	
+					
+					<!-- 🔥 인물 랭킹 -->
+					<div class="_container_60mdw_1">
+
+						<!-- 타이틀 영역 -->
+						<div class="_section_jru7s_1 _title_60mdw_10">
+							<p class="_listTitle_60mdw_23 _isComments_60mdw_42">
+								<span class="_beta_60mdw_46">Beta</span> 
+								왓챠피디아 인물 랭킹
+
+								<button class="_button_wlotr_1" type="button">
+									<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 18 18" class="_icon_wlotr_6">
+										<path fill="currentColor" fill-rule="evenodd" d="M9 17.25A8.25 8.25 0 1 0 9 .75a8.25 8.25 0 0 0 0 16.5M9 1.87a7.13 7.13 0 1 1 0 14.26A7.13 7.13 0 0 1 9 1.87m-.56 10.5v-4.5h1.12v4.5zM9 5.26a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5" clip-rule="evenodd"></path>
+									</svg>
+
+									<div class="_wrapper_7pdqu_1 _tooltip_wlotr_14">
+										<div
+											class="_text_7pdqu_5 _badge14_o65ro_219 _bottom_7pdqu_38 _center_7pdqu_47 text-container">
+											주요 포털과 왓챠피디아의 데이터를 활용한 트렌드 인물 순위</div>
+									</div>
+								</button>
+							</p>
+						</div>
+
+						<!-- 리스트 섹션 -->
+						<section class="_section_jru7s_1 _listSection_fruph_1 _container_mz3qo_1">
+							<!-- 스크롤 영역 -->
+							<div class="_listWrapper_mz3qo_13 listWrapper">
+								<ul class="_peopleRankingList_fruph_29 _list_mz3qo_13">
+
+									<!-- ===== 인물 카드 1개 시작 ===== -->
+									<li class="_li_1je76_1">
+										<a class="_container_2wi1r_1" href="#">
+											<div class="_rankBadge_4n38t_1 _subtitle2Bold_1dosp_78 _rankBadge_2wi1r_15">1</div>
+											<img class="_image_2wi1r_7" alt="박지훈" src="/images/people3.jpg">
+										</a>
+									
+										<div class="_container_18uaq_1">
+											<div class="_name_18uaq_9 _subtitle2Bold_1dosp_78">박지훈</div>
+											<div class="_uptrend_18uaq_16 _caption1Regular_1dosp_197"> ( — 0 )</div>
+										</div>
+									
+										<ul class="_ul_vxpaw_1">
+											<li class="_li_vxpaw_8 _body3Regular_1dosp_176"><a href="#">왕과 사는 남자</a></li>
+											<li class="_li_vxpaw_8 _body3Regular_1dosp_176"><a href="#">약한영웅 Class 1</a></li>
+										</ul>
+									
+										<div class="_container_13wn3_1">
+											<button class="_likeButton_13wn3_7 _likeButtonNotLiked_13wn3_24" type="button">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+													<path fill="currentColor" fill-rule="evenodd" d="M10.2 2.03c.28-.64.92-1.03 1.6-1.03a3.25 3.25 0 0 1 3.27 3.22V7.3h3.16c2.28 0 4.08 2 3.72 4.27l-.99 6.3A3.75 3.75 0 0 1 17.24 21H4.84A2.8 2.8 0 0 1 2 18.2v-6.3c0-1.57 1.3-2.8 2.85-2.8h2.12zM8.6 19h8.63c.89 0 1.62-.63 1.75-1.44l.99-6.3c.16-1-.64-1.96-1.75-1.96H15a1.9 1.9 0 0 1-1.93-1.9V4.22c0-.6-.47-1.14-1.12-1.21L8.77 9.98q-.07.16-.16.28zm-2-7.9V19H4.85a.8.8 0 0 1-.85-.8v-6.3c0-.42.35-.8.85-.8z" clip-rule="evenodd"></path>
+												</svg>
+											</button>
+											<button class="_likeCount_13wn3_28 _caption2Medium_1dosp_211" type="button">
+												<span>좋아요</span> 1120
+											</button>
+										</div>
+									</li>
+									<!-- ===== 인물 카드 1개 끝 ===== -->
+									
+									<!-- ===== 인물 카드 2개 시작 ===== -->
+									<li class="_li_1je76_1">
+										<a class="_container_2wi1r_1" href="#">
+											<div class="_rankBadge_4n38t_1 _subtitle2Bold_1dosp_78 _rankBadge_2wi1r_15">2</div>
+											<img class="_image_2wi1r_7" alt="장항준" src="/images/people1.jpg">
+										</a>
+									
+										<div class="_container_18uaq_1">
+											<div class="_name_18uaq_9 _subtitle2Bold_1dosp_78">장항준</div>
+											<div class="_uptrend_18uaq_16 _caption1Regular_1dosp_197">( — 0 )</div>
+										</div>
+									
+										<ul class="_ul_vxpaw_1">
+											<li class="_li_vxpaw_8 _body3Regular_1dosp_176"><a href="#">왕과 사는 남자</a></li>
+										</ul>
+									
+										<div class="_container_13wn3_1">
+											<button class="_likeButton_13wn3_7 _likeButtonNotLiked_13wn3_24" type="button"></button>
+											<button class="_likeCount_13wn3_28 _caption2Medium_1dosp_211" type="button">
+												<span>좋아요</span> 394
+											</button>
+										</div>
+									</li>
+									<!-- ===== 인물 카드 2개 끝 ===== -->
+									
+									<!-- ===== 인물 카드 3개 시작 ===== -->
+									<li class="_li_1je76_1">
+										<a class="_container_2wi1r_1" href="#">
+											<div class="_rankBadge_4n38t_1 _subtitle2Bold_1dosp_78 _rankBadge_2wi1r_15">3</div>
+											<img class="_image_2wi1r_7" alt="유해진" src="/images/people2.jpg">
+										</a>
+									
+										<div class="_container_18uaq_1">
+											<div class="_name_18uaq_9 _subtitle2Bold_1dosp_78">유해진</div>
+											<div class="_uptrend_18uaq_16 _caption1Regular_1dosp_197">▲ 3</div>
+										</div>
+									
+										<ul class="_ul_vxpaw_1">
+											<li class="_li_vxpaw_8 _body3Regular_1dosp_176"><a href="#">왕과 사는 남자</a></li>
+											<li class="_li_vxpaw_8 _body3Regular_1dosp_176"><a href="#">왕의 남자</a></li>
+										</ul>
+									
+										<div class="_container_13wn3_1">
+											<button class="_likeButton_13wn3_7 _likeButtonNotLiked_13wn3_24" type="button"></button>
+											<button class="_likeCount_13wn3_28 _caption2Medium_1dosp_211" type="button">
+												<span>좋아요</span> 1371
+											</button>
+										</div>
+									</li>
+									<!-- ===== 인물 카드 3개 끝 ===== -->
+									
+									
+									<!-- ===== 인물 카드 4개 시작 ===== -->
+									<li class="_li_1je76_1">
+										<a class="_container_2wi1r_1" href="#">
+											<div class="_rankBadge_4n38t_1 _subtitle2Bold_1dosp_78 _rankBadge_2wi1r_15">4</div>
+											<img class="_image_2wi1r_7" alt="유지태" src="/images/people4.jpg">
+										</a>
+									
+										<div class="_container_18uaq_1">
+											<div class="_name_18uaq_9 _subtitle2Bold_1dosp_78">유지태</div>
+											<div class="_uptrend_18uaq_16 _caption1Regular_1dosp_197">▼ 1</div>
+										</div>
+									
+										<ul class="_ul_vxpaw_1">
+											<li class="_li_vxpaw_8 _body3Regular_1dosp_176"><a href="#">왕과 사는 남자</a></li>
+										</ul>
+									
+										<div class="_container_13wn3_1">
+											<button class="_likeButton_13wn3_7 _likeButtonNotLiked_13wn3_24" type="button"></button>
+											<button class="_likeCount_13wn3_28 _caption2Medium_1dosp_211" type="button">
+												<span>좋아요</span> 781
+											</button>
+										</div>
+									</li>
+									<!-- ===== 인물 카드 5개 끝 ===== -->
+									<li class="_li_1je76_1">
+										<a class="_container_2wi1r_1" href="#">
+											<div class="_rankBadge_4n38t_1 _subtitle2Bold_1dosp_78 _rankBadge_2wi1r_15">5</div>
+											<img class="_image_2wi1r_7" alt="이준영" src="/images/people202.jpg">
+										</a>
+									
+										<div class="_container_18uaq_1">
+											<div class="_name_18uaq_9 _subtitle2Bold_1dosp_78">이준혁</div>
+											<div class="_uptrend_18uaq_16 _caption1Regular_1dosp_197">▲ 2</div>
+										</div>
+									
+										<ul class="_ul_vxpaw_1">
+											<li class="_li_vxpaw_8 _body3Regular_1dosp_176"><a href="#">왕과 사는 남자</a></li>
+											<li class="_li_vxpaw_8 _body3Regular_1dosp_176"><a href="#">레이디 두아</a></li>
+										</ul>
+									
+										<div class="_container_13wn3_1">
+											<button class="_likeButton_13wn3_7 _likeButtonNotLiked_13wn3_24" type="button"></button>
+											<button class="_likeCount_13wn3_28 _caption2Medium_1dosp_211" type="button">
+												<span>좋아요</span> 1854
+											</button>
+										</div>
+									</li>
+									
+									<!-- ===== 인물 카드 6개 시작 ===== -->
+									<li class="_li_1je76_1">
+										<a class="_container_2wi1r_1" href="#">
+											<div class="_rankBadge_4n38t_1 _subtitle2Bold_1dosp_78 _rankBadge_2wi1r_15">6</div>
+											<img class="_image_2wi1r_7" alt="하지민" src="/images/people201.jpg">
+										</a>
+									
+										<div class="_container_18uaq_1">
+											<div class="_name_18uaq_9 _subtitle2Bold_1dosp_78">신혜선</div>
+											<div class="_uptrend_18uaq_16 _caption1Regular_1dosp_197">NEW</div>
+										</div>
+									
+										<ul class="_ul_vxpaw_1">
+											<li class="_li_vxpaw_8 _body3Regular_1dosp_176"><a href="#">레이디두아</a></li>
+										</ul>
+									
+										<div class="_container_13wn3_1">
+											<button class="_likeButton_13wn3_7 _likeButtonNotLiked_13wn3_24" type="button"></button>
+											<button class="_likeCount_13wn3_28 _caption2Medium_1dosp_211" type="button">
+												<span>좋아요</span> 620
+											</button>
+										</div>
+									</li>
+									<!-- ===== 인물 카드 6개 끝 ===== -->
+									
+									
+								</ul>
+							</div>
+
+							
+							
+							<!-- 오른쪽 버튼 -->
+							<div class="_buttonContainer_mz3qo_56 arrowButton _right_mz3qo_68">
+								<button class="_button_jl4aw_1" title="right" type="button">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+										<path fill="currentColor" d="M8.07 3a.76.76 0 0 0 0 1.09l8.65 8.46a.8.8 0 0 0 1.11 0 .76.76 0 0 0 0-1.1L9.18 3a.8.8 0 0 0-1.12 0"></path>
+										<path fill="currentColor" d="M8.07 21a.8.8 0 0 0 1.12 0l8.64-8.45a.76.76 0 0 0 0-1.1.8.8 0 0 0-1.11 0l-8.65 8.46a.76.76 0 0 0 0 1.09"></path>
+									</svg>
+								</button>
+							</div>
+
+							<!-- 왼쪽 버튼 -->
+							<div class="_buttonContainer_mz3qo_56 arrowButton _left_mz3qo_72 _disabled_mz3qo_64">
+								<button class="_button_jl4aw_1" title="left" type="button">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+										<path fill="currentColor" d="M16.5 3a.76.76 0 0 1 0 1.09l-8.65 8.46a.8.8 0 0 1-1.12 0 .76.76 0 0 1 0-1.1L15.38 3a.8.8 0 0 1 1.12 0"></path>
+										<path fill="currentColor" d="M16.5 21a.8.8 0 0 1-1.12 0l-8.65-8.45a.76.76 0 0 1 0-1.1.8.8 0 0 1 1.12 0l8.64 8.46a.76.76 0 0 1 0 1.09Z"></path>
+									</svg>
+								</button>
+							</div>
+
+						</section>
+
+					</div>
+					
+					<!-- 🔥 매거진 -->
+					<div class="_container_60mdw_1">
+					  <div class="_section_jru7s_1 _title_60mdw_10">
+					    <p class="_listTitle_60mdw_23 _isComments_60mdw_42">
+					      매거진
+					      <a class="_body1Regular_1dosp_113 _deckLink_60mdw_92 _showMore_60mdw_105"
+					         title="매거진"
+					         data-discover="true"
+					         th:href="@{/magazine}">
+					        <span>더보기</span>
+					        <img alt="arrow"
+					             src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20width='9px'%20height='14px'%20viewBox='0%200%209%2014'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eHome/Section/Header/z_Items/Arrow%3c/title%3e%3cg%20stroke='none'%20stroke-width='1'%20fill='none'%20fill-rule='evenodd'%20stroke-linecap='round'%3e%3cpolyline%20stroke='%23A5A5AA'%20stroke-width='2'%20points='1%201%207%207%201%2013'%3e%3c/polyline%3e%3c/g%3e%3c/svg%3e">
+					      </a>
+					    </p>
+					  </div>
+					
+					  <section class="_section_jru7s_1 _listSection_fruph_1 _container_mz3qo_1">
+					
+					    <div class="_listWrapper_mz3qo_13 listWrapper">
+					      <ul class="_magazineList_fruph_22 _list_mz3qo_13">
+					
+					        <!-- 카드 1 -->
+					        <li class="w_exposed_cell"
+							    th:each="mag : ${magazineList}">
+							
+							  <a th:href="@{/magazine/detail(id=${mag.magazineId})}"
+	
+							     rel="noopener noreferrer">
+							
+							    <article class="_card_1xcia_1">
+							
+							      <div class="_imageContainer_1xcia_5">
+							        <div class="_fallbackImage_1xcia_30"></div>
+							
+							        <!-- 썸네일 -->
+							        <img class="_image_1xcia_5"
+								     th:src="@{/magazine/images/{img}(img=${mag.magazineThumbnail})}"
+								     th:alt="${mag.magazineTitle}">
+							
+							        <div class="_imageBorder_1xcia_12"></div>
+							      </div>
+							
+							      <header class="_header_1xcia_40">
+							        <img class="_headerIcon_1xcia_47"
+							             width="18"
+							             height="18"
+							             th:src="@{/main/images/content.png}">
+							
+							        <p class="_headerText_1xcia_54 _medium_o65ro_6 _body4_o65ro_164">
+							          콘텐츠소식
+							        </p>
+							      </header>
+							
+							      <!-- 제목 -->
+							      <p class="_title_1xcia_61 _h4_o65ro_82"
+							         th:text="${mag.magazineTitle}">
+							      </p>
+							
+							      <!-- 설명 -->
+							      <p class="_description_1xcia_71 _medium_o65ro_6 _body3_o65ro_153"
+							         th:text="${mag.magazineSummary}">
+							      </p>
+							
+							    </article>
+							
+							  </a>
+							</li>
+								
+					
+							
+					        <div class="_scroll_mz3qo_45 _enabled_mz3qo_52 loadmore"></div>
+					      </ul>
+					    </div>
+					
+					    <!-- 오른쪽 버튼 -->
+					    <div class="_buttonContainer_mz3qo_56 arrowButton _right_mz3qo_68">
+					      <button class="_button_jl4aw_1" type="button">
+					        <svg xmlns="http://www.w3.org/2000/svg"
+					             width="24"
+					             height="24"
+					             fill="none"
+					             viewBox="0 0 24 24">
+					          <path fill="currentColor"
+					                d="M8.07 3a.76.76 0 0 0 0 1.09l8.65 8.46a.8.8 0 0 0 1.11 0 .76.76 0 0 0 0-1.1L9.18 3a.8.8 0 0 0-1.12 0"/>
+					          <path fill="currentColor"
+					                d="M8.07 21a.8.8 0 0 0 1.12 0l8.64-8.45a.76.76 0 0 0 0-1.1.8.8 0 0 0-1.11 0l-8.65 8.46a.76.76 0 0 0 0 1.09"/>
+					        </svg>
+					      </button>
+					    </div>
+					
+					    <!-- 왼쪽 버튼 -->
+					    <div class="_buttonContainer_mz3qo_56 arrowButton _left_mz3qo_72 _disabled_mz3qo_64">
+					      <button class="_button_jl4aw_1" type="button">
+					        <svg xmlns="http://www.w3.org/2000/svg"
+					             width="24"
+					             height="24"
+					             fill="none"
+					             viewBox="0 0 24 24">
+					          <path fill="currentColor"
+					                d="M16.5 3a.76.76 0 0 1 0 1.09l-8.65 8.46a.8.8 0 0 1-1.12 0 .76.76 0 0 1 0-1.1L15.38 3a.8.8 0 0 1 1.12 0"/>
+					          <path fill="currentColor"
+					                d="M16.5 21a.8.8 0 0 1-1.12 0l-8.65-8.45a.76.76 0 0 1 0-1.1.8.8 0 0 1 1.12 0l8.64 8.46a.76.76 0 0 1 0 1.09Z"/>
+					        </svg>
+					      </button>
+					    </div>
+					
+					  </section>
+					</div>
+				
+					<!-- 🔥 지금 뜨는 코멘트 -->
+
+					<div class="_container_60mdw_1">
+						<!-- ===== 타이틀 ===== -->
+						<div class="_section_jru7s_1 _title_60mdw_10">
+							<p class="_listTitle_60mdw_23 _isComments_60mdw_42">
+								지금 뜨는 코멘트 <a
+									class="_body1Regular_1dosp_113 _deckLink_60mdw_92 _showMore_60mdw_105"
+									title="지금 뜨는 코멘트" data-discover="true"
+									th:href="@{/feed/comments(filter='popular')}"> <span>더보기</span>
+									<img alt="arrow"
+									src="data:image/svg+xml;utf8, <svg xmlns='http://www.w3.org/2000/svg' width='9' height='14' viewBox='0 0 9 14' fill='none' stroke-linecap='round'> <polyline stroke='%23A5A5AA' stroke-width='2' points='1 1 7 7 1 13'/> </svg>">
+								</a>
+							</p>
+						</div>
+						<!-- ===== 가로 스크롤 영역 ===== -->
+						<section
+							class="_section_jru7s_1 _horizontalScroll_18d5u_1 _container_mz3qo_1">
+							<div class="_listWrapper_mz3qo_13 listWrapper">
+								<ul class="_commentList_18d5u_12 _list_mz3qo_13">
+									<!-- ===================== 댓글 카드 1 ===================== -->
+									<li class="comment" th:each="comment : ${hotCommentList}">
+										<a data-discover="true" th:if="${comment.work != null}"
+										th:href="@{/work/detail(id=${comment.work.workId})}">
+											<article class="_container_8397x_1">
+												<!-- 헤더 -->
+												<div class="_header_8397x_10">
+													<div class="_container_5gh9l_1">
+														<img class="_profileImg_5gh9l_12"
+															th:src="@{/images/default_profile.jpg}"
+															alt="profile">
+														<p
+															class="_userName_5gh9l_21 _medium_o65ro_6 _body4_o65ro_164"
+															th:text="${comment.memberId}"></p>
+													</div>
+													<!-- 별점 (임시 4점 고정) -->
+													<div class="_action_8397x_91 _ratingContainer_1t45t_1">
+														<img th:each="i : ${#numbers.sequence(1,5)}" width="13"
+															height="13" alt="star"
+															th:src="${i <= 4} ? 'data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 13 13&quot;><path fill=&quot;%23FFD047&quot; d=&quot;M6.97035 0.511745L8.44734 3.9409C8.52056 4.11393 8.68187 4.23237 8.86721 4.25095L12.5362 4.61675C12.9813 4.66087 13.162 5.22292 12.8268 5.52368L10.0696 8.0099C9.93119 8.13416 9.86941 8.32576 9.90945 8.5104L10.7011 12.166C10.7972 12.6096 10.3259 12.9568 9.94034 12.7269L6.75984 10.8341C6.59967 10.7388 6.40061 10.7388 6.24044 10.8341L3.05994 12.7269C2.67439 12.9568 2.20303 12.6096 2.29914 12.166L3.08968 8.5104C3.13087 8.32576 3.06909 8.13416 2.92952 8.0099L0.173464 5.52368C-0.161747 5.22292 0.0178715 4.66087 0.464057 4.61675L4.13307 4.25095C4.31841 4.23237 4.47858 4.11393 4.55294 3.9409L6.02993 0.511745C6.2084 0.0960197 6.79073 0.0960197 6.97035 0.511745Z&quot;/></svg>' : 'data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 13 13&quot;><path fill=&quot;%23E9EAEB&quot; d=&quot;M6.97035 0.511745L8.44734 3.9409C8.52056 4.11393 8.68187 4.23237 8.86721 4.25095L12.5362 4.61675C12.9813 4.66087 13.162 5.22292 12.8268 5.52368L10.0696 8.0099C9.93119 8.13416 9.86941 8.32576 9.90945 8.5104L10.7011 12.166C10.7972 12.6096 10.3259 12.9568 9.94034 12.7269L6.75984 10.8341C6.59967 10.7388 6.40061 10.7388 6.24044 10.8341L3.05994 12.7269C2.67439 12.9568 2.20303 12.6096 2.29914 12.166L3.08968 8.5104C3.13087 8.32576 3.06909 8.13416 2.92952 8.0099L0.173464 5.52368C-0.161747 5.22292 0.0178715 4.66087 0.464057 4.61675L4.13307 4.25095C4.31841 4.23237 4.47858 4.11393 4.55294 3.9409L6.02993 0.511745C6.2084 0.0960197 6.79073 0.0960197 6.97035 0.511745Z&quot;/></svg>'">
+													</div>
+												</div>
+												<!-- 바디 -->
+												<div class="_body_8397x_16">
+												
+													<div class="_posterDiv_8397x_21"
+														   
+															     th:attr="data-workid=${comment.work.workId}">
+														<img class="poster"
+     th:src="@{/images/{file}(file=${comment.work.workThumbnail})}"
+     alt="content poster">
+														</div>
+											
+													<div class="_commentContent_8397x_44">
+														<div
+															class="_contentTitle_8397x_48 _medium_o65ro_6 _body2_o65ro_134"
+															th:text="${comment.work.workTitle}"></div>
+														<div
+															class="_wrapper_1ryb3_1 _commentText_8397x_56 _body2_o65ro_134"
+															style="max-height: 60px;">
+															<div data-select="embed-title-text"
+																th:text="${comment.commentContent}"></div>
+														</div>
+													</div>
+												</div>
+												<!-- 하단 좋아요 / 댓글수 -->
+												<hr class="_divider_8397x_65">
+												<div>
+													<!-- 좋아요 -->
+													<div
+														class="_commentCount_8397x_72 _medium_o65ro_6 _body3_o65ro_153">
+														<!-- 네가 준 좋아요 SVG 그대로 -->
+														<svg xmlns="http://www.w3.org/2000/svg" width="16"
+															height="16" fill="currentColor" viewBox="0 0 24 24"> 
+					 										<path fill-rule="evenodd"
+																d="M10.2 2.03c.28-.64.92-1.03 1.6-1.03a3.25 3.25 0 0 1 3.27 3.22V7.3h3.16c2.28 0 4.08 2 3.72 4.27l-.99 6.3A3.75 3.75 0 0 1 17.24 21H4.84A2.8 2.8 0 0 1 2 18.2v-6.3c0-1.57 1.3-2.8 2.85-2.8h2.12zM8.6 19h8.63c.89 0 1.62-.63 1.75-1.44l.99-6.3c.16-1-.64-1.96-1.75-1.96H15a1.9 1.9 0 0 1-1.93-1.9V4.22c0-.6-.47-1.14-1.12-1.21L8.77 9.98q-.07.16-.16.28zm-2-7.9V19H4.85a.8.8 0 0 1-.85-.8v-6.3c0-.42.35-.8.85-.8z"
+																clip-rule="evenodd"></path> 
+		 												</svg>
+														<!-- 임의 좋아요 수 -->
+														<span th:text="${comment.commentId * 3 + 7}"></span>
+													</div>
+													<!-- 댓글 수 -->
+													<div
+														class="_commentCount_8397x_72 _medium_o65ro_6 _body3_o65ro_153">
+														<!-- 댓글 아이콘 (기존 간단 버전 유지) -->
+														<svg xmlns="http://www.w3.org/2000/svg" width="16"
+															height="16" fill="none" viewBox="0 0 16 16"> 
+					 										<path stroke="currentColor" stroke-width="1.25"
+																d="M4 4h8v6H6l-2 2z"></path> 
+					 									</svg>
+														<!-- 임의 댓글 수 -->
+														<span th:text="${comment.commentId + 2}"></span>
+													</div>
+												</div>
+											</article>
+									</a>
+									</li>
+								</ul>
+							</div>
+							<!-- 오른쪽 버튼 -->
+							<div class="_rightButton_15cav_33">
+								<button class="_button_iz3nw_1" title="right" type="button">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+										fill="none" viewBox="0 0 24 24"> <path
+											fill="currentColor"
+											d="M8.07 3a.76.76 0 0 0 0 1.09l8.65 8.46a.8.8 0 0 0 1.11 0 .76.76 0 0 0 0-1.1L9.18 3a.8.8 0 0 0-1.12 0"></path> <path
+											fill="currentColor"
+											d="M8.07 21a.8.8 0 0 0 1.12 0l8.64-8.45a.76.76 0 0 0 0-1.1.8.8 0 0 0-1.11 0l-8.65 8.46a.76.76 0 0 0 0 1.09"></path> </svg>
+								</button>
+							</div>
+							<!-- 왼쪽 버튼 -->
+							<div class="_leftButton_15cav_39">
+								<button class="_button_iz3nw_1" title="left" type="button">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+										fill="none" viewBox="0 0 24 24"> <path
+											fill="currentColor"
+											d="M16.5 3a.76.76 0 0 1 0 1.09l-8.65 8.46a.8.8 0 0 1-1.12 0 .76.76 0 0 1 0-1.1L15.38 3a.8.8 0 0 1 1.12 0"> </path> <path
+											fill="currentColor"
+											d="M16.5 21a.8.8 0 0 1-1.12 0l-8.65-8.45a.76.76 0 0 1 0-1.1.8.8 0 0 1 1.12 0l8.64 8.46a.76.76 0 0 1 0 1.09Z"> </path> </svg>
+								</button>
+							</div>
+						</section>
+					</div>
+
+					
+					
+					</div>
+				
+					<!-- 이벤트 섹션 -->
+					<div class="_container_60mdw_1">
+						<div class="ranking-section">
+						    <div class="section-title">
+						        <p>이벤트
+						         <a class="show-more" href="/ko-KR/notifications?type=promotions">
+						        <span>더보기</span>
+						        
+						        <img alt="arrow" src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20width='9px'%20height='14px'%20viewBox='0%200%209%2014'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3ctitle%3eHome/Section/Header/z_Items/Arrow%3c/title%3e%3cg%20id='Home/Section/Header/z_Items/Arrow'%20stroke='none'%20stroke-width='1'%20fill='none'%20fill-rule='evenodd'%20stroke-linecap='round'%3e%3cpolyline%20id='Path-Copy-6'%20stroke='%23A5A5AA'%20stroke-width='2'%20points='1%201%207%207%201%2013'%3e%3c/polyline%3e%3c/g%3e%3c/svg%3e">
+						
+						  </a>
+						    </p>
+						    </div>
+						
+						    <ul class="promotion-list">
+						        <li class="promotion-item">
+						       
+						                <div class="promotion-img">
+						                    <img src="https://an2-img.amz.wtchn.net/image/v2/1nIDVtXREzbttf2b7KWEBw.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1KbklsMHNJbkFpT2lJdmRqSXZjM1J2Y21VdmNISnZiVzkwYVc5dUx6Z3dNakl3TXpZMk5ERTJNakkyT1NKOS5laDhGVFJTZjRKcXUtc2dpRFppNWtLNGRsVWt4c3dMY21uR2M2aXdwTzA4" 
+						                         alt="류승완 《재미의 조건》 도서 증정 이벤트">
+						                </div>
+						                <p class="promotion-title">
+						                    류승완 《재미의 조건》 도서 증정 이벤트
+						                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12">
+						                        <path fill="currentColor" d="M4.03 1.5a.4.4 0 0 0 0 .55l4.33 4.22a.4.4 0 0 0 .56 0 .4.4 0 0 0 0-.54L4.59 1.5a.4.4 0 0 0-.56 0Z"/>
+						                        <path fill="currentColor" d="M4.04 10.5a.4.4 0 0 0 .55 0l4.33-4.23a.4.4 0 0 0 0-.54.4.4 0 0 0-.56 0L4.04 9.95a.4.4 0 0 0 0 .55"/>
+						                    </svg>
+						                </p>   
+						                 
+						        </li>
+						    </ul>
+						</div>
+				     </div>
+				
+				
+				
+				 
+					<!-- 구독권 배너 -->
+					<div class="_homeBannerContainer_1ea7l_10">
+						<div class="_bannerWrapper_uil7j_10">
+							<section class="_adCell_uil7j_6 _wrapper_1qk96_41">
+								<div class="media-area _mediaArea_1qk96_64">
+									<div class="_mediaWrapper_1qk96_68">
+										<a class="_adImage_1qk96_73" href="https://watcha.com/ko-KR/promotions/watchapromotion2026?browser_open_type=external" rel="noopener noreferrer" target="_blank" style="background-image: url(&quot;https://an2-img.amz.wtchn.net/image/v2/qtn0UrYFUufFKTg_tkQIHw.png?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKd0lqb2lMM1l5TDNOMGIzSmxMM0J5YjIxdmRHbHZiaTg1TnpVNU5qVTVPRGN3T1Rnd05UQWlmUS5pVGhSaVFKTmNZUWNyUkd1Tmh6THVOUDlfSnFNcHFlODFTR19MQXFWTVgw&quot;);"></a>
+									</div>
+								</div>
+								<a class="_linkSection_1qk96_218" href="https://watcha.com/ko-KR/promotions/watchapromotion2026?browser_open_type=external" rel="noopener noreferrer" target="_blank">
+								<div class="_textArea_1qk96_158">
+									<section class="_infoSection_1qk96_154">
+										<div class="_adDetail_1qk96_137">
+											<p class="_adTitle_1qk96_115">4O% 할인 곧 끝나요!</p>
+											<p class="_adDescription_1qk96_124">연간 구독권 할인 놓치지마세요.</p>
+											<h3 class="_provideWrapper_1qk96_50">
+												<div class="_rounded_rqdtv_1 _wrapper_6cgwz_1 _small_1r25a_1 _photo_1qk96_29">
+													<div class="_profilePhoto_6cgwz_27 _withSrc_6cgwz_34 ProfilePhotoImage" style="background-image: url(&quot;https://an2-img.amz.wtchn.net/image/v2/x_17zvHqBHbcxPbYKxdogw.png?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKd0lqb2lMM1l5TDNOMGIzSmxMM1ZwYldGblpTOHhNVEkwTWpJd09Ea3dNRGc1T0RZMEluMC5PcVdycWQ3aElfNmh2dVNXM2hXOHhqdDlTVVdXQXNmVkxpaC1KQ0lNS1BV&quot;);">
+													</div>
+												</div>
+												<p class="_provideName_1qk96_56">WATCHA · AD</p>
+											</h3>
+										</div>
+										<div class="_buttonWrapper_1qk96_144">
+											<button type="button" class="_base_1s721_1 _block_1s721_21 _primary_1s721_38 _medium_1s721_31 _medium_o65ro_6 _body2_o65ro_134 _gotoAdButton_1qk96_150">
+												<span class="_base_10gc5_1" role="textbox">지금 할인 받기</span>
+											</button>
+										</div>
+									</section>
+								</div>
+								</a>
+							</section>
+						</div>
+					</div>
+				
+				
+				</section>
+
+			</div>
+
+		</main>
+
+	</div>
+
+
+
+
+</section>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    const posters = document.querySelectorAll("img.poster");
+
+    posters.forEach((img, index) => {
+        img.src = "/images/movie" + (index + 1) + ".jpg";
+    });
+
+});
+</script>
+
+<script th:src="@{/main/main.js}" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="layout :: layout(~{::section})">
+<section>
+    <link rel="stylesheet" th:href="@{/member/likes.css}" />
+    <main class="likes-container">
+        <header class="likes-header">
+            <h1 class="page-title">좋아요</h1>
+        </header>
+
+        <nav class="likes-tabs">
+            <a th:href="@{/likes(type='people')}" th:classappend="${currentType == 'people' ? 'active' : ''}" class="tab-item">인물</a>
+            <a th:href="@{/likes(type='decks')}" th:classappend="${currentType == 'decks' ? 'active' : ''}" class="tab-item">컬렉션</a>
+            <a th:href="@{/likes(type='comments')}" th:classappend="${currentType == 'comments' ? 'active' : ''}" class="tab-item">코멘트</a>
+        </nav>
+
+        <div class="likes-content">
+            
+            <div th:if="${currentType == 'people'}" class="people-grid">
+                <div class="person-card skeleton" th:each="i : ${#numbers.sequence(1, 8)}">
+                    <div class="person-photo skeleton-box"></div>
+                    <div class="person-info">
+                        <div class="skeleton-line name"></div>
+                        <div class="skeleton-line role"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div th:if="${currentType == 'decks'}" class="collection-list">
+                <div class="collection-grid">
+
+			<div class="collection-card" th:each="i : ${#numbers.sequence(1, 2)}">
+				<div class="thumbnail-stack">
+					<div class="thumbnail-main">
+						<img th:src="@{/sample-poster.jpg}" alt="메인 포스터">
+					</div>
+					<div class="card-overlay">
+						<div class="user-info">
+							<div class="user-profile-sm"></div>
+							<span class="user-name">user</span>
+						</div>
+						<div class="item-count">2</div>
+					</div>
+				</div>
+
+				<div class="card-body">
+					<h3 class="card-title">ㅁㅇㄱㄷ</h3>
+
+					<p class="card-description">여기에 컬렉션에 대한 설명이 들어갑니다. 최대 두 줄 정도가
+						적당합니다.</p>
+
+					<hr class="card-divider">
+
+					<div class="card-footer">
+						<span class="like-comment">좋아요 1 · 댓글 0</span>
+					</div>
+				</div>
+			</div>
+
+		</div><div class="collection-grid">
+
+			<div class="collection-card" th:each="i : ${#numbers.sequence(1, 2)}">
+				<div class="thumbnail-stack">
+					<div class="thumbnail-main">
+						<img th:src="@{/sample-poster.jpg}" alt="메인 포스터">
+					</div>
+					<div class="card-overlay">
+						<div class="user-info">
+							<div class="user-profile-sm"></div>
+							<span class="user-name">user</span>
+						</div>
+						<div class="item-count">2</div>
+					</div>
+				</div>
+
+				<div class="card-body">
+					<h3 class="card-title">ㅁㅇㄱㄷ</h3>
+
+					<p class="card-description">여기에 컬렉션에 대한 설명이 들어갑니다. 최대 두 줄 정도가
+						적당합니다.</p>
+
+					<hr class="card-divider">
+
+					<div class="card-footer">
+						<span class="like-comment">좋아요 1 · 댓글 0</span>
+					</div>
+				</div>
+			</div>
+
+		</div>
+            </div>
+
+            <div th:if="${currentType == 'comments'}" class="comment-detailed-list">
+    <div class="comment-card" th:each="i : ${#numbers.sequence(1, 3)}">
+        <div class="comment-user-header">
+            <div class="user-profile-circle">
+                <div class="skeleton-box circle"></div>
+            </div>
+            <div class="user-meta">
+                <span class="user-name">김정호</span>
+                <span class="comment-date">7일 전</span>
+            </div>
+            <div class="user-rating">★ 3.0</div>
+        </div>
+
+        <div class="work-info-box">
+            <div class="work-poster">
+                <div class="skeleton-box poster"></div>
+            </div>
+            <div class="work-details">
+                <h4 class="work-title">유인도</h4>
+                <p class="work-meta-text">영화 · 2025</p>
+                <p class="work-meta-text">평균 2.8</p>
+            </div>
+        </div>
+
+        <div class="comment-body">
+            <p class="comment-text">실력있는 감독이 편의에 기대어 영화를 만들면 나오는 작품 (재밌긴 한데 고민의 흔적이 없다..)</p>
+        </div>
+
+        <div class="comment-footer">
+            <div class="stats-info">
+                좋아요 <span class="count">3</span> 댓글 <span class="count">2</span>
+            </div>
+            <div class="footer-action-bar">
+                <div class="left-actions">
+                    <button class="action-item like-btn active">👍</button>
+                    <button class="action-item comment-btn">💬</button>
+                    <button class="action-item share-btn">🔗</button>
+                </div>
+                <button class="action-item more-btn">···</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+    </main>
+</section>
+</html>

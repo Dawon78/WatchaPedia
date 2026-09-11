@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout(~{::section})">
+<section>
+    <link rel="stylesheet" th:href="@{/book/book.css}"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+   
+    <main class="book-main">
+        <div class="event-banner">
+            <img alt="이벤트 배너" th:src="@{/banner.png}">
+        </div>
+
+        <section class="slider-section">
+            <h2 class="section-title">신간 베스트셀러 순위51</h2>
+            <div class="book-slider">
+                <div th:each="book, status : ${bestsellers}" class="work-item">
+                    <a th:href="@{/book/detail/{id}(id=${book.work?.workId})}" class="item-link">
+                    <div class="poster-wrapper">
+                        <img th:src="@{'/images/' + ${book.work?.workThumbnail}}" class="poster-img">
+                        <div class="rank-badge" th:text="${status.count}">1</div>
+                    </div>
+                    <div class="work-info">
+                        <div class="work-title" th:text="${book.work?.workTitle}">제목</div>
+                        <div class="work-rating">평균 ★ <span th:text="${book.work?.hotScore ?: '0.0'}">4.0</span></div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="slider-section">
+            <h2 class="section-title">책 검색 순위</h2>
+            <div class="book-slider">
+                <div th:each="book, status : ${workList}" class="work-item">
+                    <a th:href="@{/book/detail/{id}(id=${book.work?.workId})}" class="item-link">
+                    <div class="poster-wrapper">
+                        <img th:src="@{'/images/' + ${book.work?.workThumbnail}}" class="poster-img">
+                        <div class="rank-badge" th:text="${status.count}">1</div>
+                    </div>
+                    <div class="work-info">
+                        <div class="work-title" th:text="${book.work?.workTitle}">제목</div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="slider-section">
+            <h2 class="section-title">평균별점이 높은 작품</h2>
+            <div class="book-slider">
+                <div th:each="book : ${topRatedBooks}" class="work-item">
+                <a th:href="@{/book/detail/{id}(id=${book.work?.workId})}" class="item-link">
+                    <div class="poster-wrapper">
+                        <img th:src="@{'/images/' + ${book.work?.workThumbnail}}" class="poster-img">
+                    </div>
+                    <div class="work-info">
+                        <div class="work-title" th:text="${book.work?.workTitle}">제목</div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="slider-section">
+            <h2 class="section-title">화제의 작가 천선란의 작품</h2>
+            <div class="book-slider">
+                <div th:each="book : ${authorBooks}" class="work-item">
+                <a th:href="@{/book/detail/{id}(id=${book.work?.workId})}" class="item-link">
+                    <div class="poster-wrapper">
+                        <img th:src="@{'/images/' + ${book.work?.workThumbnail}}" class="poster-img">
+                    </div>
+                    <div class="work-info">
+                        <div class="work-title" th:text="${book.work?.workTitle}">제목</div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="slider-section">
+            <h2 class="section-title">#드라마</h2>
+            <div class="book-slider">
+                <div th:each="book : ${dramaBooks}" class="work-item">
+                <a th:href="@{/book/detail/{id}(id=${book.work?.workId})}" class="item-link">
+                    <div class="poster-wrapper">
+                        <img th:src="@{'/images/' + ${book.work?.workThumbnail}}" class="poster-img">
+                    </div>
+                    <div class="work-info">
+                        <div class="work-title" th:text="${book.work?.workTitle}">제목</div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="slider-section">
+            <h2 class="section-title">#SF</h2>
+            <div class="book-slider">
+                <div th:each="book : ${sfBooks}" class="work-item">
+                <a th:href="@{/book/detail/{id}(id=${book.work?.workId})}" class="item-link">
+                    <div class="poster-wrapper">
+                        <img th:src="@{'/images/' + ${book.work?.workThumbnail}}" class="poster-img">
+                    </div>
+                    <div class="work-info">
+                        <div class="work-title" th:text="${book.work?.workTitle}">제목</div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+ 
+    </main>
+    <script th:src="@{/book/bookSlider.js}"></script>
+</section>
+</html>

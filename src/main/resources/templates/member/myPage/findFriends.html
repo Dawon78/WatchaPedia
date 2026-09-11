@@ -1,0 +1,151 @@
+<div th:fragment="findFriendsFragment">
+    <style>
+    /* --- 친구 찾기 모달 (u-mod-friend-) --- */
+    .u-mod-friend-window {
+        background: #fff;
+        width: 375px;
+        height: 550px;
+        border-radius: 16px; /* 💡 사방 라운드 처리 */
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    .u-mod-friend-head {
+        height: 52px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        position: relative; /* 💡 버튼 정렬 기준 */
+    }
+
+    /* 💡 닫기 버튼 위치 교정 */
+    .u-mod-friend-close {
+        position: absolute; 
+        left: 15px; /* 💡 왼쪽 끝으로 고정 */
+        top: 50%;
+        transform: translateY(-50%);
+        background: none; 
+        border: none;
+        font-size: 22px; 
+        color: #ff0558; 
+        cursor: pointer;
+        padding: 0;
+    }
+
+    .u-mod-friend-title { font-size: 16px; font-weight: bold; }
+
+    /* 💡 리스트 영역 스크롤 및 드래그바 디자인 */
+    .u-mod-friend-body {
+        flex: 1;
+        overflow-y: auto; /* 💡 내용 많으면 자동 스크롤 */
+        padding: 5px 0;
+    }
+
+    /* 💡 크롬/사파리 전용 스크롤바 커스텀 */
+    .u-mod-friend-body::-webkit-scrollbar {
+        width: 6px;
+    }
+    .u-mod-friend-body::-webkit-scrollbar-thumb {
+        background: #ddd; /* 💡 드래그바 색상 */
+        border-radius: 10px;
+    }
+    .u-mod-friend-body::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .u-mod-friend-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 16px;
+        border-bottom: 1px solid #f9f9f9;
+    }
+
+    .u-mod-friend-profile {
+        width: 44px; height: 44px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 12px;
+        background: #f0f0f0;
+        flex-shrink: 0;
+    }
+
+    .u-mod-friend-profile img { width: 100%; height: 100%; object-fit: cover; }
+
+    .u-mod-friend-info { flex: 1; min-width: 0; }
+
+    .u-mod-friend-name {
+        font-size: 14px; font-weight: bold;
+        display: flex; align-items: center; gap: 4px;
+    }
+
+    .u-mod-friend-badge { color: #ff0558; font-size: 12px; }
+
+    .u-mod-friend-meta {
+        font-size: 12px; color: #8e8e93;
+        margin: 2px 0 0 0;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    .u-mod-friend-follow-btn {
+        padding: 6px 14px;
+        border: 0;
+        border-radius: 20px;
+        background: #ffeaf1;
+        color: #ff2f6e;
+        font-size: 13px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-left: 10px;
+        flex-shrink: 0;
+    }
+
+    .u-mod-friend-follow-btn:hover { background: #ffdee9; }
+    
+    .u-mod-friend-follow-btn.following {
+        background: #fff; /* 회색 배경 */
+        color: #7e7e7e;      /* 연한 글자색 */
+        }
+    </style>
+
+    <div id="uModFriendLayer" class="u-mod-overlay" style="display: none;">
+        <div class="u-mod-friend-window">
+            <div class="u-mod-friend-head">
+                <button class="u-mod-friend-close" onclick="toggleUniqueFriendModal(false)">✕</button>
+                <h2 class="u-mod-friend-title">친구 찾기</h2>
+            </div>
+
+            <div class="u-mod-friend-body">
+    <th:block th:if="${suggestedFriends != null}">
+        <div class="u-mod-friend-item" th:each="friend : ${suggestedFriends}">
+            <div class="u-mod-friend-profile">
+                <img th:src="${friend.memberPhoto != null ? friend.memberPhoto : '/images/default-profile.png'}" alt="프로필">
+            </div>
+            <div class="u-mod-friend-info">
+                <div class="u-mod-friend-name">
+                    <span th:text="${friend.memberName}">사용자 이름</span> 
+                    <span class="u-mod-friend-badge" th:if="${friend.memberId == 'admin'}">✔</span>
+                </div>
+                <p class="u-mod-friend-meta" th:text="${friend.memberBio ?: friend.memberId}">설명</p>
+            </div>
+            
+            <button class="u-mod-friend-follow-btn" 
+                    th:with="isFollowing=${followingIds != null and #lists.contains(followingIds, friend.memberId)}"
+                    th:classappend="${isFollowing} ? 'following' : ''"
+                    th:text="${isFollowing} ? '팔로잉' : '팔로우'"
+                    th:onclick="toggleUniqueFollow([[${friend.memberId}]], this)">
+                팔로우
+            </button>
+        </div>
+    </th:block>
+    
+    <div th:if="${suggestedFriends == null or suggestedFriends.isEmpty()}" style="text-align:center; padding:20px; color:#999;">
+        추천할 친구가 없습니다.
+    </div>
+</div>
+        </div>
+    </div>
+</div>

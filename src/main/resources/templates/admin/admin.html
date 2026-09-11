@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::section})">
+<section>
+<link rel="stylesheet" th:href="@{/admin/admin.css}">
+<div class="main">
+<h2 class="maintext">관리자 페이지</h2>
+
+<div class="admin-tabs">
+    <button onclick="showTab('member')">회원 관리</button>
+    <button onclick="showTab('work')">작품 관리</button>
+    <button onclick="showTab('person')">인물 관리</button>
+</div>
+
+<!-- ================= 회원 ================= -->
+<div id="member" class="tab-section">
+👤 회원 관리
+
+  <form th:action="@{/admin/member/add}" method="post">
+    이메일 ID <input name="memberId">
+    비밀번호 <input name="memberPw">
+    이름 <input name="memberName">
+    <button>추가</button>
+</form>
+
+<table border="1">
+<tr>
+    <th>ID</th><th>이름</th><th>삭제</th>
+</tr>
+<tr th:each="m : ${members}">
+    <td th:text="${m.memberId}"></td>
+    <td th:text="${m.memberName}"></td>
+    <td>
+        <form th:action="@{'/admin/member/delete/' + ${m.memberId}}" method="post">
+            <button>삭제</button>
+        </form>
+    </td>
+</tr>
+</table>
+
+</div>
+
+
+
+
+<!-- ================= 작품 ================= -->
+<div id="work" class="tab-section" style="display:none">
+🎬 작품 관리
+
+<form th:action="@{/admin/work/add}" method="post">
+    <div>
+        타입
+        <select name="workType">
+            <option value="MOVIE">MOVIE</option>
+            <option value="SERIES">SERIES</option>
+            <option value="BOOK">BOOK</option>
+            <option value="WEBTOON">WEBTOON</option>
+        </select>
+    </div>
+
+    <div>
+        제목
+        <input type="text" name="workTitle" required>
+    </div>
+
+    <div>
+        설명
+        <textarea name="workDesc" rows="3"></textarea>
+    </div>
+
+    <div>
+        썸네일 파일명
+        <input type="text" name="workThumbnail" placeholder="movie1.jpg">
+    </div>
+
+    <div>
+        출간일
+        <input type="date" name="workPublishDate">
+    </div>
+
+    <div>
+        HOT 점수
+        <input type="number" name="hotScore" value="0">
+    </div>
+
+    <div>
+        순위
+        <input type="number" name="workRank" value="1">
+    </div>
+
+    <button type="submit">작품 추가</button>
+</form>
+
+<table border="1">
+<tr>
+    <th>ID</th>
+    <th>타입</th>
+    <th>제목</th>
+    <th>설명</th>
+    <th>썸네일</th>
+    <th>출간일</th>
+    <th>HOT</th>
+    <th>랭크</th>
+    <th>삭제</th>
+</tr>
+
+<tr th:each="w : ${works}">
+    <td th:text="${w.workId}"></td>
+
+    <td th:text="${w.workType}"></td>
+
+    <td th:text="${w.workTitle}"></td>
+
+    <!-- 설명 너무 길어서 잘라서 표시 (추천) -->
+    <td th:text="${#strings.abbreviate(w.workDesc, 40)}"></td>
+
+    <!-- 썸네일 이미지 -->
+    <td>
+        <img th:src="@{'/images/' + ${w.workThumbnail}}"
+             width="60" height="80"
+             style="object-fit:cover; border-radius:6px;"
+             onerror="this.src='/images/default.png'">
+    </td>
+
+    <td th:text="${w.workPublishDate}"></td>
+
+    <td th:text="${w.hotScore}"></td>
+
+    <td th:text="${w.workRank}"></td>
+
+    <td>
+        <form th:action="@{'/admin/work/delete/' + ${w.workId}}" method="post">
+            <button>삭제</button>
+        </form>
+    </td>
+</tr>
+
+</table>
+</div>
+
+<!-- ================= 인물 ================= -->
+<div id="person" class="tab-section" style="display:none">
+🎭 인물 관리
+
+<form th:action="@{/admin/person/add}" method="post">
+    이름 <input name="name">
+    프로필 이미지 <input name="profileUrl">
+    <button>추가</button>
+</form>
+
+<table border="1">
+<tr>
+    <th>ID</th><th>이름</th><th>프로필 이미지</th>
+</tr>
+<tr th:each="p : ${persons}">
+    <td th:text="${p.personId}"></td>
+	  <td th:text="${p.name}"></td>
+    <td>
+        <img th:src="@{'/images/' + ${p.profileUrl}}"
+             width="60" height="60"
+             style="object-fit:cover; border-radius:8px;">
+    </td>
+    <td>
+        <form th:action="@{'/admin/person/delete/' + ${p.personId}}" method="post">
+            <button>삭제</button>
+        </form>
+    </td>
+</tr>
+</table>
+</div>
+
+<script>
+function showTab(id) {
+    document.querySelectorAll(".tab-section")
+        .forEach(el => el.style.display = "none");
+    document.getElementById(id).style.display = "block";
+}
+
+// 페이지 로드 시 URL ?tab=work 읽어서 해당 탭 보여주기
+document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const tab = params.get("tab");
+    if (tab) {
+        showTab(tab);
+    } else {
+        showTab('member'); // 기본 회원 관리
+    }
+});
+</script>
+</div>
+</section>
+</html>

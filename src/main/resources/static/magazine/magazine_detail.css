@@ -1,0 +1,342 @@
+@charset "UTF-8";
+
+/* =================================================
+   📦 Article Container
+================================================= */
+._articleContainer_u9u3k_24 {
+    max-width: 640px;
+    margin: 24px auto 48px;
+   
+}
+
+
+/* =================================================
+   🧩 Header
+================================================= */
+._header_u9u3k_67 {
+    position: relative;
+   
+}
+
+._headerText_u9u3k_109 {
+    flex: 1;
+    color: #7e7e7e;
+}
+
+._title_u9u3k_33 {
+    padding: 8px 0;
+    
+}
+
+
+/* ===== category (breadcrumb) ===== */
+._category_u9u3k_85 {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    color: #7e7e7e;
+    text-overflow: ellipsis;
+}
+
+._category_u9u3k_85 > a {
+    text-decoration: underline;
+     color: #7e7e7e;
+}
+
+._category_u9u3k_85 > svg {
+    margin: 0 8px;
+}
+
+
+/* ===== profile ===== */
+._profile_b5fl7_1 {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+._releasedAt_b5fl7_32 {
+    color: #7e7e7e;
+}
+
+._role_b5fl7_18 {
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 16px;
+}
+
+
+/* ===== share button ===== */
+._shareButton_u9u3k_72 {
+    position: absolute;
+    right: 0;
+    bottom: -3px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+
+._shareButton_u9u3k_72 > svg {
+    width: 24px;
+    height: 24px;
+}
+
+
+/* =================================================
+   📰 Article Body
+================================================= */
+._article_u9u3k_5 {
+    margin-top: 20px;
+}
+
+._article_u9u3k_5 .HTML p {
+    margin: 16px 0;
+}
+
+._component_82rb0_1 {
+    opacity: 0;
+}
+
+
+/* ===== animation ===== */
+._sunrise_82rb0_17 {
+    animation: sunrise .5s forwards;
+}
+
+@keyframes sunrise {
+    to {
+        opacity: 1;
+        transform: translate3d(0,0,0);
+    }
+}
+
+
+/* =================================================
+   🏷 Tags
+================================================= */
+._tags_u9u3k_37 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0 32px;
+}
+
+._tags_u9u3k_37 > li {
+    white-space: nowrap;
+    list-style: none;
+}
+
+._tag_19o0r_1 {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 24px;
+    background: #f6f6f6;
+    color: #5e5e5e;
+        list-style-type: none;
+}
+
+
+/* =================================================
+   ✏️ Typography / Reset (필요 최소만)
+================================================= */
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-weight: bold;
+}
+
+p {
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+img {
+    width: 100%;
+}
+
+button {
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    
+}
+hr {
+    display: block;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    color: gray;
+    unicode-bidi: isolate;
+    overflow: hidden;
+}
+._hr_u9u3k_61 {
+    height: 12px;
+    background:#f5f5f5;
+    border: 0;
+}
+/* =========================================
+   Related Section
+========================================= */
+
+._relatedSection_u9u3k_48 {
+    margin: 60px 0;
+}
+
+._relatedSectionTitle_u9u3k_57 {
+    margin: 0 300px 20px;
+}
+
+
+/* =========================================
+   List (가로 슬라이더)
+========================================= */
+._listWrapper_mz3qo_13 {
+    display: flex;
+    overflow-x: auto;
+    gap: 8px;
+    scrollbar-width: none;
+}
+
+._listWrapper_mz3qo_13::-webkit-scrollbar {
+    display: none;
+}
+
+.relatedUl {
+    display: flex;
+    gap: 8px;
+    padding: 0 300px;
+}
+
+/* 카드 3개씩 보이기 */
+.relatedUl > li {
+    flex: 0 0 calc((100% - 16px) / 3);
+}
+
+
+/* =========================================
+   Card
+========================================= */
+._li_10apn_31 > a {
+    display: block;
+    width: 100%;
+}
+
+
+/* poster */
+._posterBlock_10apn_44 {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 49 / 70;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+._posterImage_10apn_107 {
+    position: absolute;
+    inset: 0;
+}
+._posterBlock_10apn_44 {
+    width: 180px;   /* 원하는 크기 */
+    height: 260px;  /* 포스터 비율 */
+}
+
+._img_1hdzi_6 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.relatedUl {
+    list-style: none;
+	
+}
+
+/* text */
+._contentWrapper_10apn_102 {
+    margin-top: 6px;
+}
+
+._contentTitle_10apn_116 {
+    font-size: 15px;
+    line-height: 20px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    color:#141414;
+}
+
+._contentRating_10apn_128 { color:#5e5e5e; }
+._contentType_10apn_148 { color:#7e7e7e; }
+
+
+/* =========================================
+   OTT Badge
+========================================= */
+._ottBadgeWrapper_10apn_67 {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    display: flex;
+    gap: 4px;
+}
+
+._ottBadge_10apn_67 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 2px;
+    background: #fff;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,.07);
+}
+
+._ottBadge_10apn_67 img {
+    width: 17px;
+}
+
+
+/* =========================================
+   Arrow Buttons
+========================================= */
+._buttonContainer_mz3qo_56 {
+    position: absolute;
+    top: 33%;
+    width: 100%;
+    pointer-events: none;
+}
+
+._buttonContainer_mz3qo_56 > button {
+    pointer-events: auto;
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    background: #f1f1f1;
+    border: 1px solid #f1f1f1;
+    border-radius: 50%;
+}
+
+._right_mz3qo_68 > button { right: -16px; }
+._left_mz3qo_72  > button { left: -16px; }
+
+._disabled_mz3qo_64 { display:none; }
+
+
+/* =========================================
+   Animation
+========================================= */
+._sunrise_82rb0_17 {
+    animation: sunrise .5s forwards;
+}
+
+@keyframes sunrise {
+    to {
+        opacity: 1;
+        transform: translate3d(0,0,0);
+    }
+}

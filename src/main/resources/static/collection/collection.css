@@ -1,0 +1,196 @@
+@charset "UTF-8";
+/* 메인 컨테이너 */
+body {
+    background-color: #fff;
+    margin: 0;
+    font-family: 'Pretendard', -apple-system, sans-serif;
+}
+
+.collection-main {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 20px 20px 50px;
+}
+
+/* 상단 타이틀 바 */
+.collection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 15px;
+}
+
+/* 💡 포스터 중첩 핵심 스타일 */
+.thumbnail-stack {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-color: #f8f8f8;
+    overflow: hidden;
+}
+
+.thumbnail-layer {
+    position: absolute;
+    width: 100%;
+    height: 300px;
+}
+
+.thumbnail-layer img {
+    position: absolute;
+    height: 110%; /* 살짝 크게 설정해서 꽉 채움 */
+    top: -5%;
+    object-fit: cover;
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+}
+
+/* 0번 포스터 (맨 앞) */
+.poster-0 { z-index: 4; width: 65%; left: 0; }
+/* 1번 포스터 */
+.poster-1 { z-index: 3; width: 60%; left: 20%; filter: brightness(0.9); }
+/* 2번 포스터 */
+.poster-2 { z-index: 2; width: 55%; left: 40%; filter: brightness(0.8); }
+/* 3번 포스터 (맨 뒤) */
+.poster-3 { z-index: 1; width: 50%; left: 55%; filter: brightness(0.7); }
+
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    margin: 0;
+}
+
+.create-link {
+    color: #ff2f6e;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* 컬렉션 그리드 설정 */
+.collection-grid {
+    display: grid;
+    /* 💡 가로로 무조건 1개만 배치 */
+    grid-template-columns: 1fr; 
+    gap: 40px; /* 카드 사이의 수직 간격을 조금 더 넓게 설정 */
+    width: 100%;
+}
+
+/* 개별 카드 스타일 */
+.collection-card {
+    width: 100%;
+    /* 왓챠피디아 컬렉션 페이지처럼 중앙 정렬을 위해 최대 너비 제한 (선택 사항) */
+    max-width: 640px; 
+    margin: 0 auto; /* 카드를 가운데로 정렬 */
+    border: 1px solid #e3e3e3;
+    border-radius: 5px;
+}
+
+/* 썸네일 영역 비율 */
+.thumbnail-stack {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1.8 / 1; /* 왓챠피디아 컬렉션 특유의 가로형 비율 */
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f8f8f8;
+    border: 1px solid #eee;
+}
+
+.thumbnail-main img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 카드 하단 정보 오버레이 */
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 15px;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user-profile-sm {
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.user-name {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.item-count {
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+/* 카드 바디 (텍스트) */
+.card-body {
+    padding: 15px 15px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    color: #292a32;
+}
+
+/* 설명칸 스타일 */
+.card-description {
+    font-size: 14px;
+    color: #4a4a4a; /* 제목보다 조금 연한 색상 */
+    margin: 0 0 15px 0;
+    line-height: 1.4;
+    /* 두 줄 이상일 때 생략 처리 (...) 하려면 아래 주석 해제 */
+    /* display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; */
+}
+
+/* 하단 얇은 구분선 */
+.card-divider {
+    border: 0;
+    height: 1px;
+    background-color: #f0f0f0;
+    margin: 15px 0;
+}
+
+.card-footer {
+    font-size: 13px;
+    color: #8e8e93;
+}
+
+.like-clickable {
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+/* 💡 활성화 시 핑크색 */
+.like-clickable.active {
+    color: #ff2f6e;
+    font-weight: bold;
+}
+
+.like-clickable:hover {
+    opacity: 0.7;
+}

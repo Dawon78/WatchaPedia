@@ -1,0 +1,168 @@
+/* 기본 컨테이너 */
+.create-container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 20px;
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    color: #292a32;
+}
+
+/* 헤더 영역 */
+.create-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.create-title {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.submit-btn {
+    color: #ccc;
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: not-allowed;
+    transition: 0.2s;
+}
+
+.submit-btn.active {
+    color: #ff0558;
+    cursor: pointer;
+}
+
+/* 입력 섹션 */
+.input-section input, .input-section textarea {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 15px 0;
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 10px;
+}
+.input-section textarea, .input-section textarea::placeholder {
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+	}
+
+.input-section textarea {
+    resize: none;
+    min-height: 120px;
+}
+
+/* 작품 섹션 헤더 */
+.work-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.work-count {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.work-count span {
+    color: #8e8e93;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+/* 수정/취소/제거 버튼 스타일 */
+.edit-link, .edit-cancel {
+    color: #ff0558;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.edit-cancel {
+    margin-right: 15px;
+}
+
+.edit-remove {
+    color: #ccc;
+    cursor: default;
+    font-size: 15px;
+    transition: color 0.2s;
+}
+
+/* 작품 리스트 그리드 */
+.work-list-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.work-card-sm {
+    width: 110px;
+    text-align: left;
+    position: relative;
+}
+
+.card-img-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1.5;
+}
+
+.card-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.work-card-title {
+    font-size: 13px;
+    margin-top: 8px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 💡 인라인에서 옮겨온 삭제 뱃지 (-) 스타일 */
+.delete-badge {
+    display: none; /* 기본 숨김 */
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    width: 24px;
+    height: 24px;
+    background: #ff0558;
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+    line-height: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid #fff;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 작품 추가 버튼 박스 */
+.add-work-btn {
+    width: 110px;
+    aspect-ratio: 1 / 1.5;
+    background: #f8f8f8;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px dashed #ddd;
+    gap: 8px;
+}
+
+.add-work-btn span {
+    color: #ccc;
+    font-size: 12px;
+}

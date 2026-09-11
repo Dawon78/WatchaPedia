@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="layout :: layout(~{::section})">
+<section>
+	<link rel="stylesheet" th:href="@{/collection/collection.css}">
+	<main class="collection-main">
+		<div class="collection-header">
+			<h1 class="page-title">컬렉션</h1>
+			<a th:href="@{/collection/create}" class="create-link">새 컬렉션 만들기</a>
+		</div>
+
+		<div class="collection-grid">
+			<div class="collection-card" th:each="col : ${collections}" 
+				 th:onclick="|location.href='/collection/detail?id=${col.collectionId}'|">
+				
+				<div class="thumbnail-stack">
+					<div class="thumbnail-layer" th:each="work, iterStat : ${col.works}" th:if="${iterStat.index < 4}">
+						<img th:src="@{'/images/' + ${work.workThumbnail}}" 
+							 th:class="'poster-' + ${iterStat.index}" alt="포스터">
+					</div>
+					
+					<div class="thumbnail-layer" th:if="${#lists.isEmpty(col.works)}">
+						<img th:src="@{/images/default-bg.png}" class="poster-0" alt="기본 배경">
+					</div>
+
+					<div class="card-overlay">
+						<div class="user-info">
+							<img th:src="@{/images/default-profile.jpg}" class="user-profile-sm">
+							<span class="user-name" th:text="${col.memberId}">user</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="card-body">
+					<h3 class="card-title" th:text="${col.collectionTitle}">제목</h3>
+					<p class="card-description" th:text="${col.collectionDesc}">설명</p>
+
+					<hr class="card-divider">
+
+					<div class="card-footer">
+    <span class="like-comment">
+        <span class="like-clickable" 
+              th:id="'like-btn-' + ${col.collectionId}"
+              th:onclick="'toggleListLike(event, ' + ${col.collectionId} + ')'">
+            ♥️ 좋아요 <span th:id="'like-count-' + ${col.collectionId}" th:text="${col.likeCount ?: 0}">0</span>
+        </span>
+        · 댓글 0
+    </span>
+</div>
+				</div>
+			</div>
+			</div>
+	</main>
+	<script>
+	/**
+	 * 컬렉션 좋아요 토글 기능
+	 */
+	 /**
+	  * 컬렉션 목록용 좋아요 토글 기능
+	  */
+	 function toggleListLike(event, collectionId) {
+	     // 💡 1. 카드 클릭 이벤트(상세 이동)가 발생하지 않도록 막음
+	     event.stopPropagation();
+
+	     fetch(`/api/collection/${collectionId}/like`, {
+	         method: 'POST',
+	         headers: { 'Content-Type': 'application/json' }
+	     })
+	     .then(res => {
+	         if (res.status === 401) {
+	             alert("로그인이 필요한 서비스입니다.");
+	             location.href = "/login";
+	             return;
+	         }
+	         return res.json();
+	     })
+	     .then(isLiked => {
+	         if (isLiked !== undefined) {
+	             const likeBtn = document.getElementById(`like-btn-${collectionId}`);
+	             const countSpan = document.getElementById(`like-count-${collectionId}`);
+	             
+	             let currentCount = parseInt(countSpan.innerText);
+
+	             if (isLiked) {
+	                 // 💡 좋아요 활성화
+	                 likeBtn.classList.add('active');
+	                 countSpan.innerText = currentCount + 1;
+	             } else {
+	                 // 💡 좋아요 취소
+	                 likeBtn.classList.remove('active');
+	                 countSpan.innerText = Math.max(0, currentCount - 1);
+	             }
+	         }
+	     })
+	     .catch(err => console.error("Error:", err));
+	 }
+	</script>
+</section>
+</html>
