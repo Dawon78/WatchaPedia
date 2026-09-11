@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::section})">
+      
+ <section>
+	  <link rel="stylesheet" th:href="@{/member/review.css}">
+	  
+<div class="rating-container">
+    <h1 class="rating-title">평가</h1>
+    
+<ul class="rating-list">
+    <li class="rating-item">
+        <a th:href="@{/reviewdetail}" class="rating-link">
+            <span class="category-name">영화</span>
+            <span class="category-count" th:text="${counts != null ? counts['MOVIE'] : 0}">0</span>
+        </a>
+    </li>
+    <li class="rating-item">
+        <a th:href="@{/reviewdetail}" class="rating-link">
+            <span class="category-name">시리즈</span>
+            <span class="category-count" th:text="${counts != null ? counts['SERIES'] : 0}">0</span>
+        </a>
+    </li>
+    <li class="rating-item">
+        <a th:href="@{/reviewdetail}" class="rating-link">
+            <span class="category-name">책</span>
+            <span class="category-count" th:text="${counts != null ? counts['BOOK'] : 0}">0</span>
+        </a>
+    </li>
+    <li class="rating-item">
+        <a th:href="@{/reviewdetail}" class="rating-link">
+            <span class="category-name">웹툰</span>
+            <span class="category-count" th:text="${counts != null ? counts['WEBTOON'] : 0}">0</span>
+        </a>
+    </li>
+</ul>
+</div>
+
+</section>>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::section})">
+      
+<section>
+    <link rel="stylesheet" th:href="@{/member/reviewdetail.css}">
+
+    <div class="content-container">
+        <h1 class="page-header-title">평가한 작품들</h1>
+
+        <div class="main-tab-bar">
+            <div class="tab-item active" onclick="switchTab('all')">전체</div>
+            <div class="tab-item" onclick="switchTab('rating')">별점 순</div>
+        </div>
+
+<div id="tab-all-content">
+    <div class="filter-row">
+        <select class="dropdown-select">
+            <option>담은 순</option>
+            <option>가나다 순</option>
+            <option>최신 순</option>
+        </select>
+    </div>
+
+<div class="work-grid">
+    <div class="work-item" th:each="rating : ${allRatings}">
+        <div class="poster-wrapper">
+            <img th:src="@{'/images/' + ${rating.work.workThumbnail}}" alt="poster">
+        </div>
+        <div class="work-title" th:text="${rating.work.workTitle}">작품 제목</div>
+        <div class="work-rating">
+            <span class="rating-label">평가함</span> ★ <span th:text="${rating.ratingScore}">4.0</span>
+        </div>
+    </div>
+        
+        <div th:if="${#lists.isEmpty(allRatings)}" style="grid-column: 1/-1; text-align: center; padding: 50px; color: #8c8c8c;">
+            아직 평가한 작품이 없습니다.
+        </div>
+    </div>
+</div>
+
+<div id="tab-rating-content" style="display: none;">
+    <section class="rating-group" th:each="score : ${scoreSteps}">
+        <div class="rating-header">
+            <div class="rating-label">
+                <span th:text="${score}">5.0</span> 평가함 
+                <span class="rating-count" 
+                      th:text="${ratingGroup.get(score) != null ? ratingGroup.get(score).size() : 0}">0</span>
+            </div>
+            <a th:href="@{/ratingreviewdetail(score=${score})}" class="more-btn">더보기</a>
+        </div>
+
+        <div class="empty-box" th:if="${ratingGroup.get(score) == null or ratingGroup.get(score).isEmpty()}">
+            <span class="empty-icon">;-(</span>
+            <div class="empty-text">결과가 없어요</div>
+        </div>
+
+        <div class="work-grid" th:if="${ratingGroup.get(score) != null and !ratingGroup.get(score).isEmpty()}">
+            <div class="work-item" th:each="rating : ${ratingGroup.get(score)}">
+                <div class="poster-wrapper">
+                    <img th:src="@{'/images/' + ${rating.work.workThumbnail}}" alt="poster">
+                </div>
+                <div class="work-title" th:text="${rating.work.workTitle}">작품 제목</div>
+            </div>
+        </div>
+    </section>
+</div>
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            const allTab = document.querySelector('.tab-item:nth-child(1)');
+            const ratingTab = document.querySelector('.tab-item:nth-child(2)');
+            const allContent = document.getElementById('tab-all-content');
+            const ratingContent = document.getElementById('tab-rating-content');
+
+            if (tab === 'all') {
+                allTab.classList.add('active');
+                ratingTab.classList.remove('active');
+                allContent.style.display = 'block';
+                ratingContent.style.display = 'none';
+            } else {
+                allTab.classList.remove('active');
+                ratingTab.classList.add('active');
+                allContent.style.display = 'none';
+                ratingContent.style.display = 'block';
+            }
+        }
+    </script>
+</section>
+</html>

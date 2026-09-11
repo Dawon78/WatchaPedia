@@ -1,0 +1,67 @@
+        /* 기본 배경 및 폰트 설정 */
+        body {
+            background-color: #ffffff; /* 원본 이미지처럼 깔끔한 흰 배경 */
+            margin: 0;
+            padding: 0;
+            font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
+        }
+
+        /* 중앙 정렬되는 메인 컨테이너 */
+        .rating-container {
+            max-width: 640px; /* 화면 중앙에 위치할 적절한 너비 */
+            margin: 60px auto 200px auto; /* 상하 여백 */
+            padding: 0 20px;
+        }
+
+        /* 상단 '평가' 타이틀 */
+        .rating-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #000;
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
+        }
+
+        /* 리스트 래퍼 */
+        .rating-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            margin-bottom: 95px;
+            
+        }
+
+        /* 개별 리스트 아이템 (구분선 적용) */
+        .rating-item {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        /* 클릭 가능한 링크 영역 (전체 영역이 눌리도록 설정) */
+        .rating-link {
+            display: flex;
+            align-items: center;
+            padding: 18px 0;
+            text-decoration: none; /* 밑줄 제거 */
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        /* 마우스 오버 시 살짝 배경색 변경 (사용성 향상) */
+        .rating-link:hover {
+            background-color: #fafafa;
+        }
+
+        /* 항목 이름 (영화, 시리즈 등) */
+        .category-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: #222;
+        }
+
+        /* 평가 개수 (1, 2 등) */
+        .category-count {
+            font-size: 13px;
+            font-weight: 400;
+            color: #999;
+            margin-left: 8px; /* 이름과 숫자 사이의 간격 */
+        }

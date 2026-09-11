@@ -1,0 +1,114 @@
+
+		    body {
+            background-color: #ffffff; /* 원본 이미지처럼 깔끔한 흰 배경 */
+            margin: 0;
+            padding: 0;
+            font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
+        }
+        /* 1. 기본 컨테이너 스타일 */
+        .content-container {
+            max-width: 1300px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background-color: #ffffff;
+            font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+        }
+
+        /* 2. 헤더 영역 (뒤로가기 + 타이틀) */
+        .detail-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .back-icon {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .page-header-title {
+            font-size: 26px;
+            font-weight: 800;
+            color: #000;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        /* 3. 별점 요약 바 (3.0점 준 영화 1) */
+        .rating-summary-bar {
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        .summary-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: gray;
+            margin: 0;
+        }
+
+        .count-highlight {
+            color: #ff0558; /* 왓챠 핑크 */
+            margin-left: 2px;
+        }
+
+        /* 4. 작품 그리드 시스템 */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 30px 15px;
+        }
+
+        .work-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .poster-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1.5;
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: #f8f8f8;
+            border: 1px solid rgba(0,0,0,0.07);
+            margin-bottom: 10px;
+        }
+
+        .poster-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 포스터 위 W 뱃지 */
+        .badge-w {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: 22px;
+            height: 22px;
+            background-color: #ff0558;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .work-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #292a32;
+            line-height: 1.4;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }

@@ -1,0 +1,188 @@
+        body {
+            background-color: #ffffff;
+            margin: 0;
+            font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+        }
+
+        /* 중앙 정렬 컨테이너 */
+        .content-container {
+            max-width: 1300px; /* 푸터 너비와 동일하게 설정 */
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* 1. 페이지 대제목 */
+        .page-header-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            color: #000;
+        }
+
+        /* 2. 상단 메인 탭 (전체 / 별점 순) */
+        .main-tab-bar {
+            display: flex;
+            border-bottom: 1px solid #f0f0f0;
+            margin-bottom: 20px;
+        }
+
+        .tab-item {
+            flex: 1;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 16px;
+            font-weight: 700;
+            color: #8e8e93;
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        /* 선택된 탭 스타일 (이미지처럼 검은색 언더라인) */
+        .tab-item.active {
+            color: #000;
+            border-bottom: 2px solid #000;
+            margin-bottom: -1px; /* 보더 겹침 방지 */
+        }
+
+        /* 3. 서브 필터 영역 (담은 순 드롭다운) */
+        .filter-row {
+            display: flex;
+            justify-content: flex-end; /* 오른쪽 정렬 */
+            margin-bottom: 30px;
+        }
+
+        .dropdown-select {
+            padding: 8px 30px 8px 12px;
+            font-size: 14px;
+            color: #666;
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            cursor: pointer;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%23999%22%20d%3D%22M3.5%204.5l2.5%203%202.5-3z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+        }
+
+        /* 4. 작품 그리드 레이아웃 */
+        .work-grid {
+            display: grid;
+            /* 이미지 비율에 맞춰 7~8열 정도로 구성 */
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 30px 15px;
+        }
+
+        .work-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 포스터 이미지 박스 */
+        .poster-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1.5; /* 왓챠 포스터 고유 비율 */
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: #f8f8f8;
+            border: 1px solid rgba(0,0,0,0.07);
+            margin-bottom: 8px;
+        }
+
+        .poster-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 왓챠 뱃지 (핑크색 W) */
+        .badge-w {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: 22px;
+            height: 22px;
+            background-color: #ff0558;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        /* 하단 정보 텍스트 */
+        .work-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #292a32;
+            margin-bottom: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .work-rating {
+            font-size: 13px;
+            color: #ffaa00; /* 별점 포인트 컬러 */
+            font-weight: 500;
+        }
+
+        .rating-label {
+            color: #8e8e93;
+            margin-right: 4px;
+        }
+        
+        /* --- 별점 순 탭 전용 스타일 --- */
+
+/* 각 별점 섹션 간격 */
+.rating-group {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 25px 0;
+}
+
+.rating-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.rating-label {
+    font-size: 18px;
+    font-weight: 700;
+    color: #292a32;
+}
+
+.rating-count {
+    color: #ff0558; /* 숫자 핑크색 */
+    margin-left: 5px;
+}
+
+.more-btn {
+    font-size: 13px;
+    color: #a5a5a7;
+    text-decoration: none;
+}
+
+/* 결과 없음 (텅 빈 상태) */
+.empty-box {
+    text-align: center;
+    padding: 50px 0;
+    color: #a5a5a7;
+}
+
+.empty-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+    display: block;
+    opacity: 0.5;
+}
+
+.empty-text {
+    font-size: 14px;
+}

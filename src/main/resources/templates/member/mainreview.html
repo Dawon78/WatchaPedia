@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::section})">
+      <meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+<section>
+    <link rel="stylesheet" th:href="@{/member/review.css}">
+    <style>
+        .review-container { max-width: 600px; margin: 0 auto; background-color: #fff; min-height: 100vh; }
+        .review-header { text-align: center; padding: 40px 20px; border-bottom: 1px solid #f0f0f0; }
+        .review-header h1 { font-size: 18px; margin-bottom: 10px; }
+        .rating-count { font-size: 45px; font-weight: bold; color: #2a2a2a; margin: 10px 0; }
+        .review-desc { color: #8c8c8c; font-size: 14px; }
+
+        /* 카테고리 탭 스타일 */
+        .category-tabs { display: flex; justify-content: space-around; border-bottom: 1px solid #eee; position: sticky; top: 0; background: #fff; z-index: 10; }
+        .tab-item { flex: 1; text-align: center; padding: 15px 0; text-decoration: none; color: #666; font-weight: 500; font-size: 15px; transition: 0.2s; }
+        .tab-item.active { color: #ff0558; border-bottom: 3px solid #ff0558; }
+
+        /* 작품 리스트 스타일 */
+        .list-section { padding: 20px; }
+        .list-title { font-size: 13px; color: #8c8c8c; margin-bottom: 15px; }
+        .work-item { display: flex; padding: 15px 0; border-bottom: 1px solid #f5f5f5; align-items: flex-start; }
+        .work-poster { width: 80px; height: 120px; object-fit: cover; border-radius: 4px; margin-right: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .work-info { flex: 1; position: relative; }
+        .work-title { font-size: 17px; font-weight: bold; margin: 0 0 5px 0; display: flex; justify-content: space-between; }
+        .work-meta { font-size: 14px; color: #8c8c8c; margin-bottom: 15px; }
+
+    .star-rating-container { display: flex; align-items: center; gap: 10px; }
+    .star-rating { 
+        font-size: 32px; 
+        color: #ff0558; 
+        cursor: pointer; 
+        position: relative; 
+        display: inline-block; 
+        letter-spacing: 2px;
+        user-select: none;
+    }
+    /* 실시간으로 채워지는 별점 (Gold 색상) */
+    .star-rating-fill {
+        position: absolute;
+        top: 0; left: 0;
+        color: #ff0558;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 0%; /* JS에서 조절 */
+        pointer-events: none; /* 클릭 방해 금지 */
+    }
+    .rating-guide { font-size: 14px; color: #ff0558; font-weight: bold; min-width: 40px; }
+</style>
+    </style>
+
+    <div class="review-container">
+<div class="review-header">
+    <h1>평가</h1>
+    <br><br>
+    
+    <p class="review-desc">작품을 평가해보세요. 당신의 취향에 딱 맞는 작품을 추천해드릴게요.</p>
+</div>
+
+        <div class="category-tabs">
+            <a th:href="@{/mainreview(type='MOVIE')}" class="tab-item" th:classappend="${selectedType == 'MOVIE'} ? 'active'">영화</a>
+            <a th:href="@{/mainreview(type='SERIES')}" class="tab-item" th:classappend="${selectedType == 'SERIES'} ? 'active'">시리즈</a>
+            <a th:href="@{/mainreview(type='BOOK')}" class="tab-item" th:classappend="${selectedType == 'BOOK'} ? 'active'">책</a>
+            <a th:href="@{/mainreview(type='WEBTOON')}" class="tab-item" th:classappend="${selectedType == 'WEBTOON'} ? 'active'">웹툰</a>
+        </div>
+
+        <div class="list-section">
+            <div class="list-title">▾ 랜덤 <span th:text="${selectedType == 'MOVIE' ? '영화' : (selectedType == 'WEBTOON' ? '웹툰' : (selectedType == 'BOOK' ? '책' : '시리즈'))}">영화</span></div>
+            
+            <div th:if="${#lists.isEmpty(works)}" style="text-align: center; padding: 50px 0; color: #ccc;">
+                평가할 작품이 더 이상 없습니다.
+            </div>
+
+<ul style="list-style: none; padding: 0;">
+    <li th:each="work : ${works}" class="work-item">
+        <img th:src="@{'/images/' + ${work.workThumbnail}}" class="work-poster" alt="poster">
+        
+        <div class="work-info">
+            <div class="work-title">
+                <span th:text="${work.workTitle}">작품 제목</span>
+                <span class="more-icon">⋮</span>
+            </div>
+            
+            <div class="work-meta" 
+                 th:text="${work.workPublishDate != null ? #temporals.year(work.workPublishDate) + ' ・ ' : ''}">
+                 2020
+            </div>
+            
+<div class="star-rating-container">
+    <div class="star-rating" th:data-work-id="${work.workId}">
+        ☆☆☆☆☆
+        <div class="star-rating-fill">★★★★★</div>
+    </div>
+    <span class="rating-guide">0.0</span>
+</div>
+        </div>
+    </li>
+</ul>
+        </div>
+    </div>
+
+<script th:inline="javascript">
+document.querySelectorAll('.star-rating').forEach(starContainer => {
+    const fill = starContainer.querySelector('.star-rating-fill');
+    const guide = starContainer.parentElement.querySelector('.rating-guide');
+    
+    // CSRF 토큰 정보 가져오기 (Spring Security 대응)
+    const csrfToken = document.querySelector('meta[name="_csrf"]')?.content;
+    const csrfHeader = document.querySelector('meta[name="_csrf_header"]')?.content;
+
+    // 마우스 움직임 감지 (호버 효과)
+    starContainer.addEventListener('mousemove', (e) => {
+        const score = calculateScore(e, starContainer);
+        fill.style.width = (score * 20) + '%';
+        guide.innerText = score.toFixed(1);
+    });
+
+    // 마우스가 나갔을 때 (저장된 점수가 없다면 0 또는 기존 점수로 복구)
+    starContainer.addEventListener('mouseleave', () => {
+        const savedScore = starContainer.getAttribute('data-score') || 0;
+        fill.style.width = (savedScore * 20) + '%';
+        guide.innerText = parseFloat(savedScore).toFixed(1);
+    });
+
+    // 클릭 시 점수 고정 및 DB 저장
+    starContainer.addEventListener('click', (e) => {
+        const score = calculateScore(e, starContainer);
+        const workId = starContainer.dataset.workId;
+
+        // 서버로 전송할 데이터 구성
+      const data = {
+            workId: parseInt(workId),
+            ratingScore: parseFloat(score) // 👈 ratingValue에서 ratingScore로 변경!
+        };
+
+        // API 호출
+        fetch('/api/rating/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                [csrfHeader]: csrfToken // CSRF 헤더 추가
+            },
+            body: JSON.stringify(data)
+        })
+        .then(async response => {
+            if (response.ok) {
+                // 1. 점수 고정
+                starContainer.setAttribute('data-score', score);
+                
+                // 2. 상단 카운트 증가 (이 작품을 처음 평가했을 때만)
+                if (!starContainer.classList.contains('rated')) {
+                    const countEl = document.querySelector('.rating-count');
+                    if (countEl) {
+                        countEl.innerText = parseInt(countEl.innerText) + 1;
+                    }
+                    starContainer.classList.add('rated');
+                }
+                console.log(`✅ 성공: 작품 ${workId}에 ${score}점 저장됨`);
+            } else if (response.status === 401) {
+                alert("로그인이 필요한 서비스입니다.");
+                window.location.href = "/member/login"; // 로그인 페이지 경로에 맞게 수정
+            } else {
+                const errorText = await response.text();
+                console.error("❌ 저장 실패:", errorText);
+                alert("평가 저장 중 오류가 발생했습니다.");
+            }
+        })
+        .catch(error => {
+            console.error('Network Error:', error);
+        });
+    });
+});
+
+/**
+ * 좌표를 기반으로 0.5점 단위 점수 계산
+ */
+function calculateScore(e, container) {
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const width = rect.width;
+    
+    // 0.5점 단위로 올림 계산
+    let score = (x / width) * 5;
+    score = Math.ceil(score * 2) / 2; 
+    
+    if (score < 0.5) score = 0.5;
+    if (score > 5.0) score = 5.0;
+    
+    return score;
+}
+</script>
+</section>
+</html>
