@@ -1,0 +1,142 @@
+/* ===== 모달 배경 ===== */
+.login-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    display: none;
+    z-index: 9999;
+}
+
+/* ===== 모달 박스 ===== */
+.login-box {
+    width: 480px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 50px 40px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+/* 로고 */
+.login-logo {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.login-logo .watcha {
+    color: #ff2f6e;
+}
+
+.login-logo .pedia {
+    color: #333;
+}
+
+/* 제목 */
+.login-title {
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+/* 인풋 */
+.login-input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: none;
+    background: #f2f2f2;
+    font-size: 14px;
+}
+
+/* 버튼 */
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #ff2f6e;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* 링크 영역 */
+.login-links {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.login-links a {
+    display: block;
+    margin-bottom: 10px;
+    color: #ff2f6e;
+    text-decoration: none;
+}
+
+.signup {
+    color: #ff2f6e;
+    cursor: pointer;
+}
+
+/* OR 구분선 */
+.login-divider {
+    margin: 30px 0;
+    position: relative;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.login-divider::before,
+.login-divider::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background: #ddd;
+}
+
+.login-divider::before { left: 0; }
+.login-divider::after { right: 0; }
+
+/* 소셜 로그인 */
+.social-login {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-circle {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* 각 소셜 색 */
+.kakao { background: #fee500; }
+.google { background: #fff; border: 1px solid #ddd; }
+.x { background: #f2f2f2; }
+.apple { background: #000; color: #fff; }
+.line { background: #06c755; color: #fff; }
+
+/* 하단 TIP */
+.login-tip {
+    margin-top: 30px;
+    padding: 15px;
+    background: #f2f2f2;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #666;
+}
