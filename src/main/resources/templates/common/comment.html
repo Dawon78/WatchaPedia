@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::section})}">
+      
+<section>
+<style>
+/* CSS 스타일은 동일하게 유지 (디자인 유지를 위해 생략하지 않음) */
+body { margin: 0; background-color: #ffffff; }
+.comments-container { max-width: 800px; margin: 0 auto 220px auto; padding: 40px 20px; }
+.comments-title { font-size: 26px; font-weight: bold; margin-bottom: 30px; letter-spacing: -1px; }
+.mypage-tabs { border-bottom: 1px solid #e5e5e5; margin-bottom: 20px; }
+.mypage-tabs ul { display: flex; list-style: none; padding: 0; margin: 0; }
+.mypage-tabs li { flex: 1; text-align: center; padding-bottom: 15px; position: relative; }
+.mypage-tabs li a { text-decoration: none; color: #a0a0a0; font-weight: 600; font-size: 16px; }
+.mypage-tabs li.active a { color: #000; }
+.mypage-tabs li.active::after { content: ""; position: absolute; bottom: -1px; left: 10%; width: 80%; height: 3px; background-color: #000; }
+.filter-wrapper { display: flex; justify-content: flex-end; margin-bottom: 30px; }
+.sort-select { padding: 12px 20px; border: 1px solid #e5e5e5; border-radius: 4px; color: #828282; font-size: 15px; width: 240px; background-color: #fff; }
+.comment-card { background-color: #f2f2f2; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.user-profile { display: flex; align-items: center; }
+.avatar { width: 32px; height: 32px; border-radius: 50%; margin-right: 10px; }
+.username { font-weight: bold; color: #292a32; margin-right: 6px; }
+.time-ago { font-size: 14px; color: #a0a0a0; }
+.rating-star { font-size: 15px; color: #666; }
+.work-brief-info { display: flex; padding-top: 15px; border-top: 1px solid #e5e5e5; }
+.work-poster { width: 65px; height: 95px; border-radius: 4px; object-fit: cover; margin-right: 15px; background-color: #ddd; }
+.work-detail { display: flex; flex-direction: column; justify-content: flex-start; }
+.work-title { font-size: 15px; font-weight: 600; margin: 0 0 4px 0; color: #292a32; }
+.work-meta { font-size: 14px; color: #8e8e8e; margin: 0; line-height: 1.5; }
+.comment-text-content { margin: 20px 0; font-size: 16px; line-height: 1.6; color: #292a32; min-height: 40px; }
+.card-footer { border-top: 1px solid #e5e5e5; padding-top: 15px; }
+.stats-text { font-size: 13px; color: #a0a0a0; margin-bottom: 12px; }
+.action-row { display: flex; justify-content: space-between; align-items: center; }
+.left-actions .action-btn { background: none; border: none; font-size: 20px; margin-right: 15px; cursor: pointer; color: #a0a0a0; }
+.right-actions button { background: none; border: none; font-size: 20px; cursor: pointer; color: #a0a0a0; margin-left: 10px; }
+</style>
+    
+<div class="comments-container">
+    <h1 class="comments-title">코멘트</h1>
+    
+    <nav class="mypage-tabs">
+        <ul>
+            <li th:classappend="${currentType == 'MOVIE'} ? 'active'"><a th:href="@{/member/comments(type='MOVIE')}">영화</a></li>
+            <li th:classappend="${currentType == 'SERIES'} ? 'active'"><a th:href="@{/member/comments(type='SERIES')}">시리즈</a></li>
+            <li th:classappend="${currentType == 'BOOK'} ? 'active'"><a th:href="@{/member/comments(type='BOOK')}">책</a></li>
+            <li th:classappend="${currentType == 'WEBTOON'} ? 'active'"><a th:href="@{/member/comments(type='WEBTOON')}">웹툰</a></li>
+        </ul>
+    </nav>
+
+    <div class="comments-list">
+        <article class="comment-card" th:each="comment : ${comments}">
+            <div class="card-header">
+                <div class="user-profile">
+                    <img src="/images/default-profile.jpg" class="avatar">
+                    <span class="username" th:text="${comment.memberId}">사용자</span>
+                    <span class="time-ago" th:if="${comment.commentCreateDate != null}" 
+                          th:text="${#temporals.format(comment.commentCreateDate, 'yyyy.MM.dd')}"></span>
+                </div>
+                <div class="rating-star">★ 4.0</div>
+            </div>
+            
+            <div class="work-brief-info" th:if="${comment.work != null}">
+                <img th:src="${comment.work.workThumbnail}" 
+                     class="work-poster" 
+                     onerror="this.src='/images/default-profile.jpg'">
+                
+                <div class="work-detail">
+                    <p class="work-title" th:text="${comment.work.workTitle}">작품 제목</p>
+                    <p class="work-meta">
+                        <span th:text="${comment.work.workType}"></span> · 
+                        <span th:text="${comment.work.workPublishDate}"></span>
+                    </p>
+                    <p class="work-meta">평균 4.0</p>
+                </div>
+            </div>
+
+            <div class="comment-text-content" th:text="${comment.commentContent}">
+                코멘트 내용
+            </div>
+            
+            <div class="card-footer">
+                <div class="stats-text">
+                    <th:block th:if="${comment.likeCount != null and comment.likeCount > 0}">
+                        좋아요 <span th:text="${comment.likeCount}">0</span>
+                    </th:block>
+                    <th:block th:unless="${comment.likeCount != null and comment.likeCount > 0}">
+                        가장 먼저 좋아요를 누르세요
+                    </th:block>
+                    · 댓글 <span th:text="${comment.reportCount ?: 0}">0</span>
+                </div>
+                <div class="action-row">
+   
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
+</section>
+</html>

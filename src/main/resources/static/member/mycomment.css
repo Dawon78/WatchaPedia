@@ -1,0 +1,182 @@
+/* 기본 배경 설정 */
+body {
+    background-color: #ffffff;
+    margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.mycomment-container {
+    max-width: 580px; /* 가로폭을 살짝 줄여 더 촘촘하게 변경 */
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 15px; /* 컨테이너 패딩 축소 */
+    display: flex;
+    flex-direction: column;
+}
+
+.mycomment-title {
+    font-size: 18px; /* 타이틀 크기 축소 */
+    font-weight: bold;
+    margin-bottom: 15px; /* 하단 여백 축소 */
+}
+
+/* 탭 메뉴 */
+.mycomment-tab-menu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #eee;
+}
+
+.mycomment-tab-item {
+    flex: 1;
+    text-align: center;
+    padding: 10px 0; /* 패딩 축소 */
+    cursor: pointer;
+    color: #999;
+    font-weight: 500;
+    font-size: 14px; /* 폰트 사이즈 살짝 축소 */
+}
+
+.mycomment-tab-item.mycomment-active {
+    color: #000;
+    border-bottom: 2px solid #000;
+    margin-bottom: -1px;
+}
+
+/* 정렬 드롭다운 */
+.mycomment-sort-section {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px 0; /* 여백 축소 */
+}
+
+.mycomment-select {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 12px;
+    color: #666;
+    outline: none;
+}
+
+/* 메인 컨텐츠 영역 최소 높이 */
+.mycomment-main-content {
+    min-height: 400px; 
+}
+
+/* 카드 레이아웃 */
+.mycomment-card {
+    border: 1px solid #f0f0f0; /* 테두리 추가 */
+    border-radius: 8px;
+    padding: 15px; /* 내부 여백 축소 */
+    background-color: #f3f3f3;
+}
+
+/* 구분선 스타일 수정 (기본 hr의 넓은 마진 제거) */
+hr {
+    border: 0;
+    border-top: 1px solid #e3e3e3;
+    margin: 10px 0; /* hr의 상하 여백을 줄임 */
+}
+
+.mycomment-user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px; /* 여백 축소 */
+}
+
+.mycomment-profile-img {
+    width: 28px; /* 프로필 사이즈 축소 */
+    height: 28px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.mycomment-user-name { font-weight: bold; margin-right: 6px; font-size: 13px; }
+.mycomment-date { color: #aaa; font-size: 12px; flex-grow: 1; }
+.mycomment-rating { color: #444; font-size: 13px; margin-left: auto; }
+
+/* 내부 콘텐츠 박스 (포스터 부분) */
+.mycomment-content-box {
+    display: flex;
+    background-color: #f3f3f3;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px; /* 여백 축소 */
+    border: 1px solid #f0f0f0;
+}
+
+.mycomment-poster-img img {
+    width: 48px; /* 포스터 사이즈 축소 */
+    height: 70px;
+    border-radius: 4px;
+    margin-right: 12px;
+    display: block;
+}
+
+.mycomment-content-title { font-size: 14px; font-weight: bold; margin: 0 0 3px 0; }
+.mycomment-content-info { font-size: 12px; color: #888; margin: 1px 0; }
+.mycomment-content-date { font-size: 11px; color: #888; margin-top: 3px; }
+
+/* 댓글 텍스트 */
+.mycomment-user-comment {
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 10px 0; /* 코멘트 상하 여백 축소 */
+    color: #333;
+}
+
+/* 하단 상태 바 */
+.mycomment-status-bar {
+    font-size: 12px;
+    color: #a5a5a5;
+    padding: 5px 0; /* 패딩 축소 */
+    margin-bottom: 5px;
+}
+
+/* 하단 아이콘 버튼들 */
+.mycomment-footer-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+}
+
+.mycomment-icon-btn {
+    background: none;
+    border: none;
+    font-size: 18px; /* 아이콘 크기 살짝 축소 */
+    color: #8e8e8e;
+    cursor: pointer;
+    padding: 2px 5px;
+    margin-right: 8px;
+}
+
+.mycomment-icon-btn:hover {
+    color: #333;
+}
+
+/* 탭 전환 애니메이션 */
+.mycomment-content-area {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(3px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 데이터가 없을 때 표시할 스타일 */
+.mycomment-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0;
+    color: #b0b0b0;
+    text-align: center;
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::section})">
+      
+<section>
+    <link rel="stylesheet" th:href="@{/member/mycomment.css}">
+
+    <div class="mycomment-container">
+        <h2 class="mycomment-title">코멘트</h2>
+
+        <ul class="mycomment-tab-menu">
+            <li class="mycomment-tab-item" onclick="openTab(event, 'movie')">영화</li>
+            <li class="mycomment-tab-item mycomment-active" onclick="openTab(event, 'series')">시리즈</li>
+            <li class="mycomment-tab-item" onclick="openTab(event, 'book')">책</li>
+            <li class="mycomment-tab-item" onclick="openTab(event, 'webtoon')">웹툰</li>
+        </ul>
+
+        <div class="mycomment-sort-section">
+            <select class="mycomment-select">
+                <option value="recent">작성 순</option>
+                <option value="likes">좋아요 순</option>
+                <option value="rating_high">나의 별점 높은 순</option>
+                <option value="rating_low">나의 별점 낮은 순</option>
+            </select>
+        </div>
+
+        <div class="mycomment-main-content">
+            <div id="movie" class="mycomment-content-area">
+                <div class="mycomment-empty">
+                    <div class="mycomment-empty-icon">💬</div>
+                    <p class="mycomment-empty-text">작성된 영화 코멘트가 없어요!</p>
+                </div>
+            </div>
+
+            <div id="series" class="mycomment-content-area" style="display: block;">
+                <div class="mycomment-card">
+                    <div class="mycomment-user-info">
+                        <div class="mycomment-profile-img"></div>
+                        <span class="mycomment-user-name">도토리</span>
+                        <span class="mycomment-date">7일 전</span>
+                        <span class="mycomment-rating">★ 4.0</span>
+                    </div>
+                    
+                    <hr class="mycomment-hr">
+                    
+                    <div class="mycomment-content-box">
+                        <div class="mycomment-poster-img">
+                            <img src="https://via.placeholder.com/50x75" alt="포스터">
+                        </div>
+                        <div class="mycomment-content-text">
+                            <p class="mycomment-content-title">런런다윈</p>
+                            <p class="mycomment-content-info">시리즈 · 2024</p>
+                            <p class="mycomment-content-info">평균 4.0</p>
+                            <p class="mycomment-content-date">2026년 02월 19일에 봄</p>
+                        </div>
+                    </div>
+
+                    <div class="mycomment-user-comment">흠 개별로</div>
+                    
+                    <hr class="mycomment-hr">
+
+                    <div class="mycomment-status-bar">
+                        가장 먼저 좋아요를 누르세요 <span class="mycomment-reply-text">댓글 0</span>
+                    </div>
+
+                    <div class="mycomment-footer-actions">
+                        <div class="mycomment-action-left">
+                            <button class="mycomment-icon-btn">👍</button>
+                            <button class="mycomment-icon-btn">💬</button>
+                            <button class="mycomment-icon-btn">🔗</button>
+                        </div>
+                        <div class="mycomment-action-right">
+                            <button class="mycomment-icon-btn">✏️</button>
+                            <button class="mycomment-icon-btn">🗑️</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="book" class="mycomment-content-area">
+                <div class="mycomment-empty">
+                    <div class="mycomment-empty-icon">📚</div>
+                    <p class="mycomment-empty-text">아직 읽은 책이 없어요!</p>
+                </div>
+            </div>
+
+            <div id="webtoon" class="mycomment-content-area">
+                <div class="mycomment-empty">
+                    <div class="mycomment-empty-icon">✍️</div>
+                    <p class="mycomment-empty-text">좋아하는 웹툰에 코멘트를 남겨보세요!</p>
+                </div>
+            </div>
+        </div> 
+    </div>
+
+    <script>
+    function openTab(evt, tabName) {
+        const contents = document.getElementsByClassName("mycomment-content-area");
+        for (let i = 0; i < contents.length; i++) { contents[i].style.display = "none"; }
+        const tabs = document.getElementsByClassName("mycomment-tab-item");
+        for (let i = 0; i < tabs.length; i++) {
+            tabs[i].classList.remove("mycomment-active");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.classList.add("mycomment-active");
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+        // 초기화 시 'series'만 보이도록
+        document.getElementById("series").style.display = "block";
+    });
+    </script>
+</section>
+</html>

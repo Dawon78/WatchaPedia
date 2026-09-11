@@ -1,0 +1,158 @@
+        /* 기본 배경 및 폰트 설정 */
+        body {
+            background-color: #ffffff;
+            
+            margin: 0;
+            padding: 0;
+            font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
+            color: #111;
+        }
+
+        /* 중앙 정렬되는 메인 컨테이너 */
+        .comments-container {
+            max-width: 640px; /* 화면 중앙에 위치할 적절한 너비 */
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* 상단 제목 */
+        .comments-title {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        /* 정렬 필터 (좋아요 순) */
+        .filter-wrapper {
+            display: flex;
+            justify-content: flex-end; /* 오른쪽 정렬 */
+            margin-bottom: 15px;
+        }
+
+        .sort-select {
+            padding: 8px 30px 8px 12px;
+            font-size: 14px;
+            color: #666;
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            appearance: none; /* 기본 화살표 숨김 */
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%23999%22%20d%3D%22M3.5%204.5l2.5%203%202.5-3z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            cursor: pointer;
+            outline: none;
+        }
+
+        /* 코멘트 카드 스타일 */
+        .comment-card {
+            background-color: #f3f3f3;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02); /* 원본의 미세한 입체감 */
+        }
+
+        /* 카드 상단: 유저 정보 및 별점 */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            object-fit: cover;
+        }
+
+        .username {
+            font-size: 15px;
+            font-weight: 600;
+            color: #222;
+        }
+
+        .badge-icon {
+            width: 14px;
+            height: 14px;
+            background-color: #ff0558; /* 왓챠 레드 */
+            color: #fff;
+            font-size: 9px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            line-height: 1;
+        }
+
+        .rating-star {
+            font-size: 14px;
+            color: #787878;
+        }
+
+        /* 카드 본문: 텍스트 내용 */
+        .card-body {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 15px;
+            word-break: break-word;
+        }
+
+        /* 카드 하단: 좋아요 수 및 버튼들 */
+        .card-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .stats-text {
+            font-size: 13px;
+            color: #787878;
+        }
+
+        .action-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 12px;
+        }
+
+        .left-actions {
+            display: flex;
+            gap: 16px;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: 18px; /* 아이콘 크기 */
+            color: #b0b0b0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .action-btn:hover { color: #888; }
+        
+        .more-btn {
+            background: none;
+            border: none;
+            color: #b0b0b0;
+            font-size: 16px;
+            cursor: pointer;
+            letter-spacing: 1px;
+        }
