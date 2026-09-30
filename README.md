@@ -19,9 +19,3 @@
 - Front-end: HTML5, CSS, JavaScript, Thymeleaf
 - Database: MySQL, eXERD
 - Tools: GitHub, Notion, STS
-
-## 트러블슈팅
-초반엔 엔티티 간 연관관계 설계가 명확하지 않아 기능이 늘수록 
-로직 중복과 조회 복잡도가 커지는 문제를 겪었습니다. JPA 연관관계 
-매핑을 재점검하고 자주 쓰이는 로직을 공통으로 분리하며 문제를 
-해결했습니다.
